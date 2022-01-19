@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const Home = ({ loggedInStatus, handleLogout }) => {
+  console.log("rendering home");
   const handleClick = () => {
     axios
       .delete("http://localhost:3001/logout", { withCredentials: true })
@@ -19,6 +20,7 @@ const Home = ({ loggedInStatus, handleLogout }) => {
 
   return (
     <div>
+      <h1>Home</h1>
       <Link to="/login">Log In</Link>
       <br></br>
       <Link to="/signup">Sign Up</Link>

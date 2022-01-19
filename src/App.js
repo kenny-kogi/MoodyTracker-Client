@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/registrations/Login";
 import Signup from "./components/registrations/Signup";
 import Home from "./components/Home";
+import TestHome from "./components/TestHome";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -17,12 +18,14 @@ const App = () => {
   const handleLogout = () => {
     setIsLoggedIn(false);
     setUser({});
+    console.log("handling logout");
   };
 
   const loginStatus = () => {
     axios
-      .get("http://localhost:3001/logged_in", { withCredentials: true })
+      .get("http://localhost:3001/user/logged_in", { withCredentials: true })
       .then((response) => {
+        console.log(response.data);
         if (response.data.logged_in) {
           handleLogin(response);
         } else {
@@ -34,13 +37,21 @@ const App = () => {
 
   useEffect(() => {
     loginStatus();
-  });
+  }, []);
 
   return (
     <div>
       <BrowserRouter>
-        <Switch>
+        <Routes>
           <Route
+            exact
+            path="/"
+            element={
+              <Home loggedInStatus={isLoggedIn} handleLogout={handleLogout} />
+            }
+          />
+
+          {/* <Route
             exact
             path="/"
             render={(props) => {
@@ -50,31 +61,23 @@ const App = () => {
                 handleLogout={handleLogout}
               />;
             }}
-          />
+          /> */}
 
           <Route
             exact
             path="/login"
-            render={(props) => {
-              <Login
-                {...props}
-                handleLogin={handleLogin}
-                loggedInStatus={isLoggedIn}
-              />;
-            }}
+            element={
+              <Login handleLogin={handleLogin} loggedInStatus={isLoggedIn} />
+            }
           />
           <Route
             exact
             path="/signup"
-            render={(props) => {
-              <Signup
-                {...props}
-                handleLogin={handleLogin}
-                loggedInStatus={isLoggedIn}
-              />;
-            }}
+            element={
+              <Signup handleLogin={handleLogin} loggedInStatus={isLoggedIn} />
+            }
           />
-        </Switch>
+        </Routes>
       </BrowserRouter>
     </div>
   );
