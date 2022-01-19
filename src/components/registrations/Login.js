@@ -1,12 +1,16 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ handleLogin, loggedInStatus }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState("");
+
+  useEffect(() => {
+    return loggedInStatus ? this.redirect() : null;
+  });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -22,6 +26,40 @@ const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    let user = {
+      username: username,
+      email: email,
+      password: password,
+    };
+
+    axios
+      .post("http://localhost:3001/login", { user }, { withCredentials: true })
+      .then((response) => {
+        if (response.data.logged_in) {
+          handleLogin(response.data);
+          redirect();
+        } else {
+          setErrors(response.data.errors);
+        }
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const redirect = () => {
+    this.props.history.push("/");
+  };
+
+  const handleErrors = () => {
+    return (
+      <div>
+        <ul>
+          {errors.map((error) => {
+            return <li key={error}>{error}</li>;
+          })}
+        </ul>
+      </div>
+    );
   };
 
   return (
@@ -56,6 +94,7 @@ const Login = () => {
           or <Link to="/signup">sign up</Link>
         </div>
       </form>
+      <div>{errors ? handleErrors() : null}</div>
     </div>
   );
 };

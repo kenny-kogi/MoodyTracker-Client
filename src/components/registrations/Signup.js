@@ -1,7 +1,7 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
-const Signup = () => {
+const Signup = ({ handleLogin }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,6 +24,47 @@ const Signup = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    let user = {
+      username: username,
+      email: email,
+      password: password,
+      password_confirmation: password_confirmation,
+    };
+
+    axios
+      .post("http://localhost:3001/users", { user }, { withCredentials: true })
+      .then((response) => {
+        if (response.data.status === "created") {
+          handleLogin(response.data);
+          redirect();
+        } else {
+          setErrors(response.data.errors);
+        }
+      })
+      .catch((errors) => {
+        console.log(errors);
+      });
+  };
+
+  const redirect = () => {
+    this.props.history.push("/");
+  };
+
+  const handleErrors = () => {
+    return (
+      <div>
+        <ul>
+          {this.state.errors.map((error) => {
+            return (
+              <li>
+                key={error} {error}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    );
   };
 
   return (
@@ -63,6 +104,7 @@ const Signup = () => {
           Sign Up
         </button>
       </form>
+      <div>{errors ? handleErrors() : null}</div>
     </div>
   );
 };
