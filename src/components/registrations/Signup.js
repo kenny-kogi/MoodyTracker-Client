@@ -31,15 +31,17 @@ const Signup = ({ handleLogin }) => {
       password: password,
       password_confirmation: password_confirmation,
     };
-
     axios
       .post("http://localhost:3001/users", { user }, { withCredentials: true })
       .then((response) => {
         if (response.data.status === "created") {
+          console.log(response);
+          console.log(response.data);
           handleLogin(response.data);
           redirect();
         } else {
           setErrors(response.data.errors);
+          console.log(response.data.errors);
         }
       })
       .catch((errors) => {
@@ -55,7 +57,7 @@ const Signup = ({ handleLogin }) => {
     return (
       <div>
         <ul>
-          {this.state.errors.map((error) => {
+          {errors.map((error) => {
             return (
               <li>
                 key={error} {error}

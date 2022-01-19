@@ -14,7 +14,7 @@ const Login = ({ handleLogin, loggedInStatus }) => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
+    console.log("not working");
     if (name === "username") {
       setUsername(value);
     } else if (name === "email") {
@@ -34,7 +34,11 @@ const Login = ({ handleLogin, loggedInStatus }) => {
     };
 
     axios
-      .post("http://localhost:3001/login", { user }, { withCredentials: true })
+      .post(
+        "http://localhost:3001/user/login",
+        { user },
+        { withCredentials: true }
+      )
       .then((response) => {
         if (response.data.logged_in) {
           handleLogin(response.data);

@@ -25,7 +25,6 @@ const App = () => {
     axios
       .get("http://localhost:3001/user/logged_in", { withCredentials: true })
       .then((response) => {
-        console.log(response.data);
         if (response.data.logged_in) {
           handleLogin(response);
         } else {
@@ -50,18 +49,6 @@ const App = () => {
               <Home loggedInStatus={isLoggedIn} handleLogout={handleLogout} />
             }
           />
-
-          {/* <Route
-            exact
-            path="/"
-            render={(props) => {
-              <Home
-                {...props}
-                loggedInStatus={isLoggedIn}
-                handleLogout={handleLogout}
-              />;
-            }}
-          /> */}
 
           <Route
             exact
