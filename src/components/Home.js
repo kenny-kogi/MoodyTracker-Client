@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Navbar from "./Home/Navbar";
 
 const Home = ({ loggedInStatus, handleLogout }) => {
   let navigate = useNavigate();
@@ -18,6 +19,7 @@ const Home = ({ loggedInStatus, handleLogout }) => {
 
   return (
     <div>
+      <Navbar />
       <h1>Home</h1>
       <Link to="/login">Log In</Link>
       <br></br>

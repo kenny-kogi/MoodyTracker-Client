@@ -4,10 +4,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/registrations/Login";
 import Signup from "./components/registrations/Signup";
 import Home from "./components/Home";
-import TestHome from "./components/TestHome";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [user, setUser] = useState({});
 
   const handleLogin = (data) => {
@@ -37,6 +37,7 @@ const App = () => {
 
   useEffect(() => {
     loginStatus();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
