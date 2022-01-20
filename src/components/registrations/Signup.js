@@ -1,47 +1,41 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Signup = ({ handleLogin }) => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState("");
-  const [password_confirmation, setPasswordConfirmation] = useState("");
+  const [user, setUser] = useState({
+    username: "",
+    email: "",
+    password: "",
+    password_confirmation: "",
+    errors: {},
+  });
+
+  let navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if (name === "username") {
-      setUsername(value);
-    } else if (name === "email") {
-      setEmail(value);
-    } else if (name === "password") {
-      setPassword(value);
-    } else if (name === "password_confirmation") {
-      setPasswordConfirmation(value);
-    }
+    setUser({
+      ...user,
+      [name]: value,
+    });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    let user = {
-      username: username,
-      email: email,
-      password: password,
-      password_confirmation: password_confirmation,
-    };
     axios
       .post("http://localhost:3001/users", { user }, { withCredentials: true })
       .then((response) => {
         if (response.data.status === "created") {
-          console.log(response);
-          console.log(response.data);
           handleLogin(response.data);
-          redirect();
+          navigate("/");
         } else {
-          setErrors(response.data.errors);
-          console.log(response.data.errors);
+          setUser({
+            ...user,
+            errors: response.data.errors,
+          });
         }
       })
       .catch((errors) => {
@@ -49,21 +43,16 @@ const Signup = ({ handleLogin }) => {
       });
   };
 
-  const redirect = () => {
-    this.props.history.push("/");
-  };
-
   const handleErrors = () => {
+    const isEmpty = Object.keys(user.errors).length === 0;
     return (
       <div>
         <ul>
-          {errors.map((error) => {
-            return (
-              <li>
-                key={error} {error}
-              </li>
-            );
-          })}
+          {isEmpty
+            ? ""
+            : user.errors.map((error) => {
+                return <li key={error}>{error}</li>;
+              })}
         </ul>
       </div>
     );
@@ -77,28 +66,28 @@ const Signup = ({ handleLogin }) => {
           placeholder="username"
           type="text"
           name="username"
-          value={username}
+          value={user.username}
           onChange={handleChange}
         />
         <input
           placeholder="email"
           type="text"
           name="email"
-          value={email}
+          value={user.email}
           onChange={handleChange}
         />
         <input
           placeholder="password"
           type="password"
           name="password"
-          value={password}
+          value={user.password}
           onChange={handleChange}
         />
         <input
           placeholder="password confirmation"
           type="password"
           name="password_confirmation"
-          value={password_confirmation}
+          value={user.password_confirmation}
           onChange={handleChange}
         />
 
@@ -106,7 +95,7 @@ const Signup = ({ handleLogin }) => {
           Sign Up
         </button>
       </form>
-      <div>{errors ? handleErrors() : null}</div>
+      <div>{user.errors ? handleErrors() : null}</div>
     </div>
   );
 };

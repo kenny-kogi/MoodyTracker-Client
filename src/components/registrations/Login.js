@@ -1,37 +1,34 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
 const Login = ({ handleLogin, loggedInStatus }) => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState("");
+  const [user, setUser] = useState({
+    username: "",
+    email: "",
+    password: "",
+    errors: "",
+  });
+
+  let navigate = useNavigate();
 
   useEffect(() => {
-    return loggedInStatus ? this.redirect() : null;
-  });
+    console.log("redirect");
+    return loggedInStatus ? navigate.push("/") : null;
+  }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    console.log("not working");
-    if (name === "username") {
-      setUsername(value);
-    } else if (name === "email") {
-      setEmail(value);
-    } else if (name === "password") {
-      setPassword(value);
-    }
+
+    setUser({
+      ...user,
+      [name]: value,
+    });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    let user = {
-      username: username,
-      email: email,
-      password: password,
-    };
 
     axios
       .post(
@@ -42,25 +39,27 @@ const Login = ({ handleLogin, loggedInStatus }) => {
       .then((response) => {
         if (response.data.logged_in) {
           handleLogin(response.data);
-          redirect();
+          navigate("/");
         } else {
-          setErrors(response.data.errors);
+          setUser({
+            ...user,
+            errors: response.data.errors,
+          });
         }
       })
       .catch((error) => console.log(error));
   };
 
-  const redirect = () => {
-    this.props.history.push("/");
-  };
-
   const handleErrors = () => {
+    const isEmpty = Object.keys(user.errors).length === 0;
     return (
       <div>
         <ul>
-          {errors.map((error) => {
-            return <li key={error}>{error}</li>;
-          })}
+          {isEmpty
+            ? ""
+            : user.errors.map((error) => {
+                return <li key={error}>{error}</li>;
+              })}
         </ul>
       </div>
     );
@@ -74,21 +73,21 @@ const Login = ({ handleLogin, loggedInStatus }) => {
           placeholder="username"
           type="text"
           name="username"
-          value={username}
+          value={user.username}
           onChange={handleChange}
         />
         <input
           placeholder="email"
           type="text"
           name="email"
-          value={email}
+          value={user.email}
           onChange={handleChange}
         />
         <input
           placeholder="password"
           type="password"
           name="password"
-          value={password}
+          value={user.password}
           onChange={handleChange}
         />{" "}
         <button placeholder="submit" type="submit">
@@ -98,7 +97,7 @@ const Login = ({ handleLogin, loggedInStatus }) => {
           or <Link to="/signup">sign up</Link>
         </div>
       </form>
-      <div>{errors ? handleErrors() : null}</div>
+      <div>{user.errors ? handleErrors() : null}</div>
     </div>
   );
 };

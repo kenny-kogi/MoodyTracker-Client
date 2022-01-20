@@ -11,14 +11,15 @@ const App = () => {
   const [user, setUser] = useState({});
 
   const handleLogin = (data) => {
+    console.log(data);
     setIsLoggedIn(true);
     setUser(data.user);
+    console.log("handling login");
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
     setUser({});
-    console.log("handling logout");
   };
 
   const loginStatus = () => {

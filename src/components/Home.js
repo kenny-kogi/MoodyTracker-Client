@@ -1,21 +1,20 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Home = ({ loggedInStatus, handleLogout }) => {
+  let navigate = useNavigate();
+
   const handleClick = () => {
     axios
-      .delete("http://localhost:3001/logout", { withCredentials: true })
+      .delete("http://localhost:3001/user/logout", { withCredentials: true })
       .then((response) => {
         handleLogout();
-        redirect();
+        navigate("/");
       })
       .catch((error) => console.log(error));
   };
-
-  const redirect = () => {
-    this.props.history.push("/");
-  };
+  console.log(loggedInStatus);
 
   return (
     <div>
