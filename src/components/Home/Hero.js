@@ -9,8 +9,6 @@ import {
   Button,
 } from "@chakra-ui/react";
 import HeroImage from "../../assets/hero6.jpg";
-import "@fontsource/fredoka-one";
-import "@fontsource/zen-maru-gothic";
 import { Link } from "react-router-dom";
 
 const Hero = () => {
@@ -20,26 +18,25 @@ const Hero = () => {
         <Box as="flex" alignItems="center" py="10" flexDirection="row">
           <Stack direction="row">
             <Box mr="" width="90%">
-              <Heading as="h1" size="lg" letterSpacing="wide" fontStyle="">
-                <Box
-                  fontWeight="bold"
-                  color="purple"
-                  fontFamily="Fredoka One"
-                  fontSize="70px"
-                >
-                  What is{" "}
-                  <Text as="span" color="pink.400">
-                    Moody
-                  </Text>{" "}
-                  Tracker?
-                </Box>
+              <Heading
+                as="h1"
+                size="lg"
+                letterSpacing="wide"
+                fontWeight="bold"
+                color="purple"
+                fontSize="70px"
+              >
+                What is{" "}
+                <Text as="span" color="pink.400">
+                  Moody
+                </Text>{" "}
+                Tracker?
               </Heading>
 
               <Box
                 mt="5"
                 letterSpacing="wide"
                 lineHeight="taller"
-                fontFamily="Zen Maru Gothic"
                 fontSize="lg"
               >
                 Moody Tracker is the easiest way to track your moods online or
@@ -57,6 +54,7 @@ const Hero = () => {
                   height="50px"
                   width="25%"
                   _hover={{ bg: "purple" }}
+                  fontWeight="bold"
                 >
                   Start Tracking
                 </Button>
