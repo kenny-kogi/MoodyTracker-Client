@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "./Home/Navbar/Navbar";
+import Hero from "./Home/Hero";
 
 const Home = ({ loggedInStatus, handleLogout }) => {
   let navigate = useNavigate();
@@ -20,6 +21,7 @@ const Home = ({ loggedInStatus, handleLogout }) => {
   return (
     <div>
       <Navbar />
+      <Hero />
       {loggedInStatus ? (
         <Link to="/logout" onClick={handleClick}>
           Log Out
