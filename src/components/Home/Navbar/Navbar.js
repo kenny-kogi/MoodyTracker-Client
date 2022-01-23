@@ -25,12 +25,19 @@ const Navbar = () => {
               fontSize="lg"
               variant="ghost"
               mr={2}
+              fontWeight="bold"
             >
               Log in
             </Button>
           </Link>
           <Link to="/signup">
-            <Button colorScheme="pink" size="lg" fontSize="lg" variant="ghost">
+            <Button
+              colorScheme="pink"
+              size="lg"
+              fontSize="lg"
+              variant="ghost"
+              fontWeight="bold"
+            >
               Sign up
             </Button>
           </Link>
