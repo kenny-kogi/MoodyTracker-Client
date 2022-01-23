@@ -1,13 +1,22 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Navbar from "../Home/Navbar/Navbar";
+import Form from "./Forms/Form";
 
 const Signup = ({ handleLogin }) => {
   const [user, setUser] = useState({
+    firstName: "",
+    lastName: "",
     username: "",
     email: "",
     password: "",
     password_confirmation: "",
+    location: "",
+    age: "",
+    occupation: "",
+    gender: "",
+    image_url: "",
     errors: {},
   });
 
@@ -15,6 +24,7 @@ const Signup = ({ handleLogin }) => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+    console.log(name, value);
 
     setUser({
       ...user,
@@ -24,6 +34,7 @@ const Signup = ({ handleLogin }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log("handling submit");
 
     axios
       .post("http://localhost:3001/users", { user }, { withCredentials: true })
@@ -60,41 +71,22 @@ const Signup = ({ handleLogin }) => {
 
   return (
     <div>
-      <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          placeholder="username"
-          type="text"
-          name="username"
-          value={user.username}
-          onChange={handleChange}
-        />
-        <input
-          placeholder="email"
-          type="text"
-          name="email"
-          value={user.email}
-          onChange={handleChange}
-        />
-        <input
-          placeholder="password"
-          type="password"
-          name="password"
-          value={user.password}
-          onChange={handleChange}
-        />
-        <input
-          placeholder="password confirmation"
-          type="password"
-          name="password_confirmation"
-          value={user.password_confirmation}
-          onChange={handleChange}
-        />
-
-        <button placeholder="submit" type="submit">
-          Sign Up
-        </button>
-      </form>
+      <Navbar />
+      <Form
+        firstName={user.firstName}
+        lastName={user.lastName}
+        location={user.location}
+        occupation={user.occupation}
+        gender={user.gender}
+        age={user.age}
+        image_url={user.image_url}
+        username={user.username}
+        email={user.email}
+        password={user.password}
+        password_confirmation={user.password_confirmation}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+      />
       <div>{user.errors ? handleErrors() : null}</div>
     </div>
   );
