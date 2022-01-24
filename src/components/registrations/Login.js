@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import Navbar from "../Home/Navbar/Navbar";
+import Form from "./Forms/Form";
 
 const Login = ({ handleLogin, loggedInStatus }) => {
   const [user, setUser] = useState({
     username: "",
     email: "",
     password: "",
-    errors: "",
+  });
+
+  // eslint-disable-next-line no-unused-vars
+  const [errors, setErrors] = useState({
+    errors: {},
   });
 
   let navigate = useNavigate();
@@ -16,6 +21,7 @@ const Login = ({ handleLogin, loggedInStatus }) => {
   useEffect(() => {
     console.log("redirect");
     return loggedInStatus ? navigate.push("/") : null;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleChange = (event) => {
@@ -41,8 +47,7 @@ const Login = ({ handleLogin, loggedInStatus }) => {
           handleLogin(response.data);
           navigate("/");
         } else {
-          setUser({
-            ...user,
+          setErrors({
             errors: response.data.errors,
           });
         }
@@ -67,36 +72,13 @@ const Login = ({ handleLogin, loggedInStatus }) => {
 
   return (
     <div>
-      <h1>Log In</h1>{" "}
-      <form onSubmit={handleSubmit}>
-        <input
-          placeholder="username"
-          type="text"
-          name="username"
-          value={user.username}
-          onChange={handleChange}
-        />
-        <input
-          placeholder="email"
-          type="text"
-          name="email"
-          value={user.email}
-          onChange={handleChange}
-        />
-        <input
-          placeholder="password"
-          type="password"
-          name="password"
-          value={user.password}
-          onChange={handleChange}
-        />{" "}
-        <button placeholder="submit" type="submit">
-          Log In
-        </button>{" "}
-        <div>
-          or <Link to="/signup">sign up</Link>
-        </div>
-      </form>
+      <Navbar login={true} />
+      <Form
+        user={user}
+        isSignup={false}
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
+      />
       <div>{user.errors ? handleErrors() : null}</div>
     </div>
   );

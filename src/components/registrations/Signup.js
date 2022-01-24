@@ -13,10 +13,13 @@ const Signup = ({ handleLogin }) => {
     password: "",
     password_confirmation: "",
     location: "",
-    age: "",
+    image: null,
+    age: null,
     occupation: "",
     gender: "",
-    image_url: "",
+  });
+
+  const [errors, setErrors] = useState({
     errors: {},
   });
 
@@ -24,27 +27,35 @@ const Signup = ({ handleLogin }) => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    console.log(name, value);
 
     setUser({
       ...user,
       [name]: value,
+    });
+    console.log(name, value);
+  };
+
+  const handleFileUpload = (event) => {
+    setUser({
+      ...user,
+      image: event.target.files[0],
     });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("handling submit");
-
+    console.log(user);
     axios
       .post("http://localhost:3001/users", { user }, { withCredentials: true })
       .then((response) => {
+        console.log(response);
         if (response.data.status === "created") {
           handleLogin(response.data);
           navigate("/");
         } else {
-          setUser({
-            ...user,
+          setErrors({
+            ...errors,
             errors: response.data.errors,
           });
         }
@@ -71,21 +82,13 @@ const Signup = ({ handleLogin }) => {
 
   return (
     <div>
-      <Navbar />
+      <Navbar signup={true} />
       <Form
-        firstName={user.firstName}
-        lastName={user.lastName}
-        location={user.location}
-        occupation={user.occupation}
-        gender={user.gender}
-        age={user.age}
-        image_url={user.image_url}
-        username={user.username}
-        email={user.email}
-        password={user.password}
-        password_confirmation={user.password_confirmation}
+        user={user}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
+        handleFileUpload={handleFileUpload}
+        isSignup={true}
       />
       <div>{user.errors ? handleErrors() : null}</div>
     </div>
