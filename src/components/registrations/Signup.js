@@ -52,7 +52,7 @@ const Signup = ({ handleLogin }) => {
         console.log(response);
         if (response.data.status === "created") {
           handleLogin(response.data);
-          navigate("/");
+          navigate("/mood/record");
         } else {
           setErrors({
             ...errors,

@@ -45,7 +45,7 @@ const Login = ({ handleLogin, loggedInStatus }) => {
       .then((response) => {
         if (response.data.logged_in) {
           handleLogin(response.data);
-          navigate("/");
+          navigate("/mood/record");
         } else {
           setErrors({
             errors: response.data.errors,

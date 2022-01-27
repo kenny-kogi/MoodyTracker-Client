@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/registrations/Login";
 import Signup from "./components/registrations/Signup";
 import Home from "./components/Home";
+import LogMood from "./components/LogMood/LogMood";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -65,6 +66,12 @@ const App = () => {
             element={
               <Signup handleLogin={handleLogin} loggedInStatus={isLoggedIn} />
             }
+          />
+
+          <Route
+            exact
+            path="/mood/record"
+            element={<LogMood loggedInStatus={isLoggedIn} />}
           />
         </Routes>
       </BrowserRouter>
