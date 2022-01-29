@@ -5,6 +5,7 @@ import Login from "./components/registrations/Login";
 import Signup from "./components/registrations/Signup";
 import Home from "./components/Home";
 import LogMood from "./components/LogMood/LogMood";
+import Moods from "./components/Moods/Moods";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -71,8 +72,10 @@ const App = () => {
           <Route
             exact
             path="/mood/record"
-            element={<LogMood loggedInStatus={isLoggedIn} />}
+            element={<LogMood loggedInStatus={isLoggedIn} user={user} />}
           />
+
+          <Route exact path="/moods" element={<Moods />} />
         </Routes>
       </BrowserRouter>
     </div>
