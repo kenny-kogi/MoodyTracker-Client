@@ -2,18 +2,12 @@ import React, { useState } from "react";
 import Navbar from "../Home/Navbar/Navbar";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import {
-  Button,
-  Box,
-  Container,
-  Heading,
-  Text,
-  Slider,
-  SliderTrack,
-  SliderFilledTrack,
-  SliderThumb,
-  SliderMark,
-} from "@chakra-ui/react";
+import { Button, Box, Container, Heading, Text } from "@chakra-ui/react";
+import Irritability from "./moods/Irritability";
+import Elevated from "./moods/Elevated";
+import HoursSlept from "./moods/HoursSlept";
+import Anxiety from "./moods/Anxiety";
+import Depressed from "./moods/Depressed";
 
 const LogMood = ({ loggedInStatus, user }) => {
   const [errors, setErrors] = useState({
@@ -60,6 +54,26 @@ const LogMood = ({ loggedInStatus, user }) => {
     });
   };
 
+  const handleEleveted = (v) => {
+    setMood({
+      ...mood,
+      elevated_level: v,
+    });
+  };
+
+  const handleAnxiety = (v) => {
+    setMood({
+      ...mood,
+      anxiety: v,
+    });
+  };
+
+  const handleDepressed = (v) => {
+    setMood({
+      ...mood,
+      depressed: v,
+    });
+  };
   return (
     <>
       <Navbar loggedInStatus={loggedInStatus} />
@@ -80,87 +94,19 @@ const LogMood = ({ loggedInStatus, user }) => {
             Let's Log Your Mood Today
           </Heading>
           <form onSubmit={handleSubmit}>
-            <Box
-              as="flex"
-              flexDirection="row"
-              display="flex"
-              justifyContent="flex-start"
-              flexWrap="wrap"
-            >
-              {" "}
+            <Box>
+              <HoursSlept handleChange={handleChange} />
               <Box
-                width="400px"
-                height="100px"
-                alignItems="center"
-                justifyContent="center"
-                mr={20}
+                as="flex"
+                flexDirection="row"
+                display="flex"
+                justifyContent="flex-start"
+                flexWrap="wrap"
               >
-                <Text>Hours Slept Last Night</Text>
-
-                <Slider
-                  aria-label="slider-ex-6"
-                  defaultValue={0}
-                  name="hours_slept"
-                  min={0}
-                  max={10}
-                  onChange={(v) => handleChange(v)}
-                  colorScheme="purple"
-                >
-                  <SliderMark value={2} mt="2" ml="2.0">
-                    2
-                  </SliderMark>
-                  <SliderMark value={4} mt="2" ml="4.0">
-                    4
-                  </SliderMark>
-                  <SliderMark value={6} mt="2" ml="6.0">
-                    6
-                  </SliderMark>
-                  <SliderMark value={8} mt="2" ml="8.0">
-                    8
-                  </SliderMark>
-                  <SliderTrack height="4" borderRadius={20}>
-                    <SliderFilledTrack />
-                  </SliderTrack>
-                  <SliderThumb />
-                </Slider>
-              </Box>
-              <Box
-                width="200px"
-                height="100px"
-                alignItems="center"
-                justifyContent="center"
-                textAlign="center"
-              >
-                <Text>Today most extreme Irritability</Text>
-
-                <Slider
-                  mt={7}
-                  aria-label="slider-ex-6"
-                  defaultValue={"None"}
-                  name="irritability_levele"
-                  onChange={(v) => handleIrritability(v)}
-                  colorScheme="purple"
-                  orientation="vertical"
-                  min={0}
-                  max={3}
-                >
-                  <SliderMark value={0} ml="25px" fontSize={15}>
-                    None
-                  </SliderMark>
-                  <SliderMark value={1} ml="25px" fontSize={15}>
-                    Mild
-                  </SliderMark>
-                  <SliderMark value={2} ml="25px" fontSize={15}>
-                    Moderate
-                  </SliderMark>
-                  <SliderMark value={3} ml="25px" fontSize={15}>
-                    Severe
-                  </SliderMark>
-                  <SliderTrack borderRadius={20} width={4}>
-                    <SliderFilledTrack />
-                  </SliderTrack>
-                  <SliderThumb />
-                </Slider>
+                <Irritability handleIrritability={handleIrritability} />
+                <Elevated handleEleveted={handleEleveted} />
+                <Anxiety handleAnxiety={handleAnxiety} />
+                <Depressed handleDepressed={handleDepressed} />
               </Box>
               <Button
                 type="submit"
@@ -180,100 +126,6 @@ const LogMood = ({ loggedInStatus, user }) => {
       </Box>
     </>
   );
-
-  // <div>
-  //
-  //   <h1>Welcome Today...Log your Mood</h1>
-
-  //   <form onSubmit={handleSubmit}>
-  //     <Grid templateColumns="repeat(3, 1fr )" mt="15">
-  //       <GridItem colSpan={1} mr="6">
-  //         <FormControl>
-  //           <FormLabel htmlFor="hours_slept">Hours Slept:</FormLabel>
-  //           <Input
-  //             id="hours_slept"
-  //             type="number"
-  //             placeholder="hours slept"
-  //             name="hours_slept"
-  //             value={mood.hours_slept}
-  //             onChange={handleChange}
-  //           />
-  //         </FormControl>
-  //         <SliderBar />
-  //       </GridItem>
-
-  //       <GridItem colSpan={1} mb="2" mr="6">
-  //         <FormControl>
-  //           <FormLabel htmlFor="depressed">Depressed:</FormLabel>
-  //           <Input
-  //             id="depressed"
-  //             type="text"
-  //             placeholder="depressed"
-  //             value={mood.depressed}
-  //             name="depressed"
-  //             onChange={handleChange}
-  //           />
-  //         </FormControl>
-  //       </GridItem>
-
-  //       <GridItem colSpan={1} mr="6">
-  //         <FormControl>
-  //           <FormLabel htmlFor="anxiety">anxiety:</FormLabel>
-  //           <Input
-  //             id="anxiety"
-  //             type="text"
-  //             placeholder="anxiety"
-  //             value={mood.anxiety}
-  //             name="anxiety"
-  //             onChange={handleChange}
-  //           />
-  //         </FormControl>
-  //       </GridItem>
-
-  //       <GridItem colSpan={1} mr="6">
-  //         <FormControl>
-  //           <FormLabel htmlFor="irritability_level">
-  //             irritability_level:
-  //           </FormLabel>
-  //           <Input
-  //             id="irritability_level"
-  //             type="number"
-  //             placeholder="irritability_level"
-  //             name="irritability_level"
-  //             value={mood.irritability_level}
-  //             onChange={handleChange}
-  //           />
-  //         </FormControl>
-  //       </GridItem>
-  //       <GridItem colSpan={1} mr="6">
-  //         <FormControl>
-  //           <FormLabel htmlFor="elevated_level">Elevated level:</FormLabel>
-  //           <Input
-  //             id="elevated_level"
-  //             type="number"
-  //             placeholder="elevated_level"
-  //             name="elevated_level"
-  //             value={mood.elevated_level}
-  //             onChange={handleChange}
-  //           />
-  //         </FormControl>
-  //       </GridItem>
-  //     </Grid>
-
-  //     <Button
-  //       type="submit"
-  //       mt="35"
-  //       bg="pink.400"
-  //       color="white"
-  //       height="50px"
-  //       width="25%"
-  //       _hover={{ bg: "purple" }}
-  //       fontWeight="bold"
-  //     >
-  //       Log Mood
-  //     </Button>
-  //   </form>
-  // </div>
 };
 
 export default LogMood;
