@@ -12,7 +12,7 @@ const Home = ({ loggedInStatus, handleLogout }) => {
       .delete("http://localhost:3001/user/logout", { withCredentials: true })
       .then((response) => {
         handleLogout();
-        navigate("/");
+        navigate("/logout");
       })
       .catch((error) => console.log(error));
   };

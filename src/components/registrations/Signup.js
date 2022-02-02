@@ -44,12 +44,9 @@ const Signup = ({ handleLogin }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("handling submit");
-    console.log(user);
     axios
       .post("http://localhost:3001/users", { user }, { withCredentials: true })
       .then((response) => {
-        console.log(response);
         if (response.data.status === "created") {
           handleLogin(response.data);
           navigate("/mood/record");

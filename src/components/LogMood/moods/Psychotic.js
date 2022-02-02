@@ -6,15 +6,16 @@ const Psychotic = ({ checked, setChecked }) => {
     <Box
       display="flex"
       flexDirection="column"
-      width="200px"
-      height="100px"
       alignItems="center"
-      textAlign="center"
-      mr={20}
-      mt={20}
-      justifyContent="space-between"
+      width="300px"
+      height="275px"
+      border="1px solid purple.100"
+      borderRadius={8}
+      boxShadow="xl"
+      borderWidth={2}
+      p={5}
     >
-      <Text>Psychotic Symptoms:</Text>
+      <Text mb={20}>Psychotic Symptoms:</Text>
       <Switch
         size="lg"
         colorScheme="purple"

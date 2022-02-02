@@ -12,13 +12,18 @@ import {
 const HoursSlept = ({ handleChange }) => {
   return (
     <Box
-      width="400px"
-      height="100px"
+      width="600px"
+      height="150px"
       alignItems="center"
       justifyContent="center"
-      mr={20}
+      p={15}
+      border="1px solid purple.100"
+      borderRadius={8}
+      boxShadow="xl"
+      mb={20}
+      borderWidth={2}
     >
-      <Text>Hours Slept Last Night</Text>
+      <Text mb={5}>Hours Slept Last Night</Text>
 
       <Slider
         aria-label="slider-ex-6"
@@ -29,22 +34,26 @@ const HoursSlept = ({ handleChange }) => {
         onChange={(v) => handleChange(v)}
         colorScheme="purple"
       >
-        <SliderMark value={2} mt="2" ml="2.0">
+        <SliderMark value={2} mt="4" ml="2.0">
           2
         </SliderMark>
-        <SliderMark value={4} mt="2" ml="4.0">
+        <SliderMark value={4} mt="4" ml="4.0">
           4
         </SliderMark>
-        <SliderMark value={6} mt="2" ml="6.0">
+        <SliderMark value={6} mt="4" ml="6.0">
           6
         </SliderMark>
-        <SliderMark value={8} mt="2" ml="8.0">
+        <SliderMark value={8} mt="4" ml="8.0">
           8
         </SliderMark>
-        <SliderTrack height="4" borderRadius={20}>
+        <SliderTrack height="6" borderRadius={20}>
           <SliderFilledTrack />
         </SliderTrack>
-        <SliderThumb />
+        <SliderThumb
+          boxSize={6}
+          backgroundColor="purple.100"
+          outlineColor="purple.300"
+        />
       </Slider>
     </Box>
   );

@@ -15,7 +15,7 @@ const Elevated = ({ handleEleveted }) => {
   const moodcolor = {
     none: "grey",
     mild: "yellow",
-    moderate: "green",
+    moderate: "orange",
     severe: "red",
   };
 
@@ -33,16 +33,22 @@ const Elevated = ({ handleEleveted }) => {
 
   return (
     <Box
-      width="200px"
-      height="100px"
-      alignItems="center"
+      width="300px"
+      height="250px"
       justifyContent="center"
       textAlign="center"
       mr={20}
+      mb={20}
+      border="1px solid purple.100"
+      borderRadius={8}
+      boxShadow="xl"
+      borderWidth={2}
+      p={5}
     >
       <Text>Today most extreme Elevated level</Text>
 
       <Slider
+        height={40}
         mt={7}
         aria-label="slider-ex-6"
         defaultValue={0}
@@ -66,10 +72,10 @@ const Elevated = ({ handleEleveted }) => {
         <SliderMark value={3} ml="25px" fontSize={15}>
           Severe
         </SliderMark>
-        <SliderTrack borderRadius={20} width={4}>
+        <SliderTrack borderRadius={20} width={6}>
           <SliderFilledTrack />
         </SliderTrack>
-        <SliderThumb />
+        <SliderThumb boxSize={6} backgroundColor={color} outlineColor={color} />
       </Slider>
     </Box>
   );
