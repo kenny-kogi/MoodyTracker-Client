@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../Home/Navbar/Navbar";
 import axios from "axios";
 import { useNavigate } from "react-router";
@@ -8,6 +8,7 @@ import Elevated from "./moods/Elevated";
 import HoursSlept from "./moods/HoursSlept";
 import Anxiety from "./moods/Anxiety";
 import Depressed from "./moods/Depressed";
+import Psychotic from "./moods/Psychotic";
 
 const LogMood = ({ loggedInStatus, user }) => {
   const [errors, setErrors] = useState({
@@ -23,11 +24,13 @@ const LogMood = ({ loggedInStatus, user }) => {
     weather: null,
     user_id: user.id,
   });
+  const [checked, setChecked] = useState(false);
 
   let navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    console.log(mood);
     axios
       .post("http://localhost:3001/moods", mood, { withCredentials: true })
       .then((response) => {
@@ -39,6 +42,23 @@ const LogMood = ({ loggedInStatus, user }) => {
       })
       .catch((error) => console.log(error));
   };
+
+  useEffect(() => {
+    if (checked) {
+      setMood({
+        ...mood,
+        psychotic_symptoms: true,
+      });
+      console.log(mood);
+    } else {
+      setMood({
+        ...mood,
+        psychotic_symptoms: false,
+      });
+      console.log(mood);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [checked]);
 
   const handleChange = (v) => {
     setMood({
@@ -74,6 +94,7 @@ const LogMood = ({ loggedInStatus, user }) => {
       depressed: v,
     });
   };
+
   return (
     <>
       <Navbar loggedInStatus={loggedInStatus} />
@@ -107,6 +128,7 @@ const LogMood = ({ loggedInStatus, user }) => {
                 <Elevated handleEleveted={handleEleveted} />
                 <Anxiety handleAnxiety={handleAnxiety} />
                 <Depressed handleDepressed={handleDepressed} />
+                <Psychotic checked={checked} setChecked={setChecked} />
               </Box>
               <Button
                 type="submit"
