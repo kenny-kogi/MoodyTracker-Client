@@ -2,7 +2,15 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../Home/Navbar/Navbar";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import { Button, Box, Container, Heading, Text } from "@chakra-ui/react";
+import {
+  Button,
+  Box,
+  Container,
+  Heading,
+  Text,
+  Divider,
+  Flex,
+} from "@chakra-ui/react";
 import Irritability from "./moods/Irritability";
 import Elevated from "./moods/Elevated";
 import HoursSlept from "./moods/HoursSlept";
@@ -11,6 +19,8 @@ import Depressed from "./moods/Depressed";
 import Psychotic from "./moods/Psychotic";
 import Weather from "./moods/Weather";
 import MoodNote from "./moods/MoodNote";
+import SideMenu from "./sidemenu/SideMenu";
+// import Activity from "./moods/Activity";
 
 const LogMood = ({ loggedInStatus, user }) => {
   const [errors, setErrors] = useState({
@@ -119,8 +129,11 @@ const LogMood = ({ loggedInStatus, user }) => {
   return (
     <>
       <Navbar loggedInStatus={loggedInStatus} />
-      <Box pt="5">
-        <Container maxWidth="container.xl">
+      <Divider border="2px solid" borderColor="purple.100" />
+      <Flex flexDirection="row">
+        <SideMenu />
+
+        <Container maxWidth="7xl" m={0} pt={5}>
           <Heading
             as="h1"
             size="sm"
@@ -137,10 +150,16 @@ const LogMood = ({ loggedInStatus, user }) => {
           </Heading>
           <form onSubmit={handleSubmit}>
             <Box>
-              <HoursSlept
-                handleChange={handleChange}
-                circularValue={circularValue}
-              />
+              <Box display="flex" flexDirection="row" gap={20}>
+                <HoursSlept
+                  handleChange={handleChange}
+                  circularValue={circularValue}
+                />
+                <MoodNote
+                  value={mood.mood_note}
+                  handleMoodNoteChange={handleMoodNoteChange}
+                />
+              </Box>
               <Box
                 as="flex"
                 flexDirection="row"
@@ -154,10 +173,7 @@ const LogMood = ({ loggedInStatus, user }) => {
                 <Depressed handleDepressed={handleDepressed} />
                 <Psychotic checked={checked} setChecked={setChecked} />
                 <Weather weather={mood.weather} handleWeather={handleWeather} />
-                <MoodNote
-                  value={mood.mood_note}
-                  handleMoodNoteChange={handleMoodNoteChange}
-                />
+                {/* <Activity /> */}
               </Box>
               <Button
                 type="submit"
@@ -174,7 +190,7 @@ const LogMood = ({ loggedInStatus, user }) => {
             </Box>
           </form>
         </Container>
-      </Box>
+      </Flex>
     </>
   );
 };

@@ -4,7 +4,7 @@ import { Box, Textarea, Text } from "@chakra-ui/react";
 const MoodNote = ({ value, handleMoodNoteChange }) => {
   return (
     <Box
-      width="600px"
+      width="500px"
       height="150px"
       alignItems="center"
       justifyContent="center"

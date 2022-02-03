@@ -13,7 +13,7 @@ import {
 const HoursSlept = ({ handleChange, circularValue }) => {
   return (
     <Box
-      width="600px"
+      width="500px"
       height="150px"
       alignItems="center"
       justifyContent="center"

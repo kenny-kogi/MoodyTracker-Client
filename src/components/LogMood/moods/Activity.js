@@ -1,7 +1,21 @@
 import React from "react";
+import { Box } from "@chakra-ui/react";
 
 const Activity = () => {
-  return <div>Activity</div>;
+  return (
+    <Box
+      width="500px"
+      height="150px"
+      alignItems="center"
+      justifyContent="center"
+      p={15}
+      border="1px solid purple.100"
+      borderRadius={8}
+      boxShadow="xl"
+      mb={20}
+      borderWidth={2}
+    ></Box>
+  );
 };
 
 export default Activity;
