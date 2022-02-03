@@ -9,6 +9,8 @@ import HoursSlept from "./moods/HoursSlept";
 import Anxiety from "./moods/Anxiety";
 import Depressed from "./moods/Depressed";
 import Psychotic from "./moods/Psychotic";
+import Weather from "./moods/Weather";
+import MoodNote from "./moods/MoodNote";
 
 const LogMood = ({ loggedInStatus, user }) => {
   const [errors, setErrors] = useState({
@@ -23,8 +25,11 @@ const LogMood = ({ loggedInStatus, user }) => {
     psychotic_symptoms: null,
     weather: null,
     user_id: user.id,
+    mood_note: null,
+    activity: null,
   });
   const [checked, setChecked] = useState(false);
+  const [circularValue, setCircularValue] = useState(0);
 
   let navigate = useNavigate();
   const handleSubmit = (event) => {
@@ -65,6 +70,8 @@ const LogMood = ({ loggedInStatus, user }) => {
       ...mood,
       hours_slept: v,
     });
+
+    setCircularValue(v);
   };
 
   const handleIrritability = (v) => {
@@ -95,6 +102,20 @@ const LogMood = ({ loggedInStatus, user }) => {
     });
   };
 
+  const handleWeather = (e) => {
+    setMood({
+      ...mood,
+      weather: e.target.value,
+    });
+  };
+
+  const handleMoodNoteChange = (e) => {
+    setMood({
+      ...mood,
+      mood_note: e.target.value,
+    });
+  };
+
   return (
     <>
       <Navbar loggedInStatus={loggedInStatus} />
@@ -110,13 +131,16 @@ const LogMood = ({ loggedInStatus, user }) => {
             mb="30"
           >
             <Text as="span" color="pink.400" fontSize="40px">
-              Hi,{" "}
+              Hi {user.username},{" "}
             </Text>
             Let's Log Your Mood Today
           </Heading>
           <form onSubmit={handleSubmit}>
             <Box>
-              <HoursSlept handleChange={handleChange} />
+              <HoursSlept
+                handleChange={handleChange}
+                circularValue={circularValue}
+              />
               <Box
                 as="flex"
                 flexDirection="row"
@@ -129,6 +153,11 @@ const LogMood = ({ loggedInStatus, user }) => {
                 <Anxiety handleAnxiety={handleAnxiety} />
                 <Depressed handleDepressed={handleDepressed} />
                 <Psychotic checked={checked} setChecked={setChecked} />
+                <Weather weather={mood.weather} handleWeather={handleWeather} />
+                <MoodNote
+                  value={mood.mood_note}
+                  handleMoodNoteChange={handleMoodNoteChange}
+                />
               </Box>
               <Button
                 type="submit"

@@ -13,6 +13,8 @@ const Psychotic = ({ checked, setChecked }) => {
       borderRadius={8}
       boxShadow="xl"
       borderWidth={2}
+      mr={20}
+      mb={20}
       p={5}
     >
       <Text mb={20}>Psychotic Symptoms:</Text>
