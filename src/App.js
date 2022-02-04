@@ -76,7 +76,11 @@ const App = () => {
             element={<LogMood loggedInStatus={isLoggedIn} user={user} />}
           />
 
-          <Route exact path="/moods" element={<Moods />} />
+          <Route
+            exact
+            path="/moods/:id"
+            element={<Moods loggedInStatus={isLoggedIn} user={user} />}
+          />
           {/* <Route exact path="/logout" element={<Logout />} /> */}
         </Routes>
       </BrowserRouter>
