@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Container, Divider, Flex, Box } from "@chakra-ui/react";
 import SideMenu from "../LogMood/sidemenu/SideMenu";
+import HoursChart from "./Charts/HoursChart";
 
 const Moods = ({ loggedInStatus }) => {
   const [moods, setMoods] = useState({});
@@ -29,10 +30,17 @@ const Moods = ({ loggedInStatus }) => {
       <Flex flexDirection="row">
         <SideMenu />
         <Container maxWidth="7xl" m={0} pt={5}>
-          <Box>
-            <Box textAlign="center" alignItems="center">
-              Created on: Wednesday, February, 2022
-            </Box>
+          <Box
+            textAlign="center"
+            alignItems="center"
+            bgColor="purple.100"
+            height={10}
+            mb={5}
+          >
+            Created on: Wednesday, February, 2022
+          </Box>
+          <Box flexDirection="row" flexWrap="wrap">
+            <HoursChart />
           </Box>
         </Container>
       </Flex>

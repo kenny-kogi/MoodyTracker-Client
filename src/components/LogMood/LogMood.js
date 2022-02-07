@@ -131,7 +131,7 @@ const LogMood = ({ loggedInStatus, user }) => {
       <Navbar loggedInStatus={loggedInStatus} />
       <Divider border="2px solid" borderColor="purple.100" />
       <Flex flexDirection="row">
-        <SideMenu />
+        <SideMenu user_id={user.id} />
 
         <Container maxWidth="7xl" m={0} pt={5}>
           <Heading
