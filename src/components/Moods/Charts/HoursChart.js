@@ -1,13 +1,37 @@
 import React from "react";
-import { Box } from "@chakra-ui/react";
+import { Box, Text, Flex } from "@chakra-ui/react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 const HoursChart = () => {
-  const hours_slept = 6;
+  const hours_slept = 3;
+  let pathColor;
+
+  if (hours_slept <= 3) {
+    pathColor = "red";
+  } else if (hours_slept <= 5) {
+    pathColor = "yellow";
+  } else if (hours_slept <= 7) {
+    pathColor = "orange";
+  } else {
+    pathColor = "green";
+  }
+
   return (
-    <Box width={250} height={250} m={20}>
+    <Flex
+      width={350}
+      height={300}
+      m={10}
+      border="1px solid purple.100"
+      borderRadius={8}
+      boxShadow="xl"
+      borderWidth={2}
+      justifyContent="center"
+    >
       <Box width={200} height={200}>
+        <Text mb={10} fontSize="20px" textAlign="center">
+          Hours Slept
+        </Text>
         <CircularProgressbar
           value={hours_slept}
           text={`${hours_slept} Hrs Slept`}
@@ -16,15 +40,8 @@ const HoursChart = () => {
           styles={buildStyles({
             strokeLinecap: "butt",
             textSize: "12px",
-
-            // How long animation takes to go from one percentage to another, in seconds
             pathTransitionDuration: 0.5,
-
-            // Can specify path transition in more detail, or remove it entirely
-            // pathTransition: 'none',
-
-            // Colors
-            pathColor: "pink",
+            pathColor: pathColor,
             textColor: "purple",
             trailColor: "#d6d6d6",
             backgroundColor: "pink",
@@ -32,7 +49,7 @@ const HoursChart = () => {
         />
         ;
       </Box>
-    </Box>
+    </Flex>
   );
 };
 

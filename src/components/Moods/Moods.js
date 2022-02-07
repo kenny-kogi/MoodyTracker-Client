@@ -5,6 +5,7 @@ import axios from "axios";
 import { Container, Divider, Flex, Box } from "@chakra-ui/react";
 import SideMenu from "../LogMood/sidemenu/SideMenu";
 import HoursChart from "./Charts/HoursChart";
+import Weather from "./Charts/Weather";
 
 const Moods = ({ loggedInStatus }) => {
   const [moods, setMoods] = useState({});
@@ -27,21 +28,16 @@ const Moods = ({ loggedInStatus }) => {
     <>
       <Navbar loggedInStatus={loggedInStatus} />
       <Divider border="2px solid" borderColor="purple.100" />
-      <Flex flexDirection="row">
+      <Flex>
         <SideMenu />
         <Container maxWidth="7xl" m={0} pt={5}>
-          <Box
-            textAlign="center"
-            alignItems="center"
-            bgColor="purple.100"
-            height={10}
-            mb={5}
-          >
+          <Box textAlign="center" bgColor="purple.100" height={10} mb={5}>
             Created on: Wednesday, February, 2022
           </Box>
-          <Box flexDirection="row" flexWrap="wrap">
+          <Flex>
             <HoursChart />
-          </Box>
+            <Weather weather={"rainy"} />
+          </Flex>
         </Container>
       </Flex>
     </>
