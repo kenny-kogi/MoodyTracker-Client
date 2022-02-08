@@ -18,7 +18,7 @@ const Weather = ({ weather }) => {
   } else if (weather === "Rainy") {
     Weather = Rainy;
   }
-
+  //test
   return (
     <Flex width={350} height={300} m={10} flexDirection="column">
       <Text fontSize="20px" textAlign="center">
