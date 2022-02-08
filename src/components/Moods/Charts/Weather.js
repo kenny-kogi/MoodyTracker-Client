@@ -9,13 +9,13 @@ import { Flex } from "@chakra-ui/react";
 const Weather = ({ weather }) => {
   let Weather;
 
-  if (weather === "sunny") {
+  if (weather === "Sunny") {
     Weather = Sunny;
-  } else if (weather === "cloudy") {
+  } else if (weather === "Cloudy") {
     Weather = Cloudy;
-  } else if (weather === "windy") {
+  } else if (weather === "Windy") {
     Weather = Windy;
-  } else if (weather === "rainy") {
+  } else if (weather === "Rainy") {
     Weather = Rainy;
   }
 

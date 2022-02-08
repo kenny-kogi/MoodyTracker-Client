@@ -3,8 +3,7 @@ import { Box, Text, Flex } from "@chakra-ui/react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-const HoursChart = () => {
-  const hours_slept = 3;
+const HoursChart = ({ hours_slept }) => {
   let pathColor;
 
   if (hours_slept <= 3) {
@@ -22,10 +21,10 @@ const HoursChart = () => {
       width={350}
       height={300}
       m={10}
-      border="1px solid purple.100"
-      borderRadius={8}
-      boxShadow="xl"
-      borderWidth={2}
+      // border="1px solid purple.100"
+      // borderRadius={8}
+      // boxShadow="xl"
+      // borderWidth={2}
       justifyContent="center"
     >
       <Box width={200} height={200}>
