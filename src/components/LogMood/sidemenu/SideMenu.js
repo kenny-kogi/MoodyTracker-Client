@@ -31,6 +31,9 @@ const SideMenu = ({ user_id }) => {
           color="blackAlpha.700"
           _hover={{ bg: "purple", color: "white" }}
           fontWeight="bold"
+          onClick={() => {
+            navigate(`/mood/record`);
+          }}
         >
           Log Mood
         </Button>

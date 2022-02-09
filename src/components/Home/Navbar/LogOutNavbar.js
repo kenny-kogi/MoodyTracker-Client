@@ -20,17 +20,18 @@ const LogOutNavbar = ({ handleClick }) => {
           </Box>
         </Link>
         <Box>
-          <Link to="/logout" onClick={handleClick}>
-            <Button
-              colorScheme="pink"
-              size="lg"
-              fontSize="lg"
-              variant="ghost"
-              fontWeight="bold"
-            >
-              Log out
-            </Button>
-          </Link>
+          <Button
+            colorScheme="pink"
+            size="lg"
+            fontSize="lg"
+            variant="ghost"
+            fontWeight="bold"
+            onClick={() => {
+              handleClick();
+            }}
+          >
+            Log out
+          </Button>
         </Box>
       </Box>
     </header>
