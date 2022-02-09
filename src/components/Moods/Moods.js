@@ -7,6 +7,7 @@ import SideMenu from "../LogMood/sidemenu/SideMenu";
 import HoursChart from "./Charts/HoursChart";
 import Weather from "./Charts/Weather";
 import ColumnChart from "./Charts/ColumnChart";
+import moment from "moment";
 
 const Moods = ({ loggedInStatus }) => {
   const [moods, setMoods] = useState({});
@@ -44,7 +45,8 @@ const Moods = ({ loggedInStatus }) => {
                       height={10}
                       mb={5}
                     >
-                      Created on: {mood.created_at}
+                      Created on:{" "}
+                      {moment(mood.created_at).utc().format("LLL", "en")}
                     </Box>
                     <Flex>
                       <HoursChart hours_slept={mood.hours_slept} />
