@@ -9,7 +9,7 @@ import Weather from "./Charts/Weather";
 import ColumnChart from "./Charts/ColumnChart";
 import moment from "moment";
 
-const Moods = ({ loggedInStatus }) => {
+const Moods = () => {
   const [moods, setMoods] = useState({});
 
   const { id } = useParams();
@@ -29,7 +29,7 @@ const Moods = ({ loggedInStatus }) => {
 
   return (
     <>
-      <Navbar loggedInStatus={loggedInStatus} />
+      <Navbar />
       <Divider border="2px solid" borderColor="purple.100" />
       <Flex>
         <SideMenu />

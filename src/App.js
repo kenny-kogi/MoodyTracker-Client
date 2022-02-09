@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AppContext } from "./context/appcontext";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import Login from "./components/registrations/Login";
 import Signup from "./components/registrations/Signup";
 import Home from "./components/Home";
 import LogMood from "./components/LogMood/LogMood";
 import Moods from "./components/Moods/Moods";
-// import Logout from "./components/Home/Logout/Logout";
 
 const App = () => {
+  let navigate = useNavigate;
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // eslint-disable-next-line no-unused-vars
   const [user, setUser] = useState({});
 
   const handleLogin = (data) => {
@@ -23,6 +23,18 @@ const App = () => {
   const handleLogout = () => {
     setIsLoggedIn(false);
     setUser({});
+  };
+
+  const handleClick = () => {
+    console.log("handling logout somehow");
+
+    axios
+      .delete("http://localhost:3001/user/logout", { withCredentials: true })
+      .then((response) => {
+        handleLogout();
+        navigate("/");
+      })
+      .catch((error) => console.log(error));
   };
 
   const loginStatus = () => {
@@ -45,45 +57,25 @@ const App = () => {
 
   return (
     <div>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            exact
-            path="/"
-            element={
-              <Home loggedInStatus={isLoggedIn} handleLogout={handleLogout} />
-            }
-          />
-
-          <Route
-            exact
-            path="/login"
-            element={
-              <Login handleLogin={handleLogin} loggedInStatus={isLoggedIn} />
-            }
-          />
-          <Route
-            exact
-            path="/signup"
-            element={
-              <Signup handleLogin={handleLogin} loggedInStatus={isLoggedIn} />
-            }
-          />
-
-          <Route
-            exact
-            path="/mood/record"
-            element={<LogMood loggedInStatus={isLoggedIn} user={user} />}
-          />
-
-          <Route
-            exact
-            path="/moods/:id"
-            element={<Moods loggedInStatus={isLoggedIn} user={user} />}
-          />
-          {/* <Route exact path="/logout" element={<Logout />} /> */}
-        </Routes>
-      </BrowserRouter>
+      <AppContext.Provider
+        value={{
+          isLoggedIn,
+          handleLogout,
+          handleLogin,
+          user,
+          handleClick,
+        }}
+      >
+        <BrowserRouter>
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/signup" element={<Signup />} />
+            <Route exact path="/mood/record" element={<LogMood />} />
+            <Route exact path="/moods/:id" element={<Moods />} />
+          </Routes>
+        </BrowserRouter>
+      </AppContext.Provider>
     </div>
   );
 };

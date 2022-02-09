@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router";
+import React, { useState, useEffect, useContext } from "react";
+import { useHistory } from "react-router";
 import axios from "axios";
 import Navbar from "../Home/Navbar/Navbar";
 import Form from "./Forms/Form";
+import { AppContext } from "../../context/appcontext";
 
-const Login = ({ handleLogin, loggedInStatus }) => {
+const Login = () => {
+  const { handleLogin, isLoggedIn } = useContext(AppContext);
+
   const [user, setUser] = useState({
     username: "",
     email: "",
@@ -16,11 +19,10 @@ const Login = ({ handleLogin, loggedInStatus }) => {
     errors: {},
   });
 
-  let navigate = useNavigate();
-
+  let history = useHistory();
   useEffect(() => {
     console.log("redirect");
-    return loggedInStatus ? navigate.push("/") : null;
+    return isLoggedIn ? history.push("/") : null;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -45,7 +47,7 @@ const Login = ({ handleLogin, loggedInStatus }) => {
       .then((response) => {
         if (response.data.logged_in) {
           handleLogin(response.data);
-          navigate("/mood/record");
+          history.push("/mood/record");
         } else {
           setErrors({
             errors: response.data.errors,

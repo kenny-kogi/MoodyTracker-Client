@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Navbar from "../Home/Navbar/Navbar";
 import axios from "axios";
 import { useNavigate } from "react-router";
@@ -20,9 +20,11 @@ import Psychotic from "./moods/Psychotic";
 import Weather from "./moods/Weather";
 import MoodNote from "./moods/MoodNote";
 import SideMenu from "./sidemenu/SideMenu";
+import { AppContext } from "../../context/appcontext";
 // import Activity from "./moods/Activity";
 
-const LogMood = ({ loggedInStatus, user }) => {
+const LogMood = () => {
+  const { user } = useContext(AppContext);
   const [errors, setErrors] = useState({
     errors: {},
   });
@@ -128,7 +130,7 @@ const LogMood = ({ loggedInStatus, user }) => {
 
   return (
     <>
-      <Navbar loggedInStatus={loggedInStatus} />
+      <Navbar />
       <Divider border="2px solid" borderColor="purple.100" />
       <Flex flexDirection="row">
         <SideMenu user_id={user.id} />

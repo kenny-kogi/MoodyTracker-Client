@@ -1,10 +1,12 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../Home/Navbar/Navbar";
 import Form from "./Forms/Form";
+import { AppContext } from "../../context/appcontext";
 
-const Signup = ({ handleLogin }) => {
+const Signup = () => {
+  const { handleLogin } = useContext(AppContext);
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
@@ -23,7 +25,7 @@ const Signup = ({ handleLogin }) => {
     errors: {},
   });
 
-  let navigate = useNavigate();
+  let navigate = useHistory();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
