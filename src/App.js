@@ -24,16 +24,6 @@ const App = () => {
     setUser({});
   };
 
-  // const handleClick = () => {
-  //   axios
-  //     .delete("http://localhost:3001/user/logout", { withCredentials: true })
-  //     .then((response) => {
-  //       handleLogout();
-  //       // navigate("/");
-  //     })
-  //     .catch((error) => console.log(error));
-  // };
-
   const loginStatus = () => {
     axios
       .get("http://localhost:3001/user/logged_in", { withCredentials: true })

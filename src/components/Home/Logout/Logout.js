@@ -9,7 +9,6 @@ const Logout = () => {
     axios
       .delete("http://localhost:3001/user/logout", { withCredentials: true })
       .then((response) => {
-        console.log(response);
         handleLogout();
       })
       .catch((error) => console.log(error));
