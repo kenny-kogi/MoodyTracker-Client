@@ -1,9 +1,9 @@
 import React from "react";
 import { Container, Box, Button } from "@chakra-ui/react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const SideMenu = ({ user_id }) => {
-  let history = useHistory();
+  let navigate = useNavigate();
 
   return (
     <Container maxWidth="17rem" m={0}>
@@ -17,7 +17,7 @@ const SideMenu = ({ user_id }) => {
           _hover={{ bg: "purple", color: "white" }}
           fontWeight="bold"
           onClick={() => {
-            history.push(`/moods/${user_id}`);
+            navigate(`/moods/${user_id}`);
           }}
         >
           Moods Dashboard
@@ -32,7 +32,7 @@ const SideMenu = ({ user_id }) => {
           _hover={{ bg: "purple", color: "white" }}
           fontWeight="bold"
           onClick={() => {
-            history.push(`/mood/record`);
+            navigate(`/mood/record`);
           }}
         >
           Log Mood

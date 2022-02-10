@@ -1,11 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Box, Button, Image } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import Logo from "../../../assets/logo.png";
-import { AppContext } from "../../../context/appcontext";
+import { useNavigate } from "react-router";
 
 const LogOutNavbar = () => {
-  const { handleClick } = useContext(AppContext);
+  let navigate = useNavigate();
+
   return (
     <header>
       <Box
@@ -29,8 +30,8 @@ const LogOutNavbar = () => {
             variant="ghost"
             fontWeight="bold"
             onClick={() => {
-              console.log("handling click");
-              handleClick();
+              console.log("handleling logout click");
+              navigate("/logout");
             }}
           >
             Log out

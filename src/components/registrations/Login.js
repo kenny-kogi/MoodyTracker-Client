@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import axios from "axios";
 import Navbar from "../Home/Navbar/Navbar";
 import Form from "./Forms/Form";
@@ -19,10 +19,11 @@ const Login = () => {
     errors: {},
   });
 
-  let history = useHistory();
+  let navigate = useNavigate();
+
   useEffect(() => {
     console.log("redirect");
-    return isLoggedIn ? history.push("/") : null;
+    return isLoggedIn ? navigate("/") : null;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -47,7 +48,7 @@ const Login = () => {
       .then((response) => {
         if (response.data.logged_in) {
           handleLogin(response.data);
-          history.push("/mood/record");
+          navigate("/mood/record");
         } else {
           setErrors({
             errors: response.data.errors,

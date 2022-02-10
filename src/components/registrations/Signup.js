@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../Home/Navbar/Navbar";
 import Form from "./Forms/Form";
@@ -25,7 +25,7 @@ const Signup = () => {
     errors: {},
   });
 
-  let navigate = useHistory();
+  let navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
