@@ -11,7 +11,6 @@ import moment from "moment";
 
 const Moods = () => {
   const [moods, setMoods] = useState({});
-
   const { id } = useParams();
   useEffect(() => {
     axios
@@ -24,7 +23,7 @@ const Moods = () => {
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log("Moods", moods);
+
   const isEmpty = Object.keys(moods).length === 0;
 
   return (

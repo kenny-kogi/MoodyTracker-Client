@@ -133,7 +133,7 @@ const LogMood = () => {
       <Navbar />
       <Divider border="2px solid" borderColor="purple.100" />
       <Flex flexDirection="row">
-        <SideMenu user_id={user.id} />
+        <SideMenu />
 
         <Container maxWidth="7xl" m={0} pt={5}>
           <Heading

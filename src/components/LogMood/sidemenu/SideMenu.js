@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Container, Box, Button } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../../../context/appcontext";
 
-const SideMenu = ({ user_id }) => {
+const SideMenu = () => {
+  const { user } = useContext(AppContext);
+
   let navigate = useNavigate();
 
   return (
@@ -17,7 +20,7 @@ const SideMenu = ({ user_id }) => {
           _hover={{ bg: "purple", color: "white" }}
           fontWeight="bold"
           onClick={() => {
-            navigate(`/moods/${user_id}`);
+            navigate(`/moods/${user.id}`);
           }}
         >
           Moods Dashboard
@@ -32,7 +35,7 @@ const SideMenu = ({ user_id }) => {
           _hover={{ bg: "purple", color: "white" }}
           fontWeight="bold"
           onClick={() => {
-            navigate(`/mood/record`);
+            navigate("/mood/record");
           }}
         >
           Log Mood
@@ -56,6 +59,9 @@ const SideMenu = ({ user_id }) => {
           color="blackAlpha.700"
           _hover={{ bg: "purple", color: "white" }}
           fontWeight="bold"
+          onClick={() => {
+            navigate(`/moods/analysis/${user.id}`);
+          }}
         >
           Moods Analysis
         </Button>

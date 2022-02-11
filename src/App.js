@@ -8,6 +8,7 @@ import Home from "./components/Home";
 import LogMood from "./components/LogMood/LogMood";
 import Moods from "./components/Moods/Moods";
 import Logout from "./components/Home/Logout/Logout";
+import MoodsAnalysis from "./components/MoodsAnalysis/MoodsAnalysis";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -60,6 +61,11 @@ const App = () => {
             <Route exact path="/mood/record" element={<LogMood />} />
             <Route exact path="/moods/:id" element={<Moods />} />
             <Route exact path="/logout" element={<Logout />} />
+            <Route
+              exact
+              path="/moods/analysis/:id"
+              element={<MoodsAnalysis />}
+            />
           </Routes>
         </BrowserRouter>
       </AppContext.Provider>
