@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Container,
   Box,
@@ -9,9 +9,13 @@ import {
   Button,
 } from "@chakra-ui/react";
 import HeroImage from "../../assets/hero6.jpg";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
+import { AppContext } from "../../context/appcontext";
 
 const Hero = () => {
+  const { isLoggedIn } = useContext(AppContext);
+  let navigate = useNavigate();
+
   return (
     <Box pt="20">
       <Container maxWidth="container.xl">
@@ -46,19 +50,21 @@ const Hero = () => {
                 doctor or therapist and receive valuable insights about your
                 triggers and mood patterns.
               </Box>
-              <Link to="/login">
-                <Button
-                  mt="35"
-                  bg="pink.400"
-                  color="white"
-                  height="50px"
-                  width="25%"
-                  _hover={{ bg: "purple" }}
-                  fontWeight="bold"
-                >
-                  Start Tracking
-                </Button>
-              </Link>
+
+              <Button
+                mt="35"
+                bg="pink.400"
+                color="white"
+                height="50px"
+                width="25%"
+                _hover={{ bg: "purple" }}
+                fontWeight="bold"
+                onClick={() => {
+                  isLoggedIn ? navigate(`/mood/record`) : navigate("/login");
+                }}
+              >
+                Start Tracking
+              </Button>
             </Box>
 
             <Box width="100%">
