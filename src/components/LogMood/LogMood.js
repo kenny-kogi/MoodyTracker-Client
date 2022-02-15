@@ -52,7 +52,7 @@ const LogMood = () => {
       .post("http://localhost:3001/moods", mood, { withCredentials: true })
       .then((response) => {
         if (response.data.status === "created") {
-          navigate(`/moods/${user.id}`);
+          navigate("/moods");
         } else {
           setErrors({ ...errors, errors: response.data.errors });
         }

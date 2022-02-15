@@ -1,12 +1,14 @@
 import React from "react";
 import CanvasJSReact from "../../../assets/charts/canvasjs.react";
 import { Flex } from "@chakra-ui/react";
-import { SleepingHoursData } from "../data/SleepingHoursData";
+import { GetSleepingHoursData } from "../data/data";
 
 let CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 const SleepingHoursChart = () => {
-  SleepingHoursData();
+  let hours_slept_list = GetSleepingHoursData().hours_slept;
+  let date_created_list = GetSleepingHoursData().date_created;
+
   const options = {
     theme: "light1",
     title: {
@@ -18,11 +20,8 @@ const SleepingHoursChart = () => {
     data: [
       {
         // Change type to "doughnut", "line", "splineArea", etc.
-        type: "column",
-        dataPoints: [
-          //   { label: , y:  },
-          //   { label: , y:  },
-        ],
+        type: "doughnut",
+        dataPoints: [{ label: date_created_list, y: hours_slept_list }],
       },
     ],
   };
