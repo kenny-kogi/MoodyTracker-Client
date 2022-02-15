@@ -59,13 +59,9 @@ const App = () => {
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/signup" element={<Signup />} />
             <Route exact path="/mood/record" element={<LogMood />} />
-            <Route exact path="/moods/:id" element={<Moods />} />
+            <Route exact path="/moods" element={<Moods />} />
             <Route exact path="/logout" element={<Logout />} />
-            <Route
-              exact
-              path="/moods/analysis/:id"
-              element={<MoodsAnalysis />}
-            />
+            <Route exact path="/moods/analysis" element={<MoodsAnalysis />} />
           </Routes>
         </BrowserRouter>
       </AppContext.Provider>
