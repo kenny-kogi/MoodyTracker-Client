@@ -12,7 +12,6 @@ import {
 import SideMenu from "../LogMood/sidemenu/SideMenu";
 import { AppContext } from "../../context/appcontext";
 import moment from "moment";
-import SleepingHoursChart from "./charts/SleepingHoursChart";
 
 const MoodsAnalysis = () => {
   const { user } = useContext(AppContext);
@@ -52,10 +51,7 @@ const MoodsAnalysis = () => {
             </Badge>
           </Heading>
 
-          <Box>
-            {" "}
-            <SleepingHoursChart />{" "}
-          </Box>
+          <Box></Box>
         </Container>
       </Flex>
     </>
