@@ -50,21 +50,55 @@ const Hero = () => {
                 doctor or therapist and receive valuable insights about your
                 triggers and mood patterns.
               </Box>
+              <Box display="flex" flexDirection="row" gap={4}>
+                <Button
+                  mt="35"
+                  bg="pink.400"
+                  color="white"
+                  height="50px"
+                  width="25%"
+                  _hover={{ bg: "purple" }}
+                  fontWeight="bold"
+                  onClick={() => {
+                    isLoggedIn ? navigate(`/mood/record`) : navigate("/login");
+                  }}
+                >
+                  Start Tracking
+                </Button>
 
-              <Button
-                mt="35"
-                bg="pink.400"
-                color="white"
-                height="50px"
-                width="25%"
-                _hover={{ bg: "purple" }}
-                fontWeight="bold"
-                onClick={() => {
-                  isLoggedIn ? navigate(`/mood/record`) : navigate("/login");
-                }}
-              >
-                Start Tracking
-              </Button>
+                <Button
+                  mt="35"
+                  bg="white"
+                  color="purple"
+                  border="1px solid purple"
+                  height="50px"
+                  width="25%"
+                  _hover={{ bg: "purple", color: "white" }}
+                  fontWeight="bold"
+                  onClick={() => {
+                    navigate("/patient/login");
+                  }}
+                >
+                  Patient
+                </Button>
+
+                <Button
+                  mt="35"
+                  bg="white"
+                  color="blue"
+                  height="50px"
+                  border="1px solid"
+                  borderColor="blue"
+                  width="25%"
+                  _hover={{ bg: "blue", color: "white" }}
+                  fontWeight="bold"
+                  onClick={() => {
+                    navigate("/therapist/login");
+                  }}
+                >
+                  Therapist
+                </Button>
+              </Box>
             </Box>
 
             <Box width="100%">

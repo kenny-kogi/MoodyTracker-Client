@@ -1,0 +1,92 @@
+import React, { useContext, useState, useEffect } from "react";
+import { AppContext } from "../../../context/appcontext";
+import { useNavigate } from "react-router";
+import axios from "axios";
+import Form from "../Forms/Form";
+import Navbar from "../../Home/Navbar/Navbar";
+
+const PatientLogin = () => {
+  const { isLoggedInPatient, handleLoginPatient } = useContext(AppContext);
+
+  const [patient, setPatient] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  // eslint-disable-next-line no-unused-vars
+  const [errors, setErrors] = useState({
+    errors: {},
+  });
+
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    return isLoggedInPatient ? navigate("/") : null;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setPatient({
+      ...patient,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    axios
+      .post(
+        "http://localhost:3001/patient/login",
+        { patient },
+        { withCredentials: true }
+      )
+      .then((response) => {
+        if (response.data.logged_in) {
+          handleLoginPatient(response.data);
+          //   navigate("/mood/record");
+          console.log("logged in ");
+        } else {
+          setErrors({
+            errors: response.data.errors,
+          });
+        }
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const handleErrors = () => {
+    const isEmpty = Object.keys(patient.errors).length === 0;
+    return (
+      <div>
+        <ul>
+          {isEmpty
+            ? ""
+            : patient.errors.map((error) => {
+                return <li key={error}>{error}</li>;
+              })}
+        </ul>
+      </div>
+    );
+  };
+
+  return (
+    <>
+      <div>
+        <Navbar login={true} />
+        <Form
+          user={patient}
+          isSignup={false}
+          handleSubmit={handleSubmit}
+          handleChange={handleChange}
+        />
+        <div>{patient.errors ? handleErrors() : null}</div>
+      </div>
+    </>
+  );
+};
+
+export default PatientLogin;
