@@ -22,7 +22,6 @@ const Login = () => {
   let navigate = useNavigate();
 
   useEffect(() => {
-    console.log("redirect");
     return isLoggedIn ? navigate("/") : null;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

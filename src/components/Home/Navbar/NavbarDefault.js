@@ -25,6 +25,7 @@ const NavbarDefault = ({ loginPage }) => {
             onClick={() => {
               navigate("/");
             }}
+            _hover={{ cursor: "pointer" }}
           />
         </Box>
 
