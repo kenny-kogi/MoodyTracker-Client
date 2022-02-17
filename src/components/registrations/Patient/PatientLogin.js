@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import { AppContext } from "../../../context/appcontext";
 import { useNavigate } from "react-router";
 import axios from "axios";
-import Navbar from "../Home/Navbar/Navbar";
-import Form from "./Forms/Form";
-import { AppContext } from "../../context/appcontext";
+import Form from "../Forms/Patient/Form";
+import Navbar from "../../Home/Navbar/Navbar";
 
-const Login = () => {
-  const { handleLogin, isLoggedIn } = useContext(AppContext);
+const PatientLogin = () => {
+  const { isLoggedInPatient, handleLoginPatient } = useContext(AppContext);
 
-  const [user, setUser] = useState({
+  const [patient, setPatient] = useState({
     username: "",
     email: "",
     password: "",
@@ -22,32 +22,31 @@ const Login = () => {
   let navigate = useNavigate();
 
   useEffect(() => {
-    return isLoggedIn ? navigate("/") : null;
+    return isLoggedInPatient ? navigate("/") : null;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    setUser({
-      ...user,
+    setPatient({
+      ...patient,
       [name]: value,
     });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     axios
       .post(
-        "http://localhost:3001/user/login",
-        { user },
+        "http://localhost:3001/patient/login",
+        { patient },
         { withCredentials: true }
       )
       .then((response) => {
         if (response.data.logged_in) {
-          handleLogin(response.data);
-          navigate("/mood/record");
+          handleLoginPatient(response.data);
+          navigate("/patient/mood/record");
         } else {
           setErrors({
             errors: response.data.errors,
@@ -58,13 +57,13 @@ const Login = () => {
   };
 
   const handleErrors = () => {
-    const isEmpty = Object.keys(user.errors).length === 0;
+    const isEmpty = Object.keys(patient.errors).length === 0;
     return (
       <div>
         <ul>
           {isEmpty
             ? ""
-            : user.errors.map((error) => {
+            : patient.errors.map((error) => {
                 return <li key={error}>{error}</li>;
               })}
         </ul>
@@ -73,17 +72,19 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <Navbar login={true} />
-      <Form
-        user={user}
-        isSignup={false}
-        handleSubmit={handleSubmit}
-        handleChange={handleChange}
-      />
-      <div>{user.errors ? handleErrors() : null}</div>
-    </div>
+    <>
+      <div>
+        <Navbar login={true} />
+        <Form
+          patient={patient}
+          isSignup={false}
+          handleSubmit={handleSubmit}
+          handleChange={handleChange}
+        />
+        <div>{patient.errors ? handleErrors() : null}</div>
+      </div>
+    </>
   );
 };
 
-export default Login;
+export default PatientLogin;

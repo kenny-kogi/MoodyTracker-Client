@@ -9,8 +9,11 @@ import LogMood from "./components/LogMood/LogMood";
 import Moods from "./components/Moods/Moods";
 import Logout from "./components/Home/Logout/Logout";
 import MoodsAnalysis from "./components/MoodsAnalysis/MoodsAnalysis";
-
+import PatientLogin from "./components/registrations/Patient/PatientLogin";
+import PatientSignup from "./components/registrations/Patient/PatientSignup";
+import PatientLogMood from "./components/LogMood/PatientLogMood";
 const App = () => {
+  //user
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({});
 
@@ -38,8 +41,40 @@ const App = () => {
       .catch((error) => console.log("api errors:", error));
   };
 
+  //patient
+  const [isLoggedInPatient, setIsLoggedInPatient] = useState(false);
+  const [patient, setPatient] = useState({});
+
+  const handleLoginPatient = (data) => {
+    console.log(data);
+    setIsLoggedInPatient(true);
+    setPatient(data.patient);
+  };
+
+  const handleLogoutPatient = () => {
+    setIsLoggedInPatient(false);
+    setPatient({});
+  };
+
+  const loginStatusPatient = () => {
+    axios
+      .get("http://localhost:3001/patient/logged_in", {
+        withCredentials: true,
+      })
+      .then((response) => {
+        if (response.data.logged_in) {
+          handleLoginPatient(response);
+        } else {
+          handleLogoutPatient();
+        }
+      })
+      .catch((error) => console.log("api errors:", error));
+  };
+
+  //general
   useEffect(() => {
     loginStatus();
+    loginStatusPatient();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -51,6 +86,10 @@ const App = () => {
           handleLogout,
           handleLogin,
           user,
+          isLoggedInPatient,
+          handleLogoutPatient,
+          handleLoginPatient,
+          patient,
         }}
       >
         <BrowserRouter>
@@ -62,6 +101,13 @@ const App = () => {
             <Route exact path="/moods" element={<Moods />} />
             <Route exact path="/logout" element={<Logout />} />
             <Route exact path="/moods/analysis" element={<MoodsAnalysis />} />
+            <Route exact path="/patient/login" element={<PatientLogin />} />
+            <Route exact path="/patient/signup" element={<PatientSignup />} />
+            <Route
+              exact
+              path="/patient/mood/record"
+              elemet={<PatientLogMood />}
+            />
           </Routes>
         </BrowserRouter>
       </AppContext.Provider>

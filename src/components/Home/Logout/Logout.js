@@ -4,15 +4,24 @@ import { AppContext } from "../../../context/appcontext";
 import Navbar from "../Navbar/Navbar";
 
 const Logout = () => {
-  const { handleLogout } = useContext(AppContext);
+  const { handleLogout, handleLogoutPatient, isLoggedIn } =
+    useContext(AppContext);
+  let currentLogged;
+
+  isLoggedIn ? (currentLogged = "user") : (currentLogged = "patient");
+
   const handleClick = () => {
     axios
-      .delete("http://localhost:3001/user/logout", { withCredentials: true })
+      .delete(`http://localhost:3001/${currentLogged}/logout`, {
+        withCredentials: true,
+      })
       .then((response) => {
-        handleLogout();
+        isLoggedIn ? handleLogout() : handleLogoutPatient();
       })
       .catch((error) => console.log(error));
   };
+
+  console.log(currentLogged);
 
   useEffect(() => {
     handleClick();
@@ -22,7 +31,7 @@ const Logout = () => {
   return (
     <>
       <Navbar />
-      <h1>Log out Page.....Bye</h1>
+      <h1>Log out Page.....</h1>
     </>
   );
 };
