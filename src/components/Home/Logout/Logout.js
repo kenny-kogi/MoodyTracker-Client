@@ -30,7 +30,7 @@ const Logout = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar user={true} />
       <h1>Log out Page.....</h1>
     </>
   );

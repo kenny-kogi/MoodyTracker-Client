@@ -74,7 +74,7 @@ const Login = () => {
 
   return (
     <div>
-      <Navbar login={true} />
+      <Navbar user={true} />
       <Form
         user={user}
         isSignup={false}

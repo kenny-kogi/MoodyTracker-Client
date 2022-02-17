@@ -88,7 +88,7 @@ const PatientSignup = () => {
 
   return (
     <div>
-      <Navbar signup={true} />
+      <Navbar patient={true} />
       <Form
         patient={patient}
         handleChange={handleChange}

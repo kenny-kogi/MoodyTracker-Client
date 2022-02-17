@@ -1,12 +1,18 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Button, Box, Image } from "@chakra-ui/react";
 import Logo from "../../../assets/logo.png";
-import { AppContext } from "../../../context/appcontext";
 import { useNavigate } from "react-router";
 
-const NavbarDefault = ({ loginPage }) => {
+const NavbarDefault = ({ user, patient, therapist }) => {
   let navigate = useNavigate();
-  const { isLoggedIn, isLoggedInPatient } = useContext(AppContext);
+  let navstring;
+
+  if (patient) {
+    navstring = "patient";
+  }
+  if (therapist) {
+    navstring = "therapist";
+  }
 
   return (
     <header>
@@ -30,45 +36,67 @@ const NavbarDefault = ({ loginPage }) => {
         </Box>
 
         <Box>
-          <Button
-            colorScheme="pink"
-            size="lg"
-            fontSize="lg"
-            variant="ghost"
-            fontWeight="bold"
-            onClick={() => {
-              if (isLoggedIn) {
-                navigate("/signup");
-              } else if (isLoggedInPatient) {
-                navigate("/patient/signup");
-              } else {
-                navigate("/signup");
-              }
-            }}
-          >
-            Sign up
-          </Button>
-
-          <Button
-            p={3}
-            colorScheme="purple"
-            size="lg"
-            fontSize="lg"
-            variant="ghost"
-            mr={2}
-            fontWeight="bold"
-            onClick={() => {
-              if (isLoggedIn) {
-                navigate("/login");
-              } else if (isLoggedInPatient) {
-                navigate("/patient/login");
-              } else {
-                navigate("/login");
-              }
-            }}
-          >
-            Log in
-          </Button>
+          {user ? (
+            <>
+              {" "}
+              <Button
+                colorScheme="pink"
+                size="lg"
+                fontSize="lg"
+                variant="ghost"
+                fontWeight="bold"
+                onClick={() => {
+                  navigate("/signup");
+                }}
+              >
+                Sign up
+              </Button>
+              <Button
+                p={3}
+                colorScheme="purple"
+                size="lg"
+                fontSize="lg"
+                variant="ghost"
+                mr={2}
+                fontWeight="bold"
+                onClick={() => {
+                  navigate("/login");
+                }}
+              >
+                Log in
+              </Button>
+            </>
+          ) : (
+            <>
+              {" "}
+              <Button
+                colorScheme="pink"
+                size="lg"
+                fontSize="lg"
+                variant="ghost"
+                fontWeight="bold"
+                onClick={() => {
+                  navigate(`/${navstring}/signup`);
+                }}
+              >
+                Sign up
+              </Button>
+              <Button
+                p={3}
+                colorScheme="purple"
+                size="lg"
+                fontSize="lg"
+                variant="ghost"
+                mr={2}
+                fontWeight="bold"
+                onClick={() => {
+                  navigate(`/${navstring}/login`);
+                }}
+              >
+                Log in
+              </Button>
+            </>
+          )}
         </Box>
       </Box>
     </header>

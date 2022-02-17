@@ -6,7 +6,7 @@ import Hero from "./Home/Hero";
 const Home = () => {
   return (
     <div>
-      <Navbar />
+      <Navbar user={true} />
       <Hero />
     </div>
   );
