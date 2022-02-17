@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { AppContext } from "../../../context/appcontext";
 import { useNavigate } from "react-router";
 import axios from "axios";
-import Form from "../Forms/Form";
+import Form from "../Forms/Patient/Form";
 import Navbar from "../../Home/Navbar/Navbar";
 
 const PatientLogin = () => {
@@ -37,7 +37,6 @@ const PatientLogin = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     axios
       .post(
         "http://localhost:3001/patient/login",
@@ -47,8 +46,7 @@ const PatientLogin = () => {
       .then((response) => {
         if (response.data.logged_in) {
           handleLoginPatient(response.data);
-          //   navigate("/mood/record");
-          console.log("logged in ");
+          navigate("/patient/mood/record");
         } else {
           setErrors({
             errors: response.data.errors,
@@ -78,7 +76,7 @@ const PatientLogin = () => {
       <div>
         <Navbar login={true} />
         <Form
-          user={patient}
+          patient={patient}
           isSignup={false}
           handleSubmit={handleSubmit}
           handleChange={handleChange}

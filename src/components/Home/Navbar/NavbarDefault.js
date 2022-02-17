@@ -1,9 +1,13 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
 import { Button, Box, Image } from "@chakra-ui/react";
 import Logo from "../../../assets/logo.png";
+import { AppContext } from "../../../context/appcontext";
+import { useNavigate } from "react-router";
 
-const NavbarDefault = () => {
+const NavbarDefault = ({ loginPage }) => {
+  let navigate = useNavigate();
+  const { isLoggedIn, isLoggedInPatient } = useContext(AppContext);
+
   return (
     <header>
       <Box
@@ -13,37 +17,57 @@ const NavbarDefault = () => {
         ml={6}
         mr={6}
       >
-        <Link to="/">
-          {" "}
-          <Box>
-            <Image height="90px" src={Logo} alt="brand" />
-          </Box>
-        </Link>
         <Box>
-          <Link to="/signup">
-            <Button
-              colorScheme="pink"
-              size="lg"
-              fontSize="lg"
-              variant="ghost"
-              fontWeight="bold"
-            >
-              Sign up
-            </Button>
-          </Link>
-          <Link to="/login">
-            <Button
-              p={3}
-              colorScheme="purple"
-              size="lg"
-              fontSize="lg"
-              variant="ghost"
-              mr={2}
-              fontWeight="bold"
-            >
-              Log in
-            </Button>
-          </Link>
+          <Image
+            height="90px"
+            src={Logo}
+            alt="brand"
+            onClick={() => {
+              navigate("/");
+            }}
+          />
+        </Box>
+
+        <Box>
+          <Button
+            colorScheme="pink"
+            size="lg"
+            fontSize="lg"
+            variant="ghost"
+            fontWeight="bold"
+            onClick={() => {
+              if (isLoggedIn) {
+                navigate("/signup");
+              } else if (isLoggedInPatient) {
+                navigate("/patient/signup");
+              } else {
+                navigate("/signup");
+              }
+            }}
+          >
+            Sign up
+          </Button>
+
+          <Button
+            p={3}
+            colorScheme="purple"
+            size="lg"
+            fontSize="lg"
+            variant="ghost"
+            mr={2}
+            fontWeight="bold"
+            onClick={() => {
+              if (isLoggedIn) {
+                navigate("/login");
+              } else if (isLoggedInPatient) {
+                navigate("/patient/login");
+              } else {
+                navigate("/login");
+              }
+            }}
+          >
+            Log in
+          </Button>
         </Box>
       </Box>
     </header>

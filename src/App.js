@@ -11,7 +11,7 @@ import Logout from "./components/Home/Logout/Logout";
 import MoodsAnalysis from "./components/MoodsAnalysis/MoodsAnalysis";
 import PatientLogin from "./components/registrations/Patient/PatientLogin";
 import PatientSignup from "./components/registrations/Patient/PatientSignup";
-
+import PatientLogMood from "./components/LogMood/PatientLogMood";
 const App = () => {
   //user
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -103,6 +103,11 @@ const App = () => {
             <Route exact path="/moods/analysis" element={<MoodsAnalysis />} />
             <Route exact path="/patient/login" element={<PatientLogin />} />
             <Route exact path="/patient/signup" element={<PatientSignup />} />
+            <Route
+              exact
+              path="/patient/mood/record"
+              elemet={<PatientLogMood />}
+            />
           </Routes>
         </BrowserRouter>
       </AppContext.Provider>

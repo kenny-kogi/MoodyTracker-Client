@@ -3,7 +3,7 @@ import { AppContext } from "../../../context/appcontext";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import Navbar from "../../Home/Navbar/Navbar";
-import Form from "../Forms/Form";
+import Form from "../Forms/Patient/Form";
 
 const PatientSignup = () => {
   const { handleLoginPatient } = useContext(AppContext);
@@ -19,6 +19,9 @@ const PatientSignup = () => {
     age: null,
     occupation: "",
     gender: "",
+    mental_health_status: "",
+    mental_health_facility: "",
+    therapist_id: null,
   });
 
   const [errors, setErrors] = useState({
@@ -55,7 +58,7 @@ const PatientSignup = () => {
       .then((response) => {
         if (response.data.status === "created") {
           handleLoginPatient(response.data);
-          //   navigate("/mood/record");
+          navigate("/patient/mood/record");
         } else {
           setErrors({
             ...errors,
@@ -87,7 +90,7 @@ const PatientSignup = () => {
     <div>
       <Navbar signup={true} />
       <Form
-        user={patient}
+        patient={patient}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         handleFileUpload={handleFileUpload}

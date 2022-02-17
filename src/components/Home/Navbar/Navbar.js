@@ -6,9 +6,9 @@ import NavbarDefault from "./NavbarDefault";
 import { AppContext } from "../../../context/appcontext";
 
 const Navbar = ({ login, signup }) => {
-  const { isLoggedIn } = useContext(AppContext);
+  const { isLoggedIn, isLoggedInPatient } = useContext(AppContext);
 
-  return isLoggedIn ? <LogOutNavbar /> : <NavbarDefault />;
+  return isLoggedIn || isLoggedInPatient ? <LogOutNavbar /> : <NavbarDefault />;
 
   // if (isLoggedIn) {
   //   return <LogOutNavbar />;
