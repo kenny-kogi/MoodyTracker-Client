@@ -4,7 +4,6 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 import Form from "../Forms/Patient/Form";
 import Navbar from "../../Home/Navbar/Navbar";
-
 const PatientLogin = () => {
   const { isLoggedInPatient, handleLoginPatient } = useContext(AppContext);
 
@@ -74,7 +73,7 @@ const PatientLogin = () => {
   return (
     <>
       <div>
-        <Navbar login={true} />
+        <Navbar patient={true} />
         <Form
           patient={patient}
           isSignup={false}

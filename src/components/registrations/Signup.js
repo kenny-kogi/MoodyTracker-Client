@@ -81,7 +81,7 @@ const Signup = () => {
 
   return (
     <div>
-      <Navbar signup={true} />
+      <Navbar user={true} />
       <Form
         user={user}
         handleChange={handleChange}

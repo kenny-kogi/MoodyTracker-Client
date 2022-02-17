@@ -28,7 +28,7 @@ const Moods = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar user={true} />
       <Divider border="2px solid" borderColor="purple.100" />
       <Flex>
         <SideMenu />

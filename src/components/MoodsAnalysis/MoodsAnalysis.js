@@ -17,7 +17,7 @@ const MoodsAnalysis = () => {
   const { user } = useContext(AppContext);
   return (
     <>
-      <Navbar />
+      <Navbar user={true} />
       <Divider border="2px solid" borderColor="purple.100" />
       <Flex>
         <SideMenu />
