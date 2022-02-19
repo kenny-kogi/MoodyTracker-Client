@@ -12,6 +12,9 @@ import MoodsAnalysis from "./components/MoodsAnalysis/MoodsAnalysis";
 import PatientLogin from "./components/registrations/Patient/PatientLogin";
 import PatientSignup from "./components/registrations/Patient/PatientSignup";
 import PatientLogMood from "./components/LogMood/PatientLogMood";
+import TherapistLogin from "./components/registrations/Therapist/TherapistLogin";
+import TherapistSignup from "./components/registrations/Therapist/TherapistSignup";
+
 const App = () => {
   //user
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -71,10 +74,42 @@ const App = () => {
       .catch((error) => console.log("api errors:", error));
   };
 
+  //Therapist
+
+  const [isLoggedInTherapist, setIsLoggedInTherapist] = useState(false);
+  const [therapist, setTherapist] = useState({});
+
+  const handleLoginTherapist = (data) => {
+    console.log(data);
+    setIsLoggedInTherapist(true);
+    setTherapist(data.therapist);
+  };
+
+  const handleLogoutTherapist = () => {
+    setIsLoggedInTherapist(false);
+    setTherapist({});
+  };
+
+  const loginStatusTherapist = () => {
+    axios
+      .get("http://localhost:3001/therapist/logged_in", {
+        withCredentials: true,
+      })
+      .then((response) => {
+        if (response.data.logged_in) {
+          handleLoginTherapist(response);
+        } else {
+          handleLogoutTherapist();
+        }
+      })
+      .catch((error) => console.log("api errors:", error));
+  };
+
   //general
   useEffect(() => {
     loginStatus();
     loginStatusPatient();
+    loginStatusTherapist();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -90,6 +125,10 @@ const App = () => {
           handleLogoutPatient,
           handleLoginPatient,
           patient,
+          isLoggedInTherapist,
+          handleLoginTherapist,
+          handleLogoutTherapist,
+          therapist,
         }}
       >
         <BrowserRouter>
@@ -103,6 +142,12 @@ const App = () => {
             <Route exact path="/moods/analysis" element={<MoodsAnalysis />} />
             <Route exact path="/patient/login" element={<PatientLogin />} />
             <Route exact path="/patient/signup" element={<PatientSignup />} />
+            <Route exact path="/therapist/login" element={<TherapistLogin />} />
+            <Route
+              exact
+              path="/therapist/signup"
+              element={<TherapistSignup />}
+            />
             <Route
               exact
               path="/patient/mood/record"

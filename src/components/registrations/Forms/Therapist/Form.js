@@ -12,14 +12,14 @@ import {
   Heading,
   Button,
 } from "@chakra-ui/react";
-import SignupImage from "../../../assets/signup1.png";
-import LogImage from "../../../assets/login1.png";
+import SignupImage from "../../../../assets/signup1.png";
+import LogImage from "../../../../assets/login1.png";
 
 const Form = ({
   handleFileUpload,
   handleChange,
   handleSubmit,
-  user,
+  therapist,
   isSignup,
 }) => {
   return (
@@ -27,7 +27,7 @@ const Form = ({
       <Stack direction="row" justifyContent="space-evenly">
         <Box width="45%">
           <Heading color="purple">
-            {isSignup ? "User Sign Up" : "User Login"}
+            {isSignup ? "Therapist Sign Up" : "Therapist Login"}
           </Heading>
           {isSignup ? (
             <form onSubmit={handleSubmit}>
@@ -40,7 +40,7 @@ const Form = ({
                       type="text"
                       placeholder="FirstName"
                       name="firstName"
-                      value={user.firstName}
+                      value={therapist.firstName}
                       onChange={handleChange}
                     />
                   </FormControl>
@@ -53,7 +53,7 @@ const Form = ({
                       id="lastName"
                       type="text"
                       placeholder="lastName"
-                      value={user.lastName}
+                      value={therapist.lastName}
                       name="lastName"
                       onChange={handleChange}
                     />
@@ -67,7 +67,7 @@ const Form = ({
                       id="username"
                       type="text"
                       placeholder="UserName"
-                      value={user.username}
+                      value={therapist.username}
                       name="username"
                       onChange={handleChange}
                     />
@@ -82,7 +82,7 @@ const Form = ({
                       type="email"
                       placeholder="email"
                       name="email"
-                      value={user.email}
+                      value={therapist.email}
                       onChange={handleChange}
                     />
                   </FormControl>
@@ -95,36 +95,8 @@ const Form = ({
                       id="location"
                       type="text"
                       placeholder="Nairobi"
-                      value={user.location}
+                      value={therapist.location}
                       name="location"
-                      onChange={handleChange}
-                    />
-                  </FormControl>
-                </GridItem>
-
-                <GridItem colSpan={1} mb="2" mr="6">
-                  <FormControl>
-                    <FormLabel htmlFor="age">Age:</FormLabel>
-                    <Input
-                      id="age"
-                      type="date"
-                      placeholder=""
-                      value={user.age}
-                      name="age"
-                      onChange={handleChange}
-                    />
-                  </FormControl>
-                </GridItem>
-
-                <GridItem colSpan={1} mr="6">
-                  <FormControl>
-                    <FormLabel htmlFor="occupation">occupation:</FormLabel>
-                    <Input
-                      id="occupation"
-                      type="text"
-                      placeholder="Nurse"
-                      value={user.occupation}
-                      name="occupation"
                       onChange={handleChange}
                     />
                   </FormControl>
@@ -136,7 +108,7 @@ const Form = ({
                     <Select
                       id="gender"
                       placeholder="Select Gender"
-                      value={user.gender}
+                      value={therapist.gender}
                       name="gender"
                       onChange={handleChange}
                     >
@@ -146,7 +118,7 @@ const Form = ({
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={2} mr="6">
+                <GridItem colSpan={1} mr="6">
                   <FormControl>
                     <FormLabel htmlFor="image">Profile Image:</FormLabel>
                     <Input
@@ -159,13 +131,29 @@ const Form = ({
                   </FormControl>
                 </GridItem>
 
+                <GridItem colSpan={2} mr="6">
+                  <FormControl>
+                    <FormLabel htmlFor="specialization">
+                      specialization:
+                    </FormLabel>
+                    <Input
+                      id="specialization"
+                      type="text"
+                      placeholder="Specialization"
+                      value={therapist.specialization}
+                      name="specialization"
+                      onChange={handleChange}
+                    />
+                  </FormControl>
+                </GridItem>
+
                 <GridItem colSpan={2} mb="2" mr="6">
                   <FormControl>
                     <FormLabel htmlFor="password">Password:</FormLabel>
                     <Input
                       id="password"
                       type="password"
-                      value={user.password}
+                      value={therapist.password}
                       onChange={handleChange}
                       name="password"
                     />
@@ -180,7 +168,7 @@ const Form = ({
                     <Input
                       id="password_confirmation"
                       type="password"
-                      value={user.password_confirmation}
+                      value={therapist.password_confirmation}
                       onChange={handleChange}
                       name="password_confirmation"
                     />
@@ -212,7 +200,7 @@ const Form = ({
                       type="text"
                       placeholder="username"
                       name="username"
-                      value={user.username}
+                      value={therapist.username}
                       onChange={handleChange}
                     />
                   </FormControl>
@@ -226,7 +214,7 @@ const Form = ({
                       type="text"
                       placeholder="email"
                       name="email"
-                      value={user.email}
+                      value={therapist.email}
                       onChange={handleChange}
                     />
                   </FormControl>
@@ -240,7 +228,7 @@ const Form = ({
                       type="password"
                       placeholder="password"
                       name="password"
-                      value={user.password}
+                      value={therapist.password}
                       onChange={handleChange}
                     />
                   </FormControl>
