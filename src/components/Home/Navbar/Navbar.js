@@ -4,9 +4,10 @@ import NavbarDefault from "./NavbarDefault";
 import { AppContext } from "../../../context/appcontext";
 
 const Navbar = ({ user, patient, therapist }) => {
-  const { isLoggedIn, isLoggedInPatient } = useContext(AppContext);
+  const { isLoggedIn, isLoggedInPatient, isLoggedInTherapist } =
+    useContext(AppContext);
 
-  return isLoggedIn || isLoggedInPatient ? (
+  return isLoggedIn || isLoggedInPatient || isLoggedInTherapist ? (
     <LogOutNavbar />
   ) : (
     <NavbarDefault user={user} patient={patient} therapist={therapist} />
