@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import Navbar from "../Home/Navbar/Navbar";
+import Navbar from "../Home/Navbar/User/Navbar";
 import axios from "axios";
 import { Container, Divider, Flex, Box } from "@chakra-ui/react";
 import SideMenu from "../LogMood/sidemenu/SideMenu";
@@ -28,7 +28,7 @@ const Moods = () => {
 
   return (
     <>
-      <Navbar user={true} />
+      <Navbar />
       <Divider border="2px solid" borderColor="purple.100" />
       <Flex>
         <SideMenu />

@@ -3,7 +3,7 @@ import { AppContext } from "../../../context/appcontext";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import Form from "../Forms/Therapist/Form";
-import Navbar from "../../Home/Navbar/Navbar";
+import Navbar from "../../Home/Navbar/Therapist/Navbar";
 
 const TherapistLogin = () => {
   const { isLoggedInTherapist, handleLoginTherapist } = useContext(AppContext);

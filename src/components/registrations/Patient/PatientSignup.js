@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { AppContext } from "../../../context/appcontext";
 import { useNavigate } from "react-router";
 import axios from "axios";
-import Navbar from "../../Home/Navbar/Navbar";
+import Navbar from "../../Home/Navbar/Patient/Navbar";
 import Form from "../Forms/Patient/Form";
 
 const PatientSignup = () => {
@@ -88,7 +88,7 @@ const PatientSignup = () => {
 
   return (
     <div>
-      <Navbar patient={true} />
+      <Navbar />
       <Form
         patient={patient}
         handleChange={handleChange}
