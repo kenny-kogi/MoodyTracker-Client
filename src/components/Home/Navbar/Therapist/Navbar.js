@@ -6,6 +6,10 @@ import { AppContext } from "../../../../context/appcontext";
 const Navbar = () => {
   const { isLoggedInTherapist } = useContext(AppContext);
 
-  return isLoggedInTherapist ? <LogOutNavbar /> : <NavbarDefault />;
+  return isLoggedInTherapist ? (
+    <LogOutNavbar currentlogged={"therapist"} />
+  ) : (
+    <NavbarDefault />
+  );
 };
 export default Navbar;
