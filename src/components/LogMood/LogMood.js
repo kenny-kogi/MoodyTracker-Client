@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import Navbar from "../Home/Navbar/Navbar";
+import Navbar from "../Home/Navbar/User/Navbar";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import {
@@ -130,7 +130,7 @@ const LogMood = () => {
 
   return (
     <>
-      <Navbar user={true} />
+      <Navbar />
       <Divider border="2px solid" borderColor="purple.100" />
       <Flex flexDirection="row">
         <SideMenu />

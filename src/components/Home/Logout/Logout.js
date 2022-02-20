@@ -1,44 +1,30 @@
 import React, { useEffect, useContext } from "react";
 import axios from "axios";
 import { AppContext } from "../../../context/appcontext";
-import Navbar from "../Navbar/Navbar";
+import Navbar from "../../Home/Navbar/Default/Navbar";
+import { useParams } from "react-router";
 
 const Logout = () => {
-  const {
-    handleLogout,
-    handleLogoutPatient,
-    isLoggedIn,
-    handleLogoutTherapist,
-    isLoggedInPatient,
-    isLoggedInTherapist,
-  } = useContext(AppContext);
-  let currentLogged;
+  const { currentlogged } = useParams();
+  const { handleLogout, handleLogoutPatient, handleLogoutTherapist } =
+    useContext(AppContext);
 
-  if (isLoggedIn) {
-    currentLogged = "user";
-  } else if (isLoggedInPatient) {
-    currentLogged = "patient";
-  } else if (isLoggedInTherapist) {
-    currentLogged = "therapist";
-  }
   const handleClick = () => {
     axios
-      .delete(`http://localhost:3001/${currentLogged}/logout`, {
+      .delete(`http://localhost:3001/${currentlogged}/logout`, {
         withCredentials: true,
       })
       .then((response) => {
-        if (isLoggedIn) {
+        if (currentlogged === "user") {
           handleLogout();
-        } else if (isLoggedInPatient) {
+        } else if (currentlogged === "patient") {
           handleLogoutPatient();
-        } else if (isLoggedInTherapist) {
+        } else if (currentlogged === "therapist") {
           handleLogoutTherapist();
         }
       })
       .catch((error) => console.log(error));
   };
-
-  console.log(currentLogged);
 
   useEffect(() => {
     handleClick();
@@ -47,7 +33,7 @@ const Logout = () => {
 
   return (
     <>
-      <Navbar user={true} />
+      <Navbar />
       <h1>Log out Page.....</h1>
     </>
   );

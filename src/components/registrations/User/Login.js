@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
-import Navbar from "../Home/Navbar/Navbar";
-import Form from "./Forms/Form";
-import { AppContext } from "../../context/appcontext";
+import Navbar from "../../Home/Navbar/User/Navbar";
+import Form from "../Forms/Form";
+import { AppContext } from "../../../context/appcontext";
 
 const Login = () => {
   const { handleLogin, isLoggedIn } = useContext(AppContext);

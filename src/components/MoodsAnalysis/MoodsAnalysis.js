@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Navbar from "../Home/Navbar/Navbar";
+import Navbar from "../Home/Navbar/User/Navbar";
 import {
   Divider,
   Flex,
@@ -17,7 +17,7 @@ const MoodsAnalysis = () => {
   const { user } = useContext(AppContext);
   return (
     <>
-      <Navbar user={true} />
+      <Navbar />
       <Divider border="2px solid" borderColor="purple.100" />
       <Flex>
         <SideMenu />

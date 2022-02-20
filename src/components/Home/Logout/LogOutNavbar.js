@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Logo from "../../../assets/logo.png";
 import { useNavigate } from "react-router";
 
-const LogOutNavbar = () => {
+const LogOutNavbar = ({ currentlogged }) => {
   let navigate = useNavigate();
 
   return (
@@ -31,7 +31,7 @@ const LogOutNavbar = () => {
             fontWeight="bold"
             onClick={() => {
               console.log("handleling logout click");
-              navigate("/logout");
+              navigate(`/logout/${currentlogged}`);
             }}
           >
             Log out

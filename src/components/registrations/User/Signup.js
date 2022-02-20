@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Navbar from "../Home/Navbar/Navbar";
-import Form from "./Forms/Form";
-import { AppContext } from "../../context/appcontext";
+import Navbar from "../../Home/Navbar/User/Navbar";
+import Form from "../Forms/Form";
+import { AppContext } from "../../../context/appcontext";
 
 const Signup = () => {
   const { handleLogin } = useContext(AppContext);
@@ -81,7 +81,7 @@ const Signup = () => {
 
   return (
     <div>
-      <Navbar user={true} />
+      <Navbar />
       <Form
         user={user}
         handleChange={handleChange}
