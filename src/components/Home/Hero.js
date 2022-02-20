@@ -95,6 +95,7 @@ const Hero = () => {
                   onClick={() => {
                     navigate("/therapist/login");
                   }}
+                  isExternal
                 >
                   Therapist
                 </Button>

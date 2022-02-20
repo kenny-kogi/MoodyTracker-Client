@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 import Navbar from "../../Home/Navbar/Patient/Navbar";
 import Form from "../Forms/Patient/Form";
+import Errors from "../../Shared/Errors";
 
 const PatientSignup = () => {
   const { handleLoginPatient } = useContext(AppContext);
@@ -24,10 +25,7 @@ const PatientSignup = () => {
     therapist_id: null,
   });
 
-  const [errors, setErrors] = useState({
-    errors: {},
-  });
-
+  const [errors, setErrors] = useState({});
   let navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -71,20 +69,7 @@ const PatientSignup = () => {
       });
   };
 
-  const handleErrors = () => {
-    const isEmpty = Object.keys(patient.errors).length === 0;
-    return (
-      <div>
-        <ul>
-          {isEmpty
-            ? ""
-            : patient.errors.map((error) => {
-                return <li key={error}>{error}</li>;
-              })}
-        </ul>
-      </div>
-    );
-  };
+  const isEmpty = Object.keys(errors).length === 0;
 
   return (
     <div>
@@ -96,7 +81,7 @@ const PatientSignup = () => {
         handleFileUpload={handleFileUpload}
         isSignup={true}
       />
-      <div>{patient.errors ? handleErrors() : null}</div>
+      {isEmpty ? null : <Errors errors={errors.errors} />}
     </div>
   );
 };

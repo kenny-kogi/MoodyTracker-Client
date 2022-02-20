@@ -4,6 +4,7 @@ import axios from "axios";
 import Navbar from "../../Home/Navbar/User/Navbar";
 import Form from "../Forms/Form";
 import { AppContext } from "../../../context/appcontext";
+import Errors from "../../Shared/Errors";
 
 const Signup = () => {
   const { handleLogin } = useContext(AppContext);
@@ -64,20 +65,7 @@ const Signup = () => {
       });
   };
 
-  const handleErrors = () => {
-    const isEmpty = Object.keys(user.errors).length === 0;
-    return (
-      <div>
-        <ul>
-          {isEmpty
-            ? ""
-            : user.errors.map((error) => {
-                return <li key={error}>{error}</li>;
-              })}
-        </ul>
-      </div>
-    );
-  };
+  const isEmpty = Object.keys(errors).length === 0;
 
   return (
     <div>
@@ -89,7 +77,7 @@ const Signup = () => {
         handleFileUpload={handleFileUpload}
         isSignup={true}
       />
-      <div>{user.errors ? handleErrors() : null}</div>
+      {isEmpty ? null : <Errors errors={errors.errors} />}
     </div>
   );
 };

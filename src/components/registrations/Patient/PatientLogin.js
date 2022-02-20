@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 import Form from "../Forms/Patient/Form";
 import Navbar from "../../Home/Navbar/Patient/Navbar";
+import Errors from "../../Shared/Errors";
 const PatientLogin = () => {
   const { isLoggedInPatient, handleLoginPatient } = useContext(AppContext);
 
@@ -14,9 +15,7 @@ const PatientLogin = () => {
   });
 
   // eslint-disable-next-line no-unused-vars
-  const [errors, setErrors] = useState({
-    errors: {},
-  });
+  const [errors, setErrors] = useState({});
 
   let navigate = useNavigate();
 
@@ -55,20 +54,7 @@ const PatientLogin = () => {
       .catch((error) => console.log(error));
   };
 
-  const handleErrors = () => {
-    const isEmpty = Object.keys(patient.errors).length === 0;
-    return (
-      <div>
-        <ul>
-          {isEmpty
-            ? ""
-            : patient.errors.map((error) => {
-                return <li key={error}>{error}</li>;
-              })}
-        </ul>
-      </div>
-    );
-  };
+  const isEmpty = Object.keys(errors).length === 0;
 
   return (
     <>
@@ -80,7 +66,7 @@ const PatientLogin = () => {
           handleSubmit={handleSubmit}
           handleChange={handleChange}
         />
-        <div>{patient.errors ? handleErrors() : null}</div>
+        {isEmpty ? null : <Errors errors={errors.errors} />}
       </div>
     </>
   );

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import Navbar from "../../Home/Navbar/Therapist/Navbar";
 import Form from "../Forms/Therapist/Form";
 import axios from "axios";
+import Errors from "../../Shared/Errors";
 
 const TherapistSignup = () => {
   const { handleLoginTherapist } = useContext(AppContext);
@@ -20,9 +21,7 @@ const TherapistSignup = () => {
     specialization: "",
   });
 
-  const [errors, setErrors] = useState({
-    errors: {},
-  });
+  const [errors, setErrors] = useState({});
 
   let navigate = useNavigate();
 
@@ -67,20 +66,7 @@ const TherapistSignup = () => {
       });
   };
 
-  const handleErrors = () => {
-    const isEmpty = Object.keys(therapist.errors).length === 0;
-    return (
-      <div>
-        <ul>
-          {isEmpty
-            ? ""
-            : therapist.errors.map((error) => {
-                return <li key={error}>{error}</li>;
-              })}
-        </ul>
-      </div>
-    );
-  };
+  const isEmpty = Object.keys(errors).length === 0;
 
   return (
     <div>
@@ -92,7 +78,7 @@ const TherapistSignup = () => {
         handleFileUpload={handleFileUpload}
         isSignup={true}
       />
-      <div>{therapist.errors ? handleErrors() : null}</div>
+      {isEmpty ? null : <Errors errors={errors.errors} />}
     </div>
   );
 };

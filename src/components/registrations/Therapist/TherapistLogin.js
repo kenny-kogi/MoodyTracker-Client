@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 import Form from "../Forms/Therapist/Form";
 import Navbar from "../../Home/Navbar/Therapist/Navbar";
+import Errors from "../../Shared/Errors";
 
 const TherapistLogin = () => {
   const { isLoggedInTherapist, handleLoginTherapist } = useContext(AppContext);
@@ -15,10 +16,7 @@ const TherapistLogin = () => {
   });
 
   // eslint-disable-next-line no-unused-vars
-  const [errors, setErrors] = useState({
-    errors: {},
-  });
-
+  const [errors, setErrors] = useState({});
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -56,20 +54,7 @@ const TherapistLogin = () => {
       .catch((error) => console.log(error));
   };
 
-  const handleErrors = () => {
-    const isEmpty = Object.keys(therapist.errors).length === 0;
-    return (
-      <div>
-        <ul>
-          {isEmpty
-            ? ""
-            : therapist.errors.map((error) => {
-                return <li key={error}>{error}</li>;
-              })}
-        </ul>
-      </div>
-    );
-  };
+  const isEmpty = Object.keys(errors).length === 0;
 
   return (
     <>
@@ -81,7 +66,7 @@ const TherapistLogin = () => {
           handleSubmit={handleSubmit}
           handleChange={handleChange}
         />
-        <div>{therapist.errors ? handleErrors() : null}</div>
+        {isEmpty ? null : <Errors errors={errors.errors} />}
       </div>
     </>
   );

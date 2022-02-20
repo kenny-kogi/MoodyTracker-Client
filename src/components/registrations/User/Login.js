@@ -4,6 +4,7 @@ import axios from "axios";
 import Navbar from "../../Home/Navbar/User/Navbar";
 import Form from "../Forms/Form";
 import { AppContext } from "../../../context/appcontext";
+import Errors from "../../Shared/Errors";
 
 const Login = () => {
   const { handleLogin, isLoggedIn } = useContext(AppContext);
@@ -15,9 +16,7 @@ const Login = () => {
   });
 
   // eslint-disable-next-line no-unused-vars
-  const [errors, setErrors] = useState({
-    errors: {},
-  });
+  const [errors, setErrors] = useState({});
 
   let navigate = useNavigate();
 
@@ -57,23 +56,10 @@ const Login = () => {
       .catch((error) => console.log(error));
   };
 
-  const handleErrors = () => {
-    const isEmpty = Object.keys(user.errors).length === 0;
-    return (
-      <div>
-        <ul>
-          {isEmpty
-            ? ""
-            : user.errors.map((error) => {
-                return <li key={error}>{error}</li>;
-              })}
-        </ul>
-      </div>
-    );
-  };
+  const isEmpty = Object.keys(errors).length === 0;
 
   return (
-    <div>
+    <>
       <Navbar user={true} />
       <Form
         user={user}
@@ -81,8 +67,9 @@ const Login = () => {
         handleSubmit={handleSubmit}
         handleChange={handleChange}
       />
-      <div>{user.errors ? handleErrors() : null}</div>
-    </div>
+
+      {isEmpty ? null : <Errors errors={errors.errors} />}
+    </>
   );
 };
 
