@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "./Home/Navbar/Default/Navbar";
 import Hero from "./Home/Layout/Hero";
 import Service from "./Home/Layout/Service";
+import Footer from "./Home/Layout/Footer";
 
 const Home = () => {
   return (
@@ -9,6 +10,7 @@ const Home = () => {
       <Navbar />
       <Hero />
       <Service />
+      <Footer />
     </>
   );
 };

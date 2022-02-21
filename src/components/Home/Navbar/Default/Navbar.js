@@ -59,7 +59,7 @@ const NavbarDefault = () => {
               //   navigate("/therapist/signup");
             }}
           >
-            Services
+            Features
           </Button>
           <Button
             color="purple"
