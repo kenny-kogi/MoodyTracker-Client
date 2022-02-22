@@ -22,9 +22,7 @@ const Signup = () => {
     gender: "",
   });
 
-  const [errors, setErrors] = useState({
-    errors: {},
-  });
+  const [errors, setErrors] = useState({});
 
   let navigate = useNavigate();
 
