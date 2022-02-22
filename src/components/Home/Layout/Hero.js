@@ -8,9 +8,9 @@ import {
   Text,
   Button,
 } from "@chakra-ui/react";
-import HeroImage from "../../assets/hero6.jpg";
+import HeroImage from "../../../assets/hero6.jpg";
 import { useNavigate } from "react-router";
-import { AppContext } from "../../context/appcontext";
+import { AppContext } from "../../../context/appcontext";
 
 const Hero = () => {
   const { isLoggedIn } = useContext(AppContext);
