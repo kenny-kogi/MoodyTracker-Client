@@ -9,18 +9,18 @@ const SideMenu = () => {
     <Container maxWidth="17rem" m={0}>
       <Box flexDirection="column" p={5}>
         <Button
-          mb={5}
           width="200px"
           height="60px"
           bgColor="purple.100"
           color="blackAlpha.700"
           _hover={{ bg: "purple", color: "white" }}
           fontWeight="bold"
+          mb={5}
           onClick={() => {
-            navigate("/moods");
+            navigate("/moods/dashboard");
           }}
         >
-          Moods Dashboard
+          Moods dashboard
         </Button>
 
         <Button
@@ -49,7 +49,9 @@ const SideMenu = () => {
         >
           Reminders
         </Button>
+
         <Button
+          mb={5}
           width="200px"
           height="60px"
           bgColor="purple.100"
@@ -57,10 +59,10 @@ const SideMenu = () => {
           _hover={{ bg: "purple", color: "white" }}
           fontWeight="bold"
           onClick={() => {
-            navigate("/moods/analysis");
+            navigate("/moods");
           }}
         >
-          Moods Analysis
+          Daily Logs
         </Button>
       </Box>
     </Container>

@@ -19,7 +19,7 @@ import Depressed from "./moods/Depressed";
 import Psychotic from "./moods/Psychotic";
 import Weather from "./moods/Weather";
 import MoodNote from "./moods/MoodNote";
-import SideMenu from "./sidemenu/SideMenu";
+import SideMenu from "../Shared/SideMenu";
 import { AppContext } from "../../context/appcontext";
 // import Activity from "./moods/Activity";
 
@@ -52,7 +52,7 @@ const LogMood = () => {
       .post("http://localhost:3001/moods", mood, { withCredentials: true })
       .then((response) => {
         if (response.data.status === "created") {
-          navigate("/moods");
+          navigate("/record/message");
         } else {
           setErrors({ ...errors, errors: response.data.errors });
         }

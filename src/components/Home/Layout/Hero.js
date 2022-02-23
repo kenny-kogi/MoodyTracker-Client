@@ -60,7 +60,7 @@ const Hero = () => {
                   _hover={{ bg: "purple" }}
                   fontWeight="bold"
                   onClick={() => {
-                    isLoggedIn ? navigate(`/mood/record`) : navigate("/login");
+                    isLoggedIn ? navigate("/mood/record") : navigate("/login");
                   }}
                 >
                   Start Tracking

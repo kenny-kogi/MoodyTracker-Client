@@ -1,22 +1,19 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
 import { AppContext } from "../../../context/appcontext";
 
-export const GetSleepingHoursData = () => {
+export const GetAverageSleptHours = () => {
   const { user } = useContext(AppContext);
-  const [hours_data, setHoursData] = useState({});
+  const [averagehours, setAverageHours] = useState(0);
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3001/users/hours_data/${user.id}`)
-      .then((response) => {
-        setHoursData(response.data.sleepinghoursdata);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  axios
+    .get(`http://localhost:3001/users/average_hours_data/${user.id}`)
+    .then((response) => {
+      setAverageHours(response.data.averagesleepinghours);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 
-  return hours_data;
+  return averagehours;
 };

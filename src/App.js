@@ -14,6 +14,7 @@ import PatientSignup from "./components/registrations/Patient/PatientSignup";
 import PatientLogMood from "./components/LogMood/PatientLogMood";
 import TherapistLogin from "./components/registrations/Therapist/TherapistLogin";
 import TherapistSignup from "./components/registrations/Therapist/TherapistSignup";
+import RecordMessage from "./components/Shared/RecordMessage";
 
 const App = () => {
   //user
@@ -139,10 +140,12 @@ const App = () => {
             <Route exact path="/mood/record" element={<LogMood />} />
             <Route exact path="/moods" element={<Moods />} />
             <Route exact path="/logout/:currentlogged" element={<Logout />} />
-            <Route exact path="/moods/analysis" element={<MoodsAnalysis />} />
+            <Route exact path="/moods/dashboard" element={<MoodsAnalysis />} />
             <Route exact path="/patient/login" element={<PatientLogin />} />
             <Route exact path="/patient/signup" element={<PatientSignup />} />
             <Route exact path="/therapist/login" element={<TherapistLogin />} />
+
+            <Route exact path="/record/message" element={<RecordMessage />} />
             <Route
               exact
               path="/therapist/signup"

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Navbar from "../Home/Navbar/User/Navbar";
 import {
   Divider,
@@ -9,12 +9,32 @@ import {
   Badge,
   Box,
 } from "@chakra-ui/react";
-import SideMenu from "../LogMood/sidemenu/SideMenu";
+import SideMenu from "../Shared/SideMenu";
 import { AppContext } from "../../context/appcontext";
 import moment from "moment";
+import AverageHours from "../MoodsAnalysis/AnalysisComponentss/AverageSleptHours";
+import AverageChart from "../MoodsAnalysis/AnalysisComponentss/AverageSleptHoursChart";
+import axios from "axios";
+import Spinner from "../Shared/Spinner";
 
 const MoodsAnalysis = () => {
   const { user } = useContext(AppContext);
+  const [hours_data, setHoursData] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/users/hours_data/${user.id}`)
+      .then((response) => {
+        setHoursData(response.data.sleepinghoursdata);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  let nullChecker = hours_data === null;
+  console.log(nullChecker);
   return (
     <>
       <Navbar />
@@ -50,8 +70,17 @@ const MoodsAnalysis = () => {
               {moment().format("LL", "en")}
             </Badge>
           </Heading>
-
-          <Box></Box>
+          <Box>
+            {" "}
+            <Flex direction="row" justifyContent="space-evenly">
+              <AverageHours />
+              {nullChecker ? (
+                <Spinner />
+              ) : (
+                <AverageChart hours_data={hours_data} />
+              )}
+            </Flex>
+          </Box>
         </Container>
       </Flex>
     </>
