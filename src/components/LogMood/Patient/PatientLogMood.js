@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import Navbar from "../Home/Navbar/User/Navbar";
+import NavbarPatient from "../../../components/Home/Navbar/Patient/Navbar";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import {
@@ -11,20 +11,20 @@ import {
   Divider,
   Flex,
 } from "@chakra-ui/react";
-import Irritability from "./moods/Irritability";
-import Elevated from "./moods/Elevated";
-import HoursSlept from "./moods/HoursSlept";
-import Anxiety from "./moods/Anxiety";
-import Depressed from "./moods/Depressed";
-import Psychotic from "./moods/Psychotic";
-import Weather from "./moods/Weather";
-import MoodNote from "./moods/MoodNote";
-import SideMenu from "../Shared/SideMenu";
-import { AppContext } from "../../context/appcontext";
+import Irritability from "../moods/Irritability";
+import Elevated from "../moods/Elevated";
+import HoursSlept from "../moods/HoursSlept";
+import Anxiety from "../moods/Anxiety";
+import Depressed from "../moods/Depressed";
+import Psychotic from "../moods/Psychotic";
+import Weather from "../moods/Weather";
+import MoodNote from "../moods/MoodNote";
+import SideMenu from "../../Shared/Patient/SideMenu";
+import { AppContext } from "../../../context/appcontext";
 // import Activity from "./moods/Activity";
 
 const LogMood = () => {
-  const { user } = useContext(AppContext);
+  const { patient } = useContext(AppContext);
   const [errors, setErrors] = useState({
     errors: {},
   });
@@ -36,12 +36,14 @@ const LogMood = () => {
     elevated_level: null,
     psychotic_symptoms: null,
     weather: null,
-    user_id: user.id,
+    patient_id: patient.id,
     mood_note: null,
     activity: null,
   });
   const [checked, setChecked] = useState(false);
   const [circularValue, setCircularValue] = useState(0);
+
+  console.log(patient);
 
   let navigate = useNavigate();
   const handleSubmit = (event) => {
@@ -52,7 +54,7 @@ const LogMood = () => {
       .post("http://localhost:3001/moods", mood, { withCredentials: true })
       .then((response) => {
         if (response.data.status === "created") {
-          navigate("/record/message");
+          navigate("/patient/record/message");
         } else {
           setErrors({ ...errors, errors: response.data.errors });
         }
@@ -130,7 +132,7 @@ const LogMood = () => {
 
   return (
     <>
-      <Navbar />
+      <NavbarPatient />
       <Divider border="2px solid" borderColor="purple.100" />
       <Flex flexDirection="row">
         <SideMenu />
@@ -146,7 +148,7 @@ const LogMood = () => {
             mb="30"
           >
             <Text as="span" color="pink.400" fontSize="40px">
-              Hi {user.username},{" "}
+              Hi {patient.username},{" "}
             </Text>
             Let's Log Your Mood Today
           </Heading>

@@ -17,7 +17,7 @@ const SideMenu = () => {
           fontWeight="bold"
           mb={5}
           onClick={() => {
-            navigate("/moods/dashboard");
+            navigate("/patient/moods/dashboard");
           }}
         >
           Moods dashboard
@@ -32,7 +32,7 @@ const SideMenu = () => {
           _hover={{ bg: "purple", color: "white" }}
           fontWeight="bold"
           onClick={() => {
-            navigate("/mood/record");
+            navigate("/patient/mood/record");
           }}
         >
           Log Mood
@@ -59,7 +59,7 @@ const SideMenu = () => {
           _hover={{ bg: "purple", color: "white" }}
           fontWeight="bold"
           onClick={() => {
-            navigate("/moods");
+            navigate("/patient/moods");
           }}
         >
           Daily Logs
@@ -74,7 +74,7 @@ const SideMenu = () => {
           _hover={{ bg: "purple", color: "white" }}
           fontWeight="bold"
           onClick={() => {
-            navigate("/moods");
+            navigate("/patient/profile");
           }}
         >
           Profile

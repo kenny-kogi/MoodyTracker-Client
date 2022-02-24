@@ -13,7 +13,7 @@ import { useNavigate } from "react-router";
 import { AppContext } from "../../../context/appcontext";
 
 const Hero = () => {
-  const { isLoggedIn } = useContext(AppContext);
+  const { isLoggedIn, isLoggedInPatient } = useContext(AppContext);
   let navigate = useNavigate();
 
   return (
@@ -76,7 +76,9 @@ const Hero = () => {
                   _hover={{ bg: "purple", color: "white" }}
                   fontWeight="bold"
                   onClick={() => {
-                    navigate("/patient/login");
+                    isLoggedInPatient
+                      ? navigate("/patient/mood/record")
+                      : navigate("/patient/login");
                   }}
                 >
                   Patient

@@ -5,16 +5,19 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/registrations/User/Login";
 import Signup from "./components/registrations/User/Signup";
 import Home from "./components/Home";
-import LogMood from "./components/LogMood/LogMood";
-import Moods from "./components/Moods/Moods";
+import LogMood from "./components/LogMood/User/LogMood";
+import Moods from "./components/Moods/User/Moods";
 import Logout from "./components/Home/Logout/Logout";
-import MoodsAnalysis from "./components/MoodsAnalysis/MoodsAnalysis";
+import MoodsAnalysis from "./components/MoodsAnalysis/User/MoodsAnalysis";
 import PatientLogin from "./components/registrations/Patient/PatientLogin";
 import PatientSignup from "./components/registrations/Patient/PatientSignup";
-import PatientLogMood from "./components/LogMood/PatientLogMood";
+import PatientLogMood from "./components/LogMood/Patient/PatientLogMood";
 import TherapistLogin from "./components/registrations/Therapist/TherapistLogin";
 import TherapistSignup from "./components/registrations/Therapist/TherapistSignup";
 import RecordMessage from "./components/Shared/RecordMessage";
+import Message from "./components/Shared/Patient/RecordMessage";
+import PatientMoods from "./components/Moods/Patient/PatientMoods";
+import PatientMoodsAnalysis from "./components/MoodsAnalysis/Patient/PatientMoodsAnalysis";
 
 const App = () => {
   //user
@@ -50,10 +53,11 @@ const App = () => {
   const [patient, setPatient] = useState({});
 
   const handleLoginPatient = (data) => {
-    console.log(data);
+    console.log("logging data", data);
     setIsLoggedInPatient(true);
     setPatient(data.patient);
   };
+  console.log("patient in loggin page", patient);
 
   const handleLogoutPatient = () => {
     setIsLoggedInPatient(false);
@@ -144,8 +148,8 @@ const App = () => {
             <Route exact path="/patient/login" element={<PatientLogin />} />
             <Route exact path="/patient/signup" element={<PatientSignup />} />
             <Route exact path="/therapist/login" element={<TherapistLogin />} />
-
             <Route exact path="/record/message" element={<RecordMessage />} />
+            <Route exact path="/patient/record/message" element={<Message />} />
             <Route
               exact
               path="/therapist/signup"
@@ -154,7 +158,13 @@ const App = () => {
             <Route
               exact
               path="/patient/mood/record"
-              elemet={<PatientLogMood />}
+              element={<PatientLogMood />}
+            />
+            <Route exact path="/patient/moods" element={<PatientMoods />} />
+            <Route
+              exact
+              path="/patient/moods/dashboard"
+              element={<PatientMoodsAnalysis />}
             />
           </Routes>
         </BrowserRouter>

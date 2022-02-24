@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import Navbar from "../Home/Navbar/User/Navbar";
+import Navbar from "../../Home/Navbar/User/Navbar";
 import {
   Divider,
   Flex,
@@ -9,13 +9,13 @@ import {
   Badge,
   Box,
 } from "@chakra-ui/react";
-import SideMenu from "../Shared/SideMenu";
-import { AppContext } from "../../context/appcontext";
+import SideMenu from "../../Shared/SideMenu";
+import { AppContext } from "../../../context/appcontext";
 import moment from "moment";
-import AverageHours from "../MoodsAnalysis/AnalysisComponentss/AverageSleptHours";
-import AverageChart from "../MoodsAnalysis/AnalysisComponentss/AverageSleptHoursChart";
+import AverageHours from "../AnalysisComponentss/AverageSleptHours";
+import AverageChart from "../AnalysisComponentss/AverageSleptHoursChart";
 import axios from "axios";
-import Spinner from "../Shared/Spinner";
+import Spinner from "../../Shared/Spinner";
 
 const MoodsAnalysis = () => {
   const { user } = useContext(AppContext);
