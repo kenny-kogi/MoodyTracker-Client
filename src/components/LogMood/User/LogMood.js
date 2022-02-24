@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import Navbar from "../Home/Navbar/User/Navbar";
+import Navbar from "../../../components/Home/Navbar/User/Navbar";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import {
@@ -11,16 +11,16 @@ import {
   Divider,
   Flex,
 } from "@chakra-ui/react";
-import Irritability from "./moods/Irritability";
-import Elevated from "./moods/Elevated";
-import HoursSlept from "./moods/HoursSlept";
-import Anxiety from "./moods/Anxiety";
-import Depressed from "./moods/Depressed";
-import Psychotic from "./moods/Psychotic";
-import Weather from "./moods/Weather";
-import MoodNote from "./moods/MoodNote";
-import SideMenu from "../Shared/SideMenu";
-import { AppContext } from "../../context/appcontext";
+import Irritability from "../moods/Irritability";
+import Elevated from "../moods/Elevated";
+import HoursSlept from "../moods/HoursSlept";
+import Anxiety from "../moods/Anxiety";
+import Depressed from "../moods/Depressed";
+import Psychotic from "../moods/Psychotic";
+import Weather from "../moods/Weather";
+import MoodNote from "../moods/MoodNote";
+import SideMenu from "../../Shared/SideMenu";
+import { AppContext } from "../../../context/appcontext";
 // import Activity from "./moods/Activity";
 
 const LogMood = () => {
