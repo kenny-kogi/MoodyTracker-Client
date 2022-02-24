@@ -16,12 +16,16 @@ import AverageHours from "../AnalysisComponentss/AverageSleptHours";
 import AverageChart from "../AnalysisComponentss/AverageSleptHoursChart";
 import axios from "axios";
 import Spinner from "../../Shared/Spinner";
+import AverageMoodsChart from "../AnalysisComponentss/AverageMoodLevels";
+import DoughnutChart from "../AnalysisComponentss/AverageMoodLevelDoghnutChart";
+import StackedBar from "../AnalysisComponentss/MoodStackBar";
 
 const MoodsAnalysis = () => {
   const { user } = useContext(AppContext);
   const [hours_data, setHoursData] = useState(null);
+  const [averageMoodsData, setAverageMoodsData] = useState(null);
 
-  useEffect(() => {
+  const getHoursSleptData = () => {
     axios
       .get(`http://localhost:3001/users/hours_data/${user.id}`)
       .then((response) => {
@@ -30,11 +34,27 @@ const MoodsAnalysis = () => {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const getAverageMoodsData = () => {
+    axios
+      .get(`http://localhost:3001/users/average_mood_levels/${user.id}`)
+      .then((response) => {
+        setAverageMoodsData(response.data.averagemoodlevels);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getHoursSleptData();
+    getAverageMoodsData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   let nullChecker = hours_data === null;
-  console.log(nullChecker);
+  let nullCheckerMood = averageMoodsData === null;
   return (
     <>
       <Navbar />
@@ -72,13 +92,23 @@ const MoodsAnalysis = () => {
           </Heading>
           <Box>
             {" "}
-            <Flex direction="row" justifyContent="space-evenly">
+            <Flex direction="row" justifyContent="space-evenly" flexWrap="wrap">
               <AverageHours />
               {nullChecker ? (
                 <Spinner />
               ) : (
                 <AverageChart hours_data={hours_data} />
               )}
+              {nullCheckerMood ? (
+                <Spinner />
+              ) : (
+                <Flex>
+                  <AverageMoodsChart averageMoodsData={averageMoodsData} />
+                  <DoughnutChart averageMoodsData={averageMoodsData} />
+                </Flex>
+              )}
+
+              <StackedBar />
             </Flex>
           </Box>
         </Container>
