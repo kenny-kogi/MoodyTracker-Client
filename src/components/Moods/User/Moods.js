@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
-import Navbar from "../Home/Navbar/User/Navbar";
+import Navbar from "../../Home/Navbar/User/Navbar";
 import axios from "axios";
 import { Container, Divider, Flex, Box } from "@chakra-ui/react";
-import SideMenu from "../Shared/SideMenu";
-import HoursChart from "./Charts/HoursChart";
-import Weather from "./Charts/Weather";
-import ColumnChart from "./Charts/ColumnChart";
+import SideMenu from "../../Shared/SideMenu";
+import HoursChart from "../Charts/HoursChart";
+import Weather from "../Charts/Weather";
+import ColumnChart from "../Charts/ColumnChart";
 import moment from "moment";
-import { AppContext } from "../../context/appcontext";
+import { AppContext } from "../../../context/appcontext";
 
 const Moods = () => {
   const [moods, setMoods] = useState({});

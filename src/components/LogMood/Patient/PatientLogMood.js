@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import Navbar from "../../../components/Home/Navbar/Patient/Navbar";
+import NavbarPatient from "../../../components/Home/Navbar/Patient/Navbar";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import {
@@ -19,7 +19,7 @@ import Depressed from "../moods/Depressed";
 import Psychotic from "../moods/Psychotic";
 import Weather from "../moods/Weather";
 import MoodNote from "../moods/MoodNote";
-import SideMenu from "../../Shared/SideMenu";
+import SideMenu from "../../Shared/Patient/SideMenu";
 import { AppContext } from "../../../context/appcontext";
 // import Activity from "./moods/Activity";
 
@@ -54,7 +54,7 @@ const LogMood = () => {
       .post("http://localhost:3001/moods", mood, { withCredentials: true })
       .then((response) => {
         if (response.data.status === "created") {
-          navigate("/record/message");
+          navigate("/patient/record/message");
         } else {
           setErrors({ ...errors, errors: response.data.errors });
         }
@@ -132,7 +132,7 @@ const LogMood = () => {
 
   return (
     <>
-      <Navbar />
+      <NavbarPatient />
       <Divider border="2px solid" borderColor="purple.100" />
       <Flex flexDirection="row">
         <SideMenu />
