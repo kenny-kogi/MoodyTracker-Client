@@ -1,14 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import Navbar from "../../Home/Navbar/User/Navbar";
-import {
-  Divider,
-  Flex,
-  Container,
-  Heading,
-  Text,
-  Badge,
-  Box,
-} from "@chakra-ui/react";
+import { Flex, Container, Heading, Text, Badge, Box } from "@chakra-ui/react";
 import SideMenu from "../../Shared/SideMenu";
 import { AppContext } from "../../../context/appcontext";
 import moment from "moment";
@@ -58,10 +50,9 @@ const MoodsAnalysis = () => {
   return (
     <>
       <Navbar />
-      <Divider border="2px solid" borderColor="purple.100" />
-      <Flex>
+      <Flex flexDirection="row" pt="100px">
         <SideMenu />
-        <Container maxWidth="7xl" m={0} pt={5}>
+        <Container maxWidth="7xl" pt={5} ml={200}>
           <Heading
             as="h1"
             size="sm"

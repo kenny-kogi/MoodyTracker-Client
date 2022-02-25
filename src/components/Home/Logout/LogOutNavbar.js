@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Image } from "@chakra-ui/react";
+import { Box, Button, Image, Flex } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import Logo from "../../../assets/logo.png";
 import { useNavigate } from "react-router";
@@ -8,13 +8,17 @@ const LogOutNavbar = ({ currentlogged }) => {
   let navigate = useNavigate();
 
   return (
-    <header>
-      <Box
-        d="flex"
+    <>
+      <Flex
         alignItems="center"
         justifyContent="space-between"
-        ml={6}
-        mr={6}
+        as="header"
+        position="fixed"
+        w="100%"
+        m={0}
+        borderBottom="3px solid"
+        borderColor="purple.100"
+        bgColor="white"
       >
         <Link to="/">
           {" "}
@@ -37,8 +41,8 @@ const LogOutNavbar = ({ currentlogged }) => {
             Log out
           </Button>
         </Box>
-      </Box>
-    </header>
+      </Flex>
+    </>
   );
 };
 

@@ -2,15 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import Navbar from "../../../components/Home/Navbar/User/Navbar";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import {
-  Button,
-  Box,
-  Container,
-  Heading,
-  Text,
-  Divider,
-  Flex,
-} from "@chakra-ui/react";
+import { Button, Box, Container, Heading, Text, Flex } from "@chakra-ui/react";
 import Irritability from "../moods/Irritability";
 import Elevated from "../moods/Elevated";
 import HoursSlept from "../moods/HoursSlept";
@@ -131,11 +123,9 @@ const LogMood = () => {
   return (
     <>
       <Navbar />
-      <Divider border="2px solid" borderColor="purple.100" />
-      <Flex flexDirection="row">
+      <Flex flexDirection="row" pt="100px">
         <SideMenu />
-
-        <Container maxWidth="7xl" m={0} pt={5}>
+        <Container maxWidth="7xl" pt={5} ml={300}>
           <Heading
             as="h1"
             size="sm"

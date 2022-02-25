@@ -14,7 +14,7 @@ const NavbarDefault = () => {
         justifyContent="space-between"
         ml={6}
         mr={6}
-        position="fixed"
+        position="sticky"
       >
         <Box>
           <Image
