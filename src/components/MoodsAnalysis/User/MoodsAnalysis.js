@@ -11,11 +11,13 @@ import Spinner from "../../Shared/Spinner";
 import AverageMoodsChart from "../AnalysisComponentss/AverageMoodLevels";
 import DoughnutChart from "../AnalysisComponentss/AverageMoodLevelDoghnutChart";
 import StackedBar from "../AnalysisComponentss/MoodStackBar";
+import MultiAxis from "../AnalysisComponentss/MultAxisMoods";
 
 const MoodsAnalysis = () => {
   const { user } = useContext(AppContext);
   const [hours_data, setHoursData] = useState(null);
   const [averageMoodsData, setAverageMoodsData] = useState(null);
+  const [moodData, setMoodData] = useState(null);
 
   const getHoursSleptData = () => {
     axios
@@ -39,14 +41,27 @@ const MoodsAnalysis = () => {
       });
   };
 
+  const getMoodArrayData = () => {
+    axios
+      .get(`http://localhost:3001/users/mood_array_data/${user.id}`)
+      .then((response) => {
+        setMoodData(response.data.moodArrayData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
     getHoursSleptData();
     getAverageMoodsData();
+    getMoodArrayData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   let nullChecker = hours_data === null;
   let nullCheckerMood = averageMoodsData === null;
+  let nullCheckerMoodArrayData = moodData === null;
   return (
     <>
       <Navbar />
@@ -99,7 +114,13 @@ const MoodsAnalysis = () => {
                 </Flex>
               )}
 
-              <StackedBar />
+              {nullCheckerMoodArrayData ? (
+                <Spinner />
+              ) : (
+                <MultiAxis moodData={moodData} />
+              )}
+
+              {/* <StackedBar /> */}
             </Flex>
           </Box>
         </Container>

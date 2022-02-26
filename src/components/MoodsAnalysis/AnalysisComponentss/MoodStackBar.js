@@ -67,6 +67,16 @@ const StackedBar = () => {
         data: [1, 0, 4, 2],
         backgroundColor: "rgb(53, 162, 235)",
       },
+      {
+        label: "Dataset 3",
+        data: [1, 0, 4, 2],
+        backgroundColor: "rgb(53, 162, 235)",
+      },
+      {
+        label: "Dataset 3",
+        data: [1, 2, 4, 2],
+        backgroundColor: "rgb(53, 162, 235)",
+      },
     ],
   };
 
