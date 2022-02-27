@@ -1,88 +1,68 @@
 import React from "react";
 import {
   Chart as ChartJS,
-  CategoryScale,
   LinearScale,
+  CategoryScale,
   BarElement,
-  Title,
-  Tooltip,
+  PointElement,
+  LineElement,
   Legend,
+  Tooltip,
 } from "chart.js";
-import { Bar } from "react-chartjs-2";
+import { Chart } from "react-chartjs-2";
 import { Flex } from "@chakra-ui/react";
 
 ChartJS.register(
-  CategoryScale,
   LinearScale,
+  CategoryScale,
   BarElement,
-  Title,
-  Tooltip,
-  Legend
+  PointElement,
+  LineElement,
+  Legend,
+  Tooltip
 );
 
-const StackedBar = () => {
-  const options = {
-    plugins: {
-      title: {
-        display: true,
-        text: "Chart.js Bar Chart - Stacked",
-      },
-    },
-    responsive: true,
-    scales: {
-      x: {
-        stacked: true,
-      },
-      y: {
-        stacked: true,
-      },
-    },
-  };
-
-  const labels = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-  ];
-
+const StackedBar = ({ moodData }) => {
+  let labels = moodData.createdDates.map((dates) => {
+    return dates;
+  });
   const data = {
     labels,
     datasets: [
       {
-        label: "Dataset 1",
-        data: [1, 3, 3, 4],
-        backgroundColor: "rgb(255, 99, 132)",
+        type: "line",
+        label: "Depressed",
+        borderColor: "rgb(255, 99, 132)",
+        borderWidth: 2,
+        fill: false,
+        data: moodData.depressedData.map((dep) => {
+          return dep;
+        }),
       },
       {
-        label: "Dataset 2",
-        data: [1, 0, 3, 1],
+        type: "bar",
+        label: "Irritability",
         backgroundColor: "rgb(75, 192, 192)",
+        data: moodData.irritabilityData.map((irr) => {
+          return irr;
+        }),
+        borderColor: "white",
+        borderWidth: 2,
       },
       {
-        label: "Dataset 3",
-        data: [1, 0, 4, 2],
+        type: "bar",
+        label: "Anxiety",
         backgroundColor: "rgb(53, 162, 235)",
-      },
-      {
-        label: "Dataset 3",
-        data: [1, 0, 4, 2],
-        backgroundColor: "rgb(53, 162, 235)",
-      },
-      {
-        label: "Dataset 3",
-        data: [1, 2, 4, 2],
-        backgroundColor: "rgb(53, 162, 235)",
+        data: moodData.anxietyData.map((anx) => {
+          return anx;
+        }),
       },
     ],
   };
 
   return (
-    <Flex width={400} height={500}>
-      <Bar options={options} data={data} />
+    <Flex width={700} height={500}>
+      <Chart type="bar" data={data} />
     </Flex>
   );
 };
