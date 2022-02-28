@@ -13,7 +13,8 @@ import { useNavigate } from "react-router";
 import { AppContext } from "../../../context/appcontext";
 
 const Hero = () => {
-  const { isLoggedIn, isLoggedInPatient } = useContext(AppContext);
+  const { isLoggedIn, isLoggedInPatient, isLoggedInTherapist } =
+    useContext(AppContext);
   let navigate = useNavigate();
 
   return (
@@ -95,7 +96,9 @@ const Hero = () => {
                   _hover={{ bg: "blue", color: "white" }}
                   fontWeight="bold"
                   onClick={() => {
-                    navigate("/therapist/login");
+                    isLoggedInTherapist
+                      ? navigate("/therapist/dashboard")
+                      : navigate("/therapist/login");
                   }}
                   isExternal
                 >
