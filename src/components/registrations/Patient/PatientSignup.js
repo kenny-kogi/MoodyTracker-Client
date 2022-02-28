@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../../context/appcontext";
 import { useNavigate } from "react-router";
 import axios from "axios";
@@ -8,6 +8,7 @@ import Errors from "../../Shared/Errors";
 
 const PatientSignup = () => {
   const { handleLoginPatient } = useContext(AppContext);
+  const [therapist, setTherapist] = useState(null);
   const [patient, setPatient] = useState({
     firstName: "",
     lastName: "",
@@ -30,7 +31,6 @@ const PatientSignup = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
     setPatient({
       ...patient,
       [name]: value,
@@ -69,6 +69,21 @@ const PatientSignup = () => {
       });
   };
 
+  const getTherapistData = () => {
+    axios
+      .get("http://localhost:3001/therapists")
+      .then((response) => {
+        setTherapist(response.data.therapists);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getTherapistData();
+  }, []);
+
   const isEmpty = Object.keys(errors).length === 0;
 
   return (
@@ -80,6 +95,7 @@ const PatientSignup = () => {
         handleSubmit={handleSubmit}
         handleFileUpload={handleFileUpload}
         isSignup={true}
+        therapists={therapist}
       />
       {isEmpty ? null : <Errors errors={errors.errors} />}
     </div>

@@ -21,7 +21,9 @@ const Form = ({
   handleSubmit,
   patient,
   isSignup,
+  therapists,
 }) => {
+  let nullCheckerTherapist = therapists === null;
   return (
     <Box py="30" ml="20">
       <Stack direction="row" justifyContent="space-evenly">
@@ -194,14 +196,28 @@ const Form = ({
                 </GridItem>
                 <GridItem colSpan={1} mb="2" mr="6">
                   <FormControl>
-                    <FormLabel htmlFor="Therapist">Therapist:</FormLabel>
-                    <Input
+                    <FormLabel htmlFor="mental_health_status">
+                      Therapist:
+                    </FormLabel>
+                    <Select
                       id="therapist_id"
-                      type="integer"
+                      placeholder="Select Therapist"
                       value={patient.therapist_id}
-                      onChange={handleChange}
                       name="therapist_id"
-                    />
+                      onChange={handleChange}
+                    >
+                      {nullCheckerTherapist ? (
+                        <option>No therapist</option>
+                      ) : (
+                        therapists.map((therapist) => {
+                          return (
+                            <option value={therapist.id}>
+                              {therapist.username}
+                            </option>
+                          );
+                        })
+                      )}
+                    </Select>
                   </FormControl>
                 </GridItem>
 
