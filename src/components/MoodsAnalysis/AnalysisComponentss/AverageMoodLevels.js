@@ -21,6 +21,7 @@ ChartJS.register(
 );
 
 const AverageMoodsChart = ({ averageMoodsData }) => {
+  console.log("Radar", averageMoodsData);
   const data = {
     labels: Object.keys(averageMoodsData),
     datasets: [

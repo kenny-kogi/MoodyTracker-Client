@@ -3,10 +3,8 @@ import { Box, Text, Flex } from "@chakra-ui/react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-import { GetAverageSleptHours } from "../data/data";
-
-const AverageHours = () => {
-  let hours_slept = GetAverageSleptHours();
+const AverageHours = ({ averagehours }) => {
+  let hours_slept = averagehours;
   let pathColor;
 
   if (hours_slept <= 3) {
