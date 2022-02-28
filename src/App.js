@@ -6,9 +6,7 @@ import Login from "./components/registrations/User/Login";
 import Signup from "./components/registrations/User/Signup";
 import Home from "./components/Home";
 import LogMood from "./components/LogMood/User/LogMood";
-import Moods from "./components/Moods/User/Moods";
 import Logout from "./components/Home/Logout/Logout";
-import MoodsAnalysis from "./components/MoodsAnalysis/User/MoodsAnalysis";
 import PatientLogin from "./components/registrations/Patient/PatientLogin";
 import PatientSignup from "./components/registrations/Patient/PatientSignup";
 import PatientLogMood from "./components/LogMood/Patient/PatientLogMood";
@@ -16,8 +14,10 @@ import TherapistLogin from "./components/registrations/Therapist/TherapistLogin"
 import TherapistSignup from "./components/registrations/Therapist/TherapistSignup";
 import RecordMessage from "./components/Shared/RecordMessage";
 import Message from "./components/Shared/Patient/RecordMessage";
-import PatientMoods from "./components/Moods/Patient/PatientMoods";
-import PatientMoodsAnalysis from "./components/MoodsAnalysis/Patient/PatientMoodsAnalysis";
+import UserAnalysis from "./components/MoodsAnalysis/User/UserAnalysis";
+import PatientAnalysis from "./components/MoodsAnalysis/Patient/PatientAnalysis";
+import UserLog from "./components/Moods/User/UserLog";
+import PatientLog from "./components/Moods/Patient/PatientLog";
 
 const App = () => {
   //user
@@ -142,9 +142,9 @@ const App = () => {
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/signup" element={<Signup />} />
             <Route exact path="/mood/record" element={<LogMood />} />
-            <Route exact path="/moods" element={<Moods />} />
+            <Route exact path="/moods" element={<UserLog />} />
             <Route exact path="/logout/:currentlogged" element={<Logout />} />
-            <Route exact path="/moods/dashboard" element={<MoodsAnalysis />} />
+            <Route exact path="/moods/dashboard" element={<UserAnalysis />} />
             <Route exact path="/patient/login" element={<PatientLogin />} />
             <Route exact path="/patient/signup" element={<PatientSignup />} />
             <Route exact path="/therapist/login" element={<TherapistLogin />} />
@@ -160,11 +160,11 @@ const App = () => {
               path="/patient/mood/record"
               element={<PatientLogMood />}
             />
-            <Route exact path="/patient/moods" element={<PatientMoods />} />
+            <Route exact path="/patient/moods" element={<PatientLog />} />
             <Route
               exact
               path="/patient/moods/dashboard"
-              element={<PatientMoodsAnalysis />}
+              element={<PatientAnalysis />}
             />
           </Routes>
         </BrowserRouter>

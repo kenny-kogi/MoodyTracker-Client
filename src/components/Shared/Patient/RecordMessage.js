@@ -1,17 +1,9 @@
 import React, { useContext } from "react";
 import Navbar from "../../Home/Navbar/Patient/Navbar";
-import {
-  Flex,
-  Box,
-  Heading,
-  Image,
-  Container,
-  Divider,
-  Text,
-} from "@chakra-ui/react";
+import { Flex, Box, Heading, Image, Container, Text } from "@chakra-ui/react";
 import ThanksImage from "../../../assets/great.jpeg";
-import SideMenu from "../SideMenu";
 import { AppContext } from "../../../context/appcontext";
+import SideMenu from "./SideMenu";
 
 const Message = () => {
   const { patient } = useContext(AppContext);
@@ -19,11 +11,10 @@ const Message = () => {
   return (
     <>
       <Navbar />
-      <Divider border="2px solid" borderColor="purple.100" />
-      <Flex flexDirection="row">
+      <Flex flexDirection="row" pt="100px">
         <SideMenu />
 
-        <Container maxWidth="7xl" m={0} pt={5}>
+        <Container maxWidth="7xl" ml={300} pt={5}>
           <Box mt={10} display="flex" justifyContent="center">
             {" "}
             <Flex flexDirection="column">

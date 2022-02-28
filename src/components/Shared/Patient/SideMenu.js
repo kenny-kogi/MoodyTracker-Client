@@ -6,7 +6,7 @@ const SideMenu = () => {
   let navigate = useNavigate();
 
   return (
-    <Container maxWidth="17rem" m={0}>
+    <Container maxWidth="17rem" m={0} position="fixed">
       <Box flexDirection="column" p={5}>
         <Button
           width="200px"
