@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { Flex, Heading, Text, Badge, Box, Center } from "@chakra-ui/react";
+import { Flex, Heading, Badge, Box, Center } from "@chakra-ui/react";
 
 import moment from "moment";
 import AverageHours from "../AnalysisComponentss/AverageSleptHours";
@@ -153,14 +153,6 @@ const MoodsAnalysis = ({ currentLogged, urlString }) => {
         alignItems="center"
         gap="10px"
       >
-        <Text>
-          {" "}
-          <Text as="span" color="pink.400" fontSize="40px">
-            Welcome {currentLogged.username},{" "}
-          </Text>
-          Here is your Mood Report
-        </Text>
-
         <Badge colorScheme="purple" variant="subtle" width={390} p={2}>
           {" "}
           From {moment(currentLogged.created_at)

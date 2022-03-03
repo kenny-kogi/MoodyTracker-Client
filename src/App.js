@@ -18,6 +18,8 @@ import UserAnalysis from "./components/MoodsAnalysis/User/UserAnalysis";
 import PatientAnalysis from "./components/MoodsAnalysis/Patient/PatientAnalysis";
 import UserLog from "./components/Moods/User/UserLog";
 import PatientLog from "./components/Moods/Patient/PatientLog";
+import TherapistDash from "./components/Dashboards/Therapist/TherapistDash";
+import PatientDash from "./components/Dashboards/Patient/PatientDash";
 
 const App = () => {
   //user
@@ -165,6 +167,16 @@ const App = () => {
               exact
               path="/patient/moods/dashboard"
               element={<PatientAnalysis />}
+            />
+            <Route
+              exact
+              path="/therapist/dashboard"
+              element={<TherapistDash />}
+            />
+            <Route
+              exact
+              path="/patient/analysis/:id"
+              element={<PatientDash />}
             />
           </Routes>
         </BrowserRouter>
