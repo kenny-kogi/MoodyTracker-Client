@@ -61,14 +61,13 @@ const Login = () => {
   return (
     <>
       <Navbar user={true} />
+      {isEmpty ? null : <Errors errors={errors.errors} />}
       <Form
         user={user}
         isSignup={false}
         handleSubmit={handleSubmit}
         handleChange={handleChange}
       />
-
-      {isEmpty ? null : <Errors errors={errors.errors} />}
     </>
   );
 };

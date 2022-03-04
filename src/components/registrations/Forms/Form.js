@@ -205,7 +205,7 @@ const Form = ({
             <form onSubmit={handleSubmit}>
               <Grid templateColumns="repeat(3, 1fr )" mt="15">
                 <GridItem colSpan={3}>
-                  <FormControl>
+                  <FormControl isRequired>
                     <FormLabel htmlFor="firstName">User Name:</FormLabel>
                     <Input
                       id="username"
@@ -219,7 +219,7 @@ const Form = ({
                 </GridItem>
 
                 <GridItem colSpan={3} mt="6">
-                  <FormControl>
+                  <FormControl isRequired>
                     <FormLabel htmlFor="email">Email:</FormLabel>
                     <Input
                       id="email"
@@ -233,7 +233,7 @@ const Form = ({
                 </GridItem>
 
                 <GridItem colSpan={3} mt="6">
-                  <FormControl>
+                  <FormControl isRequired>
                     <FormLabel htmlFor="password">Password:</FormLabel>
                     <Input
                       id="password"

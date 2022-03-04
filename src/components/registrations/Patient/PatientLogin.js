@@ -60,13 +60,13 @@ const PatientLogin = () => {
     <>
       <div>
         <Navbar patient={true} />
+        {isEmpty ? null : <Errors errors={errors.errors} />}
         <Form
           patient={patient}
           isSignup={false}
           handleSubmit={handleSubmit}
           handleChange={handleChange}
         />
-        {isEmpty ? null : <Errors errors={errors.errors} />}
       </div>
     </>
   );
