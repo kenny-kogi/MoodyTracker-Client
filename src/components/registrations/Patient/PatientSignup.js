@@ -89,6 +89,7 @@ const PatientSignup = () => {
   return (
     <div>
       <Navbar />
+      {isEmpty ? null : <Errors errors={errors.errors} />}
       <Form
         patient={patient}
         handleChange={handleChange}
@@ -97,7 +98,6 @@ const PatientSignup = () => {
         isSignup={true}
         therapists={therapist}
       />
-      {isEmpty ? null : <Errors errors={errors.errors} />}
     </div>
   );
 };

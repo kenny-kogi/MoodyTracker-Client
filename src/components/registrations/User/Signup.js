@@ -68,6 +68,7 @@ const Signup = () => {
   return (
     <div>
       <Navbar />
+      {isEmpty ? null : <Errors errors={errors.errors} />}
       <Form
         user={user}
         handleChange={handleChange}
@@ -75,7 +76,6 @@ const Signup = () => {
         handleFileUpload={handleFileUpload}
         isSignup={true}
       />
-      {isEmpty ? null : <Errors errors={errors.errors} />}
     </div>
   );
 };
