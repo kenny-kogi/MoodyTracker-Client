@@ -24,6 +24,7 @@ import { CgProfile } from "react-icons/cg";
 const TherapistDash = () => {
   const { therapist } = useContext(AppContext);
   const [patients, setPatients] = useState(null);
+  const [update, setUpdate] = useState(false);
   const getAllPatients = () => {
     axios
       .get(`http://localhost:3001/therapists/patients/${therapist.id}`)
@@ -37,10 +38,23 @@ const TherapistDash = () => {
 
   let navigate = useNavigate();
 
+  const removePatientFromList = (patient_id) => {
+    axios
+      .get(
+        `http://localhost:3001/therapists/remove_patient/${therapist.id}/${patient_id}`
+      )
+      .then((response) => {
+        setUpdate(true);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
     getAllPatients();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [update]);
 
   let nullCheckerPatient = patients === null;
   return (
@@ -131,7 +145,7 @@ const TherapistDash = () => {
                           width={100}
                           icon={<MdDelete />}
                           onClick={() => {
-                            console.log("delete");
+                            removePatientFromList(patient.id);
                           }}
                         />
                       </Flex>
