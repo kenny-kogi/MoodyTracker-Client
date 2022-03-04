@@ -18,7 +18,6 @@ import { AppContext } from "../../../context/appcontext";
 import Spinner from "../../Shared/Spinner";
 import { useNavigate } from "react-router";
 import PatientSvg from "../../../assets/pt.png";
-import ProfileSvg from "../../../assets/user-profile-svgrepo-com.svg";
 import { MdDelete } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 
