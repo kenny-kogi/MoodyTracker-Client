@@ -20,6 +20,7 @@ import UserLog from "./components/Moods/User/UserLog";
 import PatientLog from "./components/Moods/Patient/PatientLog";
 import TherapistDash from "./components/Dashboards/Therapist/TherapistDash";
 import PatientDash from "./components/Dashboards/Patient/PatientDash";
+import Profile from "./components/Profile/Patient/PatientProfile";
 
 const App = () => {
   //user
@@ -178,6 +179,7 @@ const App = () => {
               path="/patient/analysis/:id"
               element={<PatientDash />}
             />
+            <Route exact path="/patient/profile" element={<Profile />} />
           </Routes>
         </BrowserRouter>
       </AppContext.Provider>
