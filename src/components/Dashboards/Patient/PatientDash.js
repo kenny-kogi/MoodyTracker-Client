@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../../Home/Navbar/Therapist/Navbar";
-import SideMenu from "../../Shared/Therapist/SideMenu";
 import { Flex, Container, Center, Heading, Text } from "@chakra-ui/react";
 import { useParams } from "react-router";
 import axios from "axios";
 import MoodsAnalysis from "../../MoodsAnalysis/MoodDashboard/MoodsAnalysis";
 import Spinner from "../../Shared/Spinner";
+import SideMenu from "../../Shared/Therapist/PatientAnalysis/SideMenu";
 
 const PatientDash = () => {
   const [patient, setPatient] = useState(null);
