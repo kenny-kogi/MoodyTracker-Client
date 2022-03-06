@@ -31,33 +31,6 @@ const SideMenu = () => {
           color="blackAlpha.700"
           _hover={{ bg: "purple", color: "white" }}
           fontWeight="bold"
-        >
-          Feedback
-        </Button>
-
-        <Button
-          mb={5}
-          width="200px"
-          height="60px"
-          bgColor="purple.100"
-          color="blackAlpha.700"
-          _hover={{ bg: "purple", color: "white" }}
-          fontWeight="bold"
-          onClick={() => {
-            navigate("/patient/moods");
-          }}
-        >
-          Daily Logs
-        </Button>
-
-        <Button
-          mb={5}
-          width="200px"
-          height="60px"
-          bgColor="purple.100"
-          color="blackAlpha.700"
-          _hover={{ bg: "purple", color: "white" }}
-          fontWeight="bold"
           onClick={() => {
             navigate("/therapist/profile");
           }}
