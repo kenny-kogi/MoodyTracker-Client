@@ -22,6 +22,7 @@ import TherapistDash from "./components/Dashboards/Therapist/TherapistDash";
 import PatientDash from "./components/Dashboards/Patient/PatientDash";
 import Profile from "./components/Profile/Patient/PatientProfile";
 import Feedback from "./components/Feedback/Therapist/TherapistFeedback";
+import TherapistFeedback from "./components/Feedback/Patient/FeedbackFrmTherapist";
 
 const App = () => {
   //user
@@ -185,6 +186,11 @@ const App = () => {
               exact
               path="/therapist/feedback/:id"
               element={<Feedback />}
+            />
+            <Route
+              exact
+              path="/therapist/feedback"
+              element={<TherapistFeedback />}
             />
           </Routes>
         </BrowserRouter>

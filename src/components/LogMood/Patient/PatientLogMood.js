@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import NavbarPatient from "../../../components/Home/Navbar/Patient/Navbar";
+import Navbar from "../../../components/Home/Navbar/Patient/Navbar";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { Button, Box, Container, Heading, Text, Flex } from "@chakra-ui/react";
@@ -11,7 +11,7 @@ import Depressed from "../moods/Depressed";
 import Psychotic from "../moods/Psychotic";
 import Weather from "../moods/Weather";
 import MoodNote from "../moods/MoodNote";
-import SideMenu from "../../Shared/Patient/SideMenu";
+import SideMenu from "../../Shared/Patient/PatientDash/SideMenu";
 import { AppContext } from "../../../context/appcontext";
 // import Activity from "./moods/Activity";
 
@@ -124,7 +124,7 @@ const LogMood = () => {
 
   return (
     <>
-      <NavbarPatient />
+      <Navbar />
 
       <Flex flexDirection="row" pt="100px">
         <SideMenu />

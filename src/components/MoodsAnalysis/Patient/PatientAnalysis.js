@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { AppContext } from "../../../context/appcontext";
 import Navbar from "../../Home/Navbar/Patient/Navbar";
 import { Flex, Container, Heading, Text } from "@chakra-ui/react";
-import SideMenu from "../../Shared/Patient/SideMenu";
+import SideMenu from "../../Shared/Patient/PatientDash/SideMenu";
 import MoodsAnalysis from "../MoodDashboard/MoodsAnalysis";
 
 const PatientAnalysis = () => {
