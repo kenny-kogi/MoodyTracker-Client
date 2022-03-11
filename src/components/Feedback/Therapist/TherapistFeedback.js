@@ -6,9 +6,12 @@ import axios from "axios";
 import { useParams } from "react-router";
 import { AppContext } from "../../../context/appcontext";
 import FeedbackForm from "./Form/FeedbackForm";
+import { useToast } from "@chakra-ui/react";
+import Errors from "../../Shared/Errors";
 
 const Feedback = () => {
   const [patient, setPatient] = useState(null);
+  // const [update, setUpdate] = useState(false);
   const { id } = useParams();
   const { therapist } = useContext(AppContext);
   const [feedback, setFeedback] = useState({
@@ -42,7 +45,7 @@ const Feedback = () => {
       [name]: value,
     });
   };
-
+  const toast = useToast();
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
@@ -53,11 +56,39 @@ const Feedback = () => {
       )
       .then((response) => {
         if (response.data.status === "created") {
+          // setUpdate(!update);
+
+          toast({
+            title: "Sent",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+            position: "top",
+            containerStyle: {
+              backgroundColor: "purple",
+            },
+          });
+          setFeedback({
+            ...feedback,
+            title: "",
+            body: "",
+          });
+          setErrors({});
           console.log("feedback created");
         } else {
           setErrors({
             ...errors,
             errors: response.data.errors,
+          });
+          toast({
+            title: "Error!",
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+            position: "top",
+            containerStyle: {
+              backgroundColor: "purple",
+            },
           });
         }
       })
@@ -65,7 +96,7 @@ const Feedback = () => {
         console.log(errors);
       });
   };
-
+  const isEmpty = Object.keys(errors).length === 0;
   let nullCheckerPatient = patient === null;
   return (
     <>
@@ -88,7 +119,7 @@ const Feedback = () => {
               {nullCheckerPatient ? "Patient" : patient.username}
             </Text>
           </Heading>
-
+          {isEmpty ? null : <Errors errors={errors.errors} />}
           <Box>
             <FeedbackForm
               feedback={feedback}
