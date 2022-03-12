@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Badge, Tag } from "@chakra-ui/react";
+import { Flex, Badge, Tag, Text, Box } from "@chakra-ui/react";
 
 const Messages = ({ title, body, therapistName, created_at }) => {
   return (
@@ -23,7 +23,27 @@ const Messages = ({ title, body, therapistName, created_at }) => {
         </Flex>
 
         <Flex direction="column" m="10px">
-          <Tag>Title: {title}</Tag>
+          <Flex direction="row">
+            <Tag height="30px" width="60px" mr="20px">
+              Title:
+            </Tag>
+            <Text> {title}</Text>
+          </Flex>
+
+          <Flex mt="20px" direction="row">
+            <Tag height="30px" width="60px" mr="20px">
+              Body:
+            </Tag>
+            <Box>{body}</Box>
+          </Flex>
+          {/* <Tag height="{}40px">
+     
+            <Text fontSize="15px" fontWeight="bold" mr="20px" as="span">
+              Title:{" "}
+            </Text>
+            {title}
+          </Tag>
+          <Badge>Body</Badge> */}
         </Flex>
       </Flex>
     </>
