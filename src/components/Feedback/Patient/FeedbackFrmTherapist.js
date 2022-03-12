@@ -75,7 +75,7 @@ const TherapistFeedback = () => {
             </Text>
             {nullCheckerTherapist ? "" : therapist.firstName}
           </Heading>
-          {nullCheckerFeedback && nullCheckerTherapist ? (
+          {nullCheckerFeedback || nullCheckerTherapist ? (
             <Center>
               <Spinner />
             </Center>
