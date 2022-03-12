@@ -23,6 +23,9 @@ import PatientDash from "./components/Dashboards/Patient/PatientDash";
 import Profile from "./components/Profile/Patient/PatientProfile";
 import Feedback from "./components/Feedback/Therapist/TherapistFeedback";
 import TherapistFeedback from "./components/Feedback/Patient/FeedbackFrmTherapist";
+import AdminLogin from "./components/registrations/Admin/AdminLogin";
+import AdminSignup from "./components/registrations/Admin/AdminSignup";
+import Report from "./components/Reports/Report";
 
 const App = () => {
   //user
@@ -115,11 +118,43 @@ const App = () => {
       .catch((error) => console.log("api errors:", error));
   };
 
+  // Admin
+
+  const [isLoggedInAdmin, setIsLoggedInAdmin] = useState(false);
+  const [admin, setAdmin] = useState({});
+
+  const handleLoginAdmin = (data) => {
+    console.log(data);
+    setIsLoggedInAdmin(true);
+    setAdmin(data.therapist);
+  };
+
+  const handleLogoutAdmin = () => {
+    setIsLoggedInAdmin(false);
+    setAdmin({});
+  };
+
+  const loginStatusAdmin = () => {
+    axios
+      .get("http://localhost:3001/admin/logged_in", {
+        withCredentials: true,
+      })
+      .then((response) => {
+        if (response.data.logged_in) {
+          handleLoginAdmin(response);
+        } else {
+          handleLogoutAdmin();
+        }
+      })
+      .catch((error) => console.log("api errors:", error));
+  };
+
   //general
   useEffect(() => {
     loginStatus();
     loginStatusPatient();
     loginStatusTherapist();
+    loginStatusAdmin();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -139,6 +174,10 @@ const App = () => {
           handleLoginTherapist,
           handleLogoutTherapist,
           therapist,
+          isLoggedInAdmin,
+          handleLoginAdmin,
+          handleLogoutAdmin,
+          admin,
         }}
       >
         <BrowserRouter>
@@ -192,6 +231,10 @@ const App = () => {
               path="/therapist/feedback"
               element={<TherapistFeedback />}
             />
+
+            <Route exact path="/admin/login" element={<AdminLogin />} />
+            <Route exact path="/admin/signup" element={<AdminSignup />} />
+            <Route exact path="/reports" element={<Report />} />
           </Routes>
         </BrowserRouter>
       </AppContext.Provider>

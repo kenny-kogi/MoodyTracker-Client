@@ -6,8 +6,12 @@ import { useParams } from "react-router";
 
 const Logout = () => {
   const { currentlogged } = useParams();
-  const { handleLogout, handleLogoutPatient, handleLogoutTherapist } =
-    useContext(AppContext);
+  const {
+    handleLogout,
+    handleLogoutPatient,
+    handleLogoutTherapist,
+    handleLogoutAdmin,
+  } = useContext(AppContext);
 
   const handleClick = () => {
     axios
@@ -21,6 +25,8 @@ const Logout = () => {
           handleLogoutPatient();
         } else if (currentlogged === "therapist") {
           handleLogoutTherapist();
+        } else if (currentlogged === "admin") {
+          handleLogoutAdmin();
         }
       })
       .catch((error) => console.log(error));
