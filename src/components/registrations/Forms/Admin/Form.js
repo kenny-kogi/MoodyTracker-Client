@@ -3,7 +3,7 @@ import {
   Box,
   FormControl,
   Grid,
-  Image,
+  //   Image,
   GridItem,
   FormLabel,
   Input,
@@ -11,8 +11,8 @@ import {
   Heading,
   Button,
 } from "@chakra-ui/react";
-import SignupImage from "../../../../assets/signup1.png";
-import LogImage from "../../../../assets/login1.png";
+// import SignupImage from "../../../../assets/signup1.png";
+// import LogImage from "../../../../assets/login1.png";
 
 const Form = ({ handleChange, handleSubmit, patient, isSignup }) => {
   return (
@@ -185,9 +185,9 @@ const Form = ({ handleChange, handleSubmit, patient, isSignup }) => {
             </form>
           )}
         </Box>
-        <Box>
+        {/* <Box>
           <Image src={isSignup ? SignupImage : LogImage} boxSize="400px" />
-        </Box>
+        </Box> */}
       </Stack>
     </Box>
   );
