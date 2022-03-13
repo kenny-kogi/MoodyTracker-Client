@@ -20,13 +20,16 @@ import UserLog from "./components/Moods/User/UserLog";
 import PatientLog from "./components/Moods/Patient/PatientLog";
 import TherapistDash from "./components/Dashboards/Therapist/TherapistDash";
 import PatientDash from "./components/Dashboards/Patient/PatientDash";
-import Profile from "./components/Profile/Patient/PatientProfile";
+import PatientProfile from "./components/Profile/Patient/PatientProfile";
 import Feedback from "./components/Feedback/Therapist/TherapistFeedback";
 import TherapistFeedback from "./components/Feedback/Patient/FeedbackFrmTherapist";
 import AdminLogin from "./components/registrations/Admin/AdminLogin";
 import AdminSignup from "./components/registrations/Admin/AdminSignup";
 import Report from "./components/Reports/Report";
 import MedicationLog from "./components/Medication/Patient/MedicationLog";
+import MedicationDash from "./components/Medication/Therapist/MedicationDash";
+import TherapistProfile from "./components/Profile/Therapist/TherapistProfile";
+import UserProfile from "./components/Profile/User/UserProfile";
 
 const App = () => {
   //user
@@ -221,7 +224,7 @@ const App = () => {
               path="/patient/analysis/:id"
               element={<PatientDash />}
             />
-            <Route exact path="/patient/profile" element={<Profile />} />
+            <Route exact path="/patient/profile" element={<PatientProfile />} />
             <Route
               exact
               path="/therapist/feedback/:id"
@@ -241,6 +244,17 @@ const App = () => {
               path="/patient/medication"
               element={<MedicationLog />}
             />
+            <Route
+              exact
+              path="/therapist/medication/:id"
+              element={<MedicationDash />}
+            />
+            <Route
+              exact
+              path="/therapist/profile"
+              element={<TherapistProfile />}
+            />
+            <Route exact path="/user/profile" element={<UserProfile />} />
           </Routes>
         </BrowserRouter>
       </AppContext.Provider>

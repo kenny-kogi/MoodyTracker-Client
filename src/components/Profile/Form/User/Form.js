@@ -8,16 +8,14 @@ import {
   FormLabel,
   Select,
   Button,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
 } from "@chakra-ui/react";
 
-const Form = ({
-  handleChange,
-  handleFileUpload,
-  handleSubmit,
-  patient,
-  therapists,
-}) => {
-  const nullCheckerTherapist = therapists === null;
+const Form = ({ handleChange, user, handleSubmit, handleChangeAgeInput }) => {
   return (
     <Box>
       <form onSubmit={handleSubmit}>
@@ -30,7 +28,7 @@ const Form = ({
                 type="text"
                 placeholder="FirstName"
                 name="firstName"
-                value={patient.firstName}
+                value={user.firstName}
                 onChange={handleChange}
               />
             </FormControl>
@@ -43,7 +41,7 @@ const Form = ({
                 id="lastName"
                 type="text"
                 placeholder="lastName"
-                value={patient.lastName}
+                value={user.lastName}
                 name="lastName"
                 onChange={handleChange}
               />
@@ -57,7 +55,7 @@ const Form = ({
                 id="username"
                 type="text"
                 placeholder="UserName"
-                value={patient.username}
+                value={user.username}
                 name="username"
                 onChange={handleChange}
               />
@@ -72,9 +70,26 @@ const Form = ({
                 type="email"
                 placeholder="email"
                 name="email"
-                value={patient.email}
+                value={user.email}
                 onChange={handleChange}
               />
+            </FormControl>
+          </GridItem>
+          <GridItem colSpan={1} mb="2" mr="6">
+            <FormControl>
+              <FormLabel htmlFor="age">Age:</FormLabel>
+              <NumberInput
+                min={12}
+                max={120}
+                name="age"
+                onChange={(v) => handleChangeAgeInput(v)}
+              >
+                <NumberInputField />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
             </FormControl>
           </GridItem>
 
@@ -85,22 +100,8 @@ const Form = ({
                 id="location"
                 type="text"
                 placeholder="Nairobi"
-                value={patient.location}
+                value={user.location}
                 name="location"
-                onChange={handleChange}
-              />
-            </FormControl>
-          </GridItem>
-
-          <GridItem colSpan={1} mb="2" mr="6">
-            <FormControl>
-              <FormLabel htmlFor="age">Age:</FormLabel>
-              <Input
-                id="age"
-                type="date"
-                placeholder=""
-                value={patient.age}
-                name="age"
                 onChange={handleChange}
               />
             </FormControl>
@@ -113,7 +114,7 @@ const Form = ({
                 id="occupation"
                 type="text"
                 placeholder="Nurse"
-                value={patient.occupation}
+                value={user.occupation}
                 name="occupation"
                 onChange={handleChange}
               />
@@ -126,7 +127,7 @@ const Form = ({
               <Select
                 id="gender"
                 placeholder="Select Gender"
-                value={patient.gender}
+                value={user.gender}
                 name="gender"
                 onChange={handleChange}
               >
@@ -136,7 +137,7 @@ const Form = ({
             </FormControl>
           </GridItem>
 
-          <GridItem colSpan={2} mr="6">
+          {/* <GridItem colSpan={2} mr="6">
             <FormControl>
               <FormLabel htmlFor="image">Profile Image:</FormLabel>
               <Input
@@ -147,63 +148,7 @@ const Form = ({
                 accept="image/jpeg"
               />
             </FormControl>
-          </GridItem>
-
-          <GridItem colSpan={1} mb="2" mr="6">
-            <FormControl>
-              <FormLabel htmlFor="mental_health_status">
-                Mental Health Status:
-              </FormLabel>
-              <Select
-                id=" mental_health_status"
-                placeholder="Select Ment Status"
-                value={patient.mental_health_status}
-                name="mental_health_status"
-                onChange={handleChange}
-              >
-                <option>Mild</option>
-                <option>Severe</option>
-              </Select>
-            </FormControl>
-          </GridItem>
-
-          <GridItem colSpan={1} mr="6">
-            <FormControl>
-              <FormLabel htmlFor="mental_health_facility">
-                Mental Health Facilty:
-              </FormLabel>
-              <Input
-                id="mental_health_facility"
-                type="text"
-                placeholder="Mental health Facility"
-                value={patient.mental_health_facility}
-                name="mental_health_facility"
-                onChange={handleChange}
-              />
-            </FormControl>
-          </GridItem>
-          <GridItem colSpan={1} mb="2" mr="6">
-            <FormControl>
-              <FormLabel htmlFor="mental_health_status">Therapist:</FormLabel>
-              <Select
-                id="therapist_id"
-                placeholder="Select Therapist"
-                value={patient.therapist_id}
-                name="therapist_id"
-                onChange={handleChange}
-              >
-                {nullCheckerTherapist ? (
-                  <option>No therapist</option>
-                ) : (
-                  therapists.map((therapist) => {
-                    return (
-                      <option value={therapist.id}>{therapist.username}</option>
-                    );
-                  })
-                )}
-              </Select>
-            </FormControl>
-          </GridItem>
+          </GridItem> */}
 
           {/* <GridItem colSpan={1} mb="2" mr="6">
             <FormControl>

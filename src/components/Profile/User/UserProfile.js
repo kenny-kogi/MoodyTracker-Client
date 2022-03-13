@@ -1,73 +1,59 @@
-import React, { useContext, useState, useEffect } from "react";
-import Navbar from "../../Home/Navbar/Patient/Navbar";
-import SideMenu from "../../Shared/Patient/SideMenu";
-import { Flex, Container, Heading, Text } from "@chakra-ui/react";
+import React, { useContext, useState } from "react";
+import Navbar from "../../Home/Navbar/User/Navbar";
 import { AppContext } from "../../../context/appcontext";
+import { useToast, Flex, Container, Heading, Text } from "@chakra-ui/react";
 import axios from "axios";
-import Form from "../Form/Patient/Form";
+import SideMenu from "../../Shared/SideMenu";
 import Errors from "../../Shared/Errors";
-import { useToast } from "@chakra-ui/react";
+import Form from "../Form/User/Form";
 
-const PatientProfile = () => {
-  let toast = useToast();
-  const { patient, handleLoginPatient } = useContext(AppContext);
-  const [therapist, setTherapist] = useState(null);
-  const [editpatient, setEditPatient] = useState({
-    id: patient.id,
-    firstName: patient.firstName,
-    lastName: patient.lastName,
-    username: patient.username,
-    email: patient.email,
-    // password: "",
-    // password_confirmation: "",
-    location: patient.location,
-    image: null,
-    age: patient.age,
-    occupation: patient.occupation,
-    gender: patient.gender,
-    mental_health_status: patient.mental_health_status,
-    mental_health_facility: patient.mental_health_facility,
-    therapist_id: patient.therapist_id,
+const UserProfile = () => {
+  const { user, handleLogin } = useContext(AppContext);
+  const [editUser, setEditUser] = useState({
+    id: user.id,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    username: user.username,
+    email: user.email,
+    location: user.location,
+    age: user.age,
+    occupation: user.occupation,
+    gender: user.gender,
+    image: user.image,
   });
 
   const [errors, setErrors] = useState({});
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setEditPatient({
-      ...editpatient,
+    setEditUser({
+      ...editUser,
       [name]: value,
     });
   };
 
-  const handleFileUpload = (event) => {
-    setEditPatient({
-      ...editpatient,
-      image: event.target.files[0],
-    });
-  };
-
   const handleChangeAgeInput = (v) => {
-    setEditPatient({
-      ...editpatient,
+    setEditUser({
+      ...editUser,
       age: v,
     });
   };
 
+  const toast = useToast();
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    let patient = editpatient;
-    console.log("edit patient", patient);
-    console.log("id", patient.id);
+    let user = editUser;
+
     axios
       .put(
-        `http://localhost:3001/patients/${patient.id}`,
-        { patient },
+        `http://localhost:3001/users/${user.id}`,
+        { user },
         { withCredentials: true }
       )
       .then((response) => {
         if (response.data.status === "updated") {
-          handleLoginPatient(response.data);
+          handleLogin(response.data);
           toast({
             title: "Details Edited",
             status: "success",
@@ -89,6 +75,7 @@ const PatientProfile = () => {
               backgroundColor: "purple",
             },
           });
+
           setErrors({
             ...errors,
             errors: response.data.errors,
@@ -99,22 +86,6 @@ const PatientProfile = () => {
         console.log(errors);
       });
   };
-
-  const getTherapistData = () => {
-    axios
-      .get("http://localhost:3001/therapists")
-      .then((response) => {
-        setTherapist(response.data.therapists);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  useEffect(() => {
-    getTherapistData();
-  }, []);
-
   const isEmpty = Object.keys(errors).length === 0;
   return (
     <>
@@ -132,18 +103,15 @@ const PatientProfile = () => {
             mb="30"
           >
             <Text as="span" color="pink.400" fontSize="40px">
-              Hi {patient.username},{" "}
+              Hi {user.username},{" "}
             </Text>
             Change Your Profile
           </Heading>
           {isEmpty ? null : <Errors errors={errors.errors} />}
           <Form
-            patient={editpatient}
+            user={editUser}
             handleChange={handleChange}
             handleSubmit={handleSubmit}
-            handleFileUpload={handleFileUpload}
-            isSignup={true}
-            therapists={therapist}
             handleChangeAgeInput={handleChangeAgeInput}
           />
         </Container>
@@ -152,4 +120,4 @@ const PatientProfile = () => {
   );
 };
 
-export default PatientProfile;
+export default UserProfile;

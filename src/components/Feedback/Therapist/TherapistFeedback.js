@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import Navbar from "../../Home/Navbar/Therapist/Navbar";
-import SideMenu from "../../Shared/Therapist/SideMenu";
+import SideMenu from "../../Shared/Therapist/PatientAnalysis/SideMenu";
 import { Flex, Container, Heading, Text, Box } from "@chakra-ui/react";
 import axios from "axios";
 import { useParams } from "react-router";
