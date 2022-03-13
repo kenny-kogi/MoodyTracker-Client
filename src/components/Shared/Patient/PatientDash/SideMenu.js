@@ -47,6 +47,21 @@ const SideMenu = () => {
           _hover={{ bg: "purple", color: "white" }}
           fontWeight="bold"
           onClick={() => {
+            navigate("/patient/medication");
+          }}
+        >
+          Medications
+        </Button>
+
+        <Button
+          mb={5}
+          width="200px"
+          height="60px"
+          bgColor="purple.100"
+          color="blackAlpha.700"
+          _hover={{ bg: "purple", color: "white" }}
+          fontWeight="bold"
+          onClick={() => {
             navigate("/patient/moods");
           }}
         >

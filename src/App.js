@@ -26,6 +26,7 @@ import TherapistFeedback from "./components/Feedback/Patient/FeedbackFrmTherapis
 import AdminLogin from "./components/registrations/Admin/AdminLogin";
 import AdminSignup from "./components/registrations/Admin/AdminSignup";
 import Report from "./components/Reports/Report";
+import MedicationLog from "./components/Medication/Patient/MedicationLog";
 
 const App = () => {
   //user
@@ -235,6 +236,11 @@ const App = () => {
             <Route exact path="/admin/login" element={<AdminLogin />} />
             <Route exact path="/admin/signup" element={<AdminSignup />} />
             <Route exact path="/reports" element={<Report />} />
+            <Route
+              exact
+              path="/patient/medication"
+              element={<MedicationLog />}
+            />
           </Routes>
         </BrowserRouter>
       </AppContext.Provider>
