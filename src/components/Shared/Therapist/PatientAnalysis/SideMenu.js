@@ -32,6 +32,9 @@ const SideMenu = () => {
           color="blackAlpha.700"
           _hover={{ bg: "purple", color: "white" }}
           fontWeight="bold"
+          onClick={() => {
+            navigate(`/therapist/medication/${id}`);
+          }}
         >
           Medication
         </Button>

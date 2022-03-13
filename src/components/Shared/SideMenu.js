@@ -76,18 +76,12 @@ const SideMenu = () => {
               _hover={{ bg: "purple", color: "white" }}
               fontWeight="bold"
               onClick={() => {
-                navigate("/moods");
+                navigate("/user/profile");
               }}
             >
               Profile
             </Button>
           </Box>
-          {/* <Divider
-            border="2px solid"
-            borderColor="purple.100"
-            orientation="vertical"
-            height="1000px"
-          /> */}
         </Flex>
       </Container>
     </>
