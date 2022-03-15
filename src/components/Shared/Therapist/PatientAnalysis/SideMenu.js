@@ -63,7 +63,7 @@ const SideMenu = () => {
           _hover={{ bg: "purple", color: "white" }}
           fontWeight="bold"
           onClick={() => {
-            navigate("/patient/moods");
+            navigate(`/therapist/patient/moods/${id}`);
           }}
         >
           Daily Logs
