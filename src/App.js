@@ -30,6 +30,7 @@ import MedicationLog from "./components/Medication/Patient/MedicationLog";
 import MedicationDash from "./components/Medication/Therapist/MedicationDash";
 import TherapistProfile from "./components/Profile/Therapist/TherapistProfile";
 import UserProfile from "./components/Profile/User/UserProfile";
+import TherapistLog from "./components/Moods/Therapist/TherapistLog";
 
 const App = () => {
   //user
@@ -255,6 +256,11 @@ const App = () => {
               element={<TherapistProfile />}
             />
             <Route exact path="/user/profile" element={<UserProfile />} />
+            <Route
+              exact
+              path="/therapist/patient/moods/:id"
+              element={<TherapistLog />}
+            />
           </Routes>
         </BrowserRouter>
       </AppContext.Provider>
