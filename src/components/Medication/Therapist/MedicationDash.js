@@ -50,18 +50,18 @@ const MedicationDash = () => {
             justifyContent="center"
           >
             <Text as="span" color="pink.400" fontSize="40px">
-              Hi {therapist.username},{" "}
+              Hi Dr.{therapist.firstName},{" "}
             </Text>
             Here is Your Patient Medication Logs
           </Heading>
-          <Flex direction="row" width={1000} justifyContent="space-evenly">
-            <Tag height={10} width={100} color="white" bgColor="purple">
+          <Flex direction="row">
+            <Tag height={10} color="white" bgColor="purple" ml="150px">
               Drug Name
             </Tag>
-            <Tag height={10} color="white" bgColor="purple">
+            <Tag height={10} color="white" bgColor="purple" ml="350px">
               Prescription
             </Tag>
-            <Tag height={10} color="white" bgColor="purple">
+            <Tag height={10} color="white" bgColor="purple" ml="340px">
               Usage Interval
             </Tag>
           </Flex>
