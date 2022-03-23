@@ -131,7 +131,7 @@ const App = () => {
   const handleLoginAdmin = (data) => {
     console.log(data);
     setIsLoggedInAdmin(true);
-    setAdmin(data.therapist);
+    setAdmin(data.admin);
   };
 
   const handleLogoutAdmin = () => {

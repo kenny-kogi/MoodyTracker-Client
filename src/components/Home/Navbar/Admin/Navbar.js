@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import LogOutNavbar from "../../Logout/LogOutNavbar";
+import LogOutNavbar from "../../Logout/Admin/LogOutNavbar";
 import NavbarDefault from "./NavbarDefault";
 import { AppContext } from "../../../../context/appcontext";
 

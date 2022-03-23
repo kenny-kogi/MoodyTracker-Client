@@ -1,7 +1,182 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
+import Navbar from "../Home/Navbar/Admin/Navbar";
+import SideMenu from "../Shared/Admin/SideMenu";
+import { Container, Text, Flex, Box, Center } from "@chakra-ui/react";
+import { AppContext } from "../../context/appcontext";
+import moment from "moment";
+import axios from "axios";
+import Spinner from "../Shared/Spinner";
+import ModelNames from "./ModelNames";
 
 const Report = () => {
-  <h1>Reports</h1>;
+  const { admin } = useContext(AppContext);
+  const [modelsCount, setModelsCount] = useState(null);
+  const [modelsNames, setModelsNames] = useState(null);
+  const [update, setUpdate] = useState(false);
+  let greeting = "";
+
+  if (moment().isBetween(3, 12, "HH")) {
+    greeting = "Good Morning";
+  } else if (moment().isBetween(12, 15, "HH")) {
+    greeting = "Good Afternoon";
+  } else if (moment().isBetween(15, 20, "HH")) {
+    greeting = "Good Evening";
+  } else if (moment().isBetween(20, 3, "HH")) {
+    greeting = "Good Night";
+  } else {
+    greeting = "Hello";
+  }
+
+  const getModelsCount = () => {
+    axios
+      .get("http://localhost:3001/reports/models/names")
+      .then((response) => {
+        setModelsNames(response.data.modelsNames);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const getModelsNames = () => {
+    axios
+      .get("http://localhost:3001/reports/models/count")
+      .then((response) => {
+        setModelsCount(response.data.modelsCount);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const deleteModel = (modelName, id) => {
+    axios
+      .delete(`http://localhost:3001/${modelName}/${id}`)
+      .then((response) => {
+        setUpdate(!update);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getModelsCount();
+    getModelsNames();
+  }, [update]);
+
+  console.log("Models Names", modelsNames);
+
+  let nullCheckerModelsCount = modelsCount === null;
+  let nullCheckerModelsNames = modelsNames === null;
+
+  return (
+    <>
+      <SideMenu />
+      <Container maxWidth="1329px" mr={0} bgColor="blue.50">
+        <Flex>
+          <Navbar />
+
+          <Flex direction="column" mt="110px" ml={5}>
+            <Box
+              bgColor="rgb(199 210 254)"
+              width={1200}
+              height={100}
+              boxSizing="border-box"
+              borderStyle="solid"
+              borderColor="#e5e7eb"
+              borderRadius=".125rem"
+            >
+              <Flex direction="column" m={5}>
+                <Text
+                  fontSize="1.88rem"
+                  line-height="1.33"
+                  letter-spacing="-.01em"
+                  fontWeight="bold"
+                  border=""
+                  textColor="color: rgb(30 41 59)"
+                >
+                  {greeting}, {admin.username} 👋
+                </Text>
+                <Text>Here is what's happening in Moody Tracker Today</Text>
+              </Flex>
+            </Box>
+
+            <Box
+              height={200}
+              width={1200}
+              mt={10}
+              border="1px solid purple.100"
+              borderRadius={8}
+              boxShadow="lg"
+              borderWidth={1}
+              bgColor="whiteAlpha.600"
+              direction="row"
+            >
+              <Flex m={5} justifyContent="space-evenly">
+                <Box>
+                  <Text>Registered Users</Text>
+                  <Text textAlign="center" fontSize={70} fontWeight="bold">
+                    {nullCheckerModelsCount ? (
+                      <Spinner />
+                    ) : (
+                      modelsCount.usersCount
+                    )}
+                  </Text>
+                </Box>
+                <Box>
+                  <Text>Registered Patients</Text>
+                  <Text textAlign="center" fontSize={70} fontWeight="bold">
+                    {nullCheckerModelsCount ? (
+                      <Spinner />
+                    ) : (
+                      modelsCount.patientsCount
+                    )}
+                  </Text>
+                </Box>
+                <Box>
+                  <Text>Registered Therapists</Text>
+                  <Text textAlign="center" fontSize={70} fontWeight="bold">
+                    {nullCheckerModelsCount ? (
+                      <Spinner />
+                    ) : (
+                      modelsCount.therapistsCount
+                    )}
+                  </Text>
+                </Box>
+              </Flex>
+            </Box>
+
+            <Flex direction="row" justifyContent="space-evenly">
+              {nullCheckerModelsNames ? (
+                <Center>
+                  <Spinner />
+                </Center>
+              ) : (
+                <>
+                  <ModelNames
+                    modelName={modelsNames.usersDetails}
+                    modelTitle="users"
+                    deleteModel={deleteModel}
+                  />
+                  <ModelNames
+                    modelName={modelsNames.patientsDetails}
+                    modelTitle="patients"
+                    deleteModel={deleteModel}
+                  />
+                  <ModelNames
+                    modelName={modelsNames.therapistsDetails}
+                    modelTitle="therapists"
+                    deleteModel={deleteModel}
+                  />
+                </>
+              )}
+            </Flex>
+          </Flex>
+        </Flex>
+      </Container>
+    </>
+  );
 };
 
 export default Report;
