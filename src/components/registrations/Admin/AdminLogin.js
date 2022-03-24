@@ -5,6 +5,7 @@ import axios from "axios";
 import Form from "../Forms/Admin/Form";
 import Navbar from "../../Home/Navbar/Admin/Navbar";
 import Errors from "../../Shared/Errors";
+import { useToast } from "@chakra-ui/react";
 const AdminLogin = () => {
   const { isLoggedInAdmin, handleLoginAdmin } = useContext(AppContext);
 
@@ -32,7 +33,7 @@ const AdminLogin = () => {
       [name]: value,
     });
   };
-
+  let toast = useToast();
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
@@ -45,7 +46,27 @@ const AdminLogin = () => {
         if (response.data.logged_in) {
           handleLoginAdmin(response.data);
           navigate("/reports");
+          toast({
+            title: "Successfully Logged",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+            position: "top",
+            containerStyle: {
+              backgroundColor: "purple",
+            },
+          });
         } else {
+          toast({
+            title: "Error !!",
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+            position: "top",
+            containerStyle: {
+              backgroundColor: "purple",
+            },
+          });
           setErrors({
             errors: response.data.errors,
           });

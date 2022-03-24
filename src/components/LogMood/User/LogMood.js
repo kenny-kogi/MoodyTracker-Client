@@ -2,7 +2,15 @@ import React, { useEffect, useState, useContext } from "react";
 import Navbar from "../../../components/Home/Navbar/User/Navbar";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import { Button, Box, Container, Heading, Text, Flex } from "@chakra-ui/react";
+import {
+  Button,
+  Box,
+  Container,
+  Heading,
+  Text,
+  Flex,
+  useToast,
+} from "@chakra-ui/react";
 import Irritability from "../moods/Irritability";
 import Elevated from "../moods/Elevated";
 import HoursSlept from "../moods/HoursSlept";
@@ -36,16 +44,38 @@ const LogMood = () => {
   const [circularValue, setCircularValue] = useState(0);
 
   let navigate = useNavigate();
+  let toast = useToast();
   const handleSubmit = (event) => {
     event.preventDefault();
 
     console.log(mood);
+
     axios
       .post("http://localhost:3001/moods", mood, { withCredentials: true })
       .then((response) => {
         if (response.data.status === "created") {
           navigate("/record/message");
+          toast({
+            title: "Mood Logged Successfully",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+            position: "top",
+            containerStyle: {
+              backgroundColor: "purple",
+            },
+          });
         } else {
+          toast({
+            title: "Error !!",
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+            position: "top",
+            containerStyle: {
+              backgroundColor: "purple",
+            },
+          });
           setErrors({ ...errors, errors: response.data.errors });
         }
       })

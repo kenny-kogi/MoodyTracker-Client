@@ -11,6 +11,11 @@ import {
   Stack,
   Heading,
   Button,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
 } from "@chakra-ui/react";
 import SignupImage from "../../../../assets/signup1.png";
 import LogImage from "../../../../assets/login1.png";
@@ -22,6 +27,7 @@ const Form = ({
   patient,
   isSignup,
   therapists,
+  handleChangeAgeInput,
 }) => {
   let nullCheckerTherapist = therapists === null;
   return (
@@ -107,14 +113,18 @@ const Form = ({
                 <GridItem colSpan={1} mb="2" mr="6">
                   <FormControl>
                     <FormLabel htmlFor="age">Age:</FormLabel>
-                    <Input
-                      id="age"
-                      type="date"
-                      placeholder=""
-                      value={patient.age}
+                    <NumberInput
+                      min={12}
+                      max={120}
                       name="age"
-                      onChange={handleChange}
-                    />
+                      onChange={(v) => handleChangeAgeInput(v)}
+                    >
+                      <NumberInputField />
+                      <NumberInputStepper>
+                        <NumberIncrementStepper />
+                        <NumberDecrementStepper />
+                      </NumberInputStepper>
+                    </NumberInput>
                   </FormControl>
                 </GridItem>
 

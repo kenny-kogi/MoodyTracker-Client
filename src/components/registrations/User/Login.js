@@ -5,6 +5,7 @@ import Navbar from "../../Home/Navbar/User/Navbar";
 import Form from "../Forms/Form";
 import { AppContext } from "../../../context/appcontext";
 import Errors from "../../Shared/Errors";
+import { useToast } from "@chakra-ui/react";
 
 const Login = () => {
   const { handleLogin, isLoggedIn } = useContext(AppContext);
@@ -34,6 +35,7 @@ const Login = () => {
     });
   };
 
+  let toast = useToast();
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -47,7 +49,27 @@ const Login = () => {
         if (response.data.logged_in) {
           handleLogin(response.data);
           navigate("/mood/record");
+          toast({
+            title: "Successfully Logged",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+            position: "top",
+            containerStyle: {
+              backgroundColor: "purple",
+            },
+          });
         } else {
+          toast({
+            title: "Error !!",
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+            position: "top",
+            containerStyle: {
+              backgroundColor: "purple",
+            },
+          });
           setErrors({
             errors: response.data.errors,
           });

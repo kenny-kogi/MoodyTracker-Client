@@ -1,8 +1,9 @@
 import React, { useEffect, useContext } from "react";
 import axios from "axios";
 import { AppContext } from "../../../context/appcontext";
-import Navbar from "../../Home/Navbar/Default/Navbar";
 import { useParams } from "react-router";
+import Home from "../../Home";
+import { useToast } from "@chakra-ui/react";
 
 const Logout = () => {
   const { currentlogged } = useParams();
@@ -13,12 +14,23 @@ const Logout = () => {
     handleLogoutAdmin,
   } = useContext(AppContext);
 
+  let toast = useToast();
   const handleClick = () => {
     axios
       .delete(`http://localhost:3001/${currentlogged}/logout`, {
         withCredentials: true,
       })
       .then((response) => {
+        toast({
+          title: "Logged Out",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+          position: "top",
+          containerStyle: {
+            backgroundColor: "purple",
+          },
+        });
         if (currentlogged === "user") {
           handleLogout();
         } else if (currentlogged === "patient") {
@@ -37,12 +49,7 @@ const Logout = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
-    <>
-      <Navbar />
-      <h1>Log out Page.....</h1>
-    </>
-  );
+  return <Home />;
 };
 
 export default Logout;
