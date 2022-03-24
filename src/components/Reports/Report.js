@@ -7,11 +7,13 @@ import moment from "moment";
 import axios from "axios";
 import Spinner from "../Shared/Spinner";
 import ModelNames from "./ModelNames";
+import AverageAge from "./AverageAge";
 
 const Report = () => {
   const { admin } = useContext(AppContext);
   const [modelsCount, setModelsCount] = useState(null);
   const [modelsNames, setModelsNames] = useState(null);
+  const [averageAge, setAverageAge] = useState(null);
   const [update, setUpdate] = useState(false);
   let greeting = "";
 
@@ -60,15 +62,28 @@ const Report = () => {
       });
   };
 
+  const getAverageAges = () => {
+    axios
+      .get("http://localhost:3001/reports/users_patients/averageAge")
+      .then((response) => {
+        setAverageAge(response.data.averageAges);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
     getModelsCount();
     getModelsNames();
+    getAverageAges();
   }, [update]);
 
-  console.log("Models Names", modelsNames);
+  console.log("Average Ages", averageAge);
 
   let nullCheckerModelsCount = modelsCount === null;
   let nullCheckerModelsNames = modelsNames === null;
+  let nullCheckerAverageAge = averageAge === null;
 
   return (
     <>
@@ -170,6 +185,19 @@ const Report = () => {
                     deleteModel={deleteModel}
                   />
                 </>
+              )}
+            </Flex>
+
+            <Flex direction="row">
+              {nullCheckerAverageAge ? (
+                <Center>
+                  <Spinner />
+                </Center>
+              ) : (
+                <AverageAge
+                  users={averageAge.avgAgeUsers}
+                  patients={averageAge.avgAgePatients}
+                />
               )}
             </Flex>
           </Flex>
