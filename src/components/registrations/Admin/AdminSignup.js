@@ -5,6 +5,7 @@ import axios from "axios";
 import Navbar from "../../Home/Navbar/Admin/Navbar";
 import Form from "../Forms/Admin/Form";
 import Errors from "../../Shared/Errors";
+import { useToast } from "@chakra-ui/react";
 
 const AdminSignup = () => {
   const { handleLoginAdmin } = useContext(AppContext);
@@ -30,6 +31,8 @@ const AdminSignup = () => {
     console.log(name, value);
   };
 
+  let toast = useToast();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
@@ -42,8 +45,27 @@ const AdminSignup = () => {
         if (response.data.status === "created") {
           handleLoginAdmin(response.data);
           navigate("/reports");
-          console.log("success");
+          toast({
+            title: "Account Created",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+            position: "top",
+            containerStyle: {
+              backgroundColor: "purple",
+            },
+          });
         } else {
+          toast({
+            title: "Error !!",
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+            position: "top",
+            containerStyle: {
+              backgroundColor: "purple",
+            },
+          });
           setErrors({
             ...errors,
             errors: response.data.errors,

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../../Home/Navbar/Patient/Navbar";
 import SideMenu from "../../Shared/Patient/SideMenu";
 import {
@@ -23,6 +23,7 @@ import {
 import { AppContext } from "../../../context/appcontext";
 import axios from "axios";
 import { useToast } from "@chakra-ui/react";
+import Errors from "../../Shared/Errors";
 
 const MedicationLog = () => {
   const { patient } = useContext(AppContext);
@@ -32,9 +33,8 @@ const MedicationLog = () => {
     usage_interval: 0,
     patient_id: patient.id,
   });
-  const [errors, setErrors] = useState({
-    errors: {},
-  });
+  const [update, setUpdate] = useState(false);
+  const [errors, setErrors] = useState({});
   const toast = useToast();
 
   const handleSubmit = (event) => {
@@ -46,6 +46,7 @@ const MedicationLog = () => {
       })
       .then((response) => {
         if (response.data.status === "created") {
+          setUpdate(!update);
           toast({
             title: "Medication Logged",
             status: "success",
@@ -63,6 +64,16 @@ const MedicationLog = () => {
             usage_interval: 0,
           });
         } else {
+          toast({
+            title: "Error !!",
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+            position: "top",
+            containerStyle: {
+              backgroundColor: "purple",
+            },
+          });
           setErrors({ ...errors, errors: response.data.errors });
         }
       })
@@ -77,6 +88,12 @@ const MedicationLog = () => {
       [name]: value,
     });
   };
+
+  useEffect(() => {
+    setErrors({});
+  }, [update]);
+  const isEmpty = Object.keys(errors).length === 0;
+  console.log("Medication Errors", errors);
 
   console.log("Medication", medication);
   return (
@@ -100,6 +117,7 @@ const MedicationLog = () => {
             </Text>
             Let's Log Your Medication Today
           </Heading>
+          {isEmpty ? null : <Errors errors={errors.errors} />}
           <Box width={800}>
             <form onSubmit={handleSubmit}>
               <Grid templateColumns="repeat(3, 1fr )" mt="15">

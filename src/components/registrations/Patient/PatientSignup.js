@@ -5,6 +5,7 @@ import axios from "axios";
 import Navbar from "../../Home/Navbar/Patient/Navbar";
 import Form from "../Forms/Patient/Form";
 import Errors from "../../Shared/Errors";
+import { useToast } from "@chakra-ui/react";
 
 const PatientSignup = () => {
   const { handleLoginPatient } = useContext(AppContext);
@@ -45,6 +46,15 @@ const PatientSignup = () => {
     });
   };
 
+  const handleChangeAgeInput = (v) => {
+    setPatient({
+      ...patient,
+      age: v,
+    });
+  };
+
+  let toast = useToast();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
@@ -57,7 +67,28 @@ const PatientSignup = () => {
         if (response.data.status === "created") {
           handleLoginPatient(response.data);
           navigate("/patient/mood/record");
+          toast({
+            title: "Account Created",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+            position: "top",
+            containerStyle: {
+              backgroundColor: "purple",
+            },
+          });
         } else {
+          toast({
+            title: "Error !!",
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+            position: "top",
+            containerStyle: {
+              backgroundColor: "purple",
+            },
+          });
+
           setErrors({
             ...errors,
             errors: response.data.errors,
@@ -97,6 +128,7 @@ const PatientSignup = () => {
         handleFileUpload={handleFileUpload}
         isSignup={true}
         therapists={therapist}
+        handleChangeAgeInput={handleChangeAgeInput}
       />
     </div>
   );

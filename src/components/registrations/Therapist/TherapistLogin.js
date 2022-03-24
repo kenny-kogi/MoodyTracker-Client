@@ -5,6 +5,7 @@ import axios from "axios";
 import Form from "../Forms/Therapist/Form";
 import Navbar from "../../Home/Navbar/Therapist/Navbar";
 import Errors from "../../Shared/Errors";
+import { useToast } from "@chakra-ui/react";
 
 const TherapistLogin = () => {
   const { isLoggedInTherapist, handleLoginTherapist } = useContext(AppContext);
@@ -33,6 +34,8 @@ const TherapistLogin = () => {
     });
   };
 
+  let toast = useToast();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
@@ -45,7 +48,27 @@ const TherapistLogin = () => {
         if (response.data.logged_in) {
           handleLoginTherapist(response.data);
           navigate("/therapist/dashboard");
+          toast({
+            title: "Successfully Logged",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+            position: "top",
+            containerStyle: {
+              backgroundColor: "purple",
+            },
+          });
         } else {
+          toast({
+            title: "Error !!",
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+            position: "top",
+            containerStyle: {
+              backgroundColor: "purple",
+            },
+          });
           setErrors({
             errors: response.data.errors,
           });

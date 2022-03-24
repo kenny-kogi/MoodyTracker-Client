@@ -5,6 +5,7 @@ import Navbar from "../../Home/Navbar/User/Navbar";
 import Form from "../Forms/Form";
 import { AppContext } from "../../../context/appcontext";
 import Errors from "../../Shared/Errors";
+import { useToast } from "@chakra-ui/react";
 
 const Signup = () => {
   const { handleLogin } = useContext(AppContext);
@@ -43,6 +44,14 @@ const Signup = () => {
     });
   };
 
+  const handleChangeAgeInput = (v) => {
+    setUser({
+      ...user,
+      age: v,
+    });
+  };
+  const toast = useToast();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
@@ -51,7 +60,28 @@ const Signup = () => {
         if (response.data.status === "created") {
           handleLogin(response.data);
           navigate("/mood/record");
+          toast({
+            title: "Account Created",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+            position: "top",
+            containerStyle: {
+              backgroundColor: "purple",
+            },
+          });
         } else {
+          toast({
+            title: "Error !!",
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+            position: "top",
+            containerStyle: {
+              backgroundColor: "purple",
+            },
+          });
+
           setErrors({
             ...errors,
             errors: response.data.errors,
@@ -75,6 +105,7 @@ const Signup = () => {
         handleSubmit={handleSubmit}
         handleFileUpload={handleFileUpload}
         isSignup={true}
+        handleChangeAgeInput={handleChangeAgeInput}
       />
     </div>
   );
