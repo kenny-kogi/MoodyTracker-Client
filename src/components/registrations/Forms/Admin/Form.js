@@ -127,7 +127,7 @@ const Form = ({ handleChange, handleSubmit, patient, isSignup }) => {
             <form onSubmit={handleSubmit}>
               <Grid templateColumns="repeat(3, 1fr )" mt="15">
                 <GridItem colSpan={3}>
-                  <FormControl>
+                  <FormControl isRequired>
                     <FormLabel htmlFor="firstName">User Name:</FormLabel>
                     <Input
                       id="username"
@@ -141,7 +141,7 @@ const Form = ({ handleChange, handleSubmit, patient, isSignup }) => {
                 </GridItem>
 
                 <GridItem colSpan={3} mt="6">
-                  <FormControl>
+                  <FormControl isRequired>
                     <FormLabel htmlFor="email">Email:</FormLabel>
                     <Input
                       id="email"
@@ -155,7 +155,7 @@ const Form = ({ handleChange, handleSubmit, patient, isSignup }) => {
                 </GridItem>
 
                 <GridItem colSpan={3} mt="6">
-                  <FormControl>
+                  <FormControl isRequired>
                     <FormLabel htmlFor="password">Password:</FormLabel>
                     <Input
                       id="password"
