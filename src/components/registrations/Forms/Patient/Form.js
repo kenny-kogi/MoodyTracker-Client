@@ -99,14 +99,26 @@ const Form = ({
                 <GridItem colSpan={1} mr="6">
                   <FormControl>
                     <FormLabel htmlFor="location">Location:</FormLabel>
-                    <Input
+                    <Select
                       id="location"
-                      type="text"
                       placeholder="Nairobi"
                       value={patient.location}
                       name="location"
                       onChange={handleChange}
-                    />
+                    >
+                      <option>Nairobi</option>
+                      <option>Kisumu</option>
+                      <option>Mombasa</option>
+                      <option>Nakuru</option>
+                      <option>Thika</option>
+                      <option>Kitale</option>
+                      <option>Eldoret</option>
+                      <option>Nanyuki</option>
+                      <option>Nyeri</option>
+                      <option>Muranga</option>
+                      <option>Rongai</option>
+                      <option>Machakos</option>
+                    </Select>
                   </FormControl>
                 </GridItem>
 
@@ -184,6 +196,7 @@ const Form = ({
                       onChange={handleChange}
                     >
                       <option>Mild</option>
+                      <option>Moderate</option>
                       <option>Severe</option>
                     </Select>
                   </FormControl>
@@ -194,14 +207,20 @@ const Form = ({
                     <FormLabel htmlFor="mental_health_facility">
                       Mental Health Facilty:
                     </FormLabel>
-                    <Input
+                    <Select
                       id="mental_health_facility"
-                      type="text"
-                      placeholder="Mental health Facility"
+                      placeholder="Mathare"
                       value={patient.mental_health_facility}
                       name="mental_health_facility"
                       onChange={handleChange}
-                    />
+                    >
+                      <option>Mathare</option>
+                      <option>Kenyatta National Hospital</option>
+                      <option>Mombasa Refferal Hosital</option>
+                      <option>Nyeri Refferal Hospital</option>
+                      <option>Kijabe Hosital</option>
+                      <option>Machakos Refferal Hospital</option>
+                    </Select>
                   </FormControl>
                 </GridItem>
                 <GridItem colSpan={1} mb="2" mr="6">

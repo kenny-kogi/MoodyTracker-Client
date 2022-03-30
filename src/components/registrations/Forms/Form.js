@@ -97,14 +97,26 @@ const Form = ({
                 <GridItem colSpan={1} mr="6">
                   <FormControl>
                     <FormLabel htmlFor="location">Location:</FormLabel>
-                    <Input
+                    <Select
                       id="location"
-                      type="text"
                       placeholder="Nairobi"
                       value={user.location}
                       name="location"
                       onChange={handleChange}
-                    />
+                    >
+                      <option>Nairobi</option>
+                      <option>Kisumu</option>
+                      <option>Mombasa</option>
+                      <option>Nakuru</option>
+                      <option>Thika</option>
+                      <option>Kitale</option>
+                      <option>Eldoret</option>
+                      <option>Nanyuki</option>
+                      <option>Nyeri</option>
+                      <option>Muranga</option>
+                      <option>Rongai</option>
+                      <option>Machakos</option>
+                    </Select>
                   </FormControl>
                 </GridItem>
 
