@@ -8,12 +8,14 @@ import axios from "axios";
 import Spinner from "../Shared/Spinner";
 import ModelNames from "./ModelNames";
 import AverageAge from "./AverageAge";
+import UserLocation from "./UserLocation";
 
 const Report = () => {
   const { admin } = useContext(AppContext);
   const [modelsCount, setModelsCount] = useState(null);
   const [modelsNames, setModelsNames] = useState(null);
   const [averageAge, setAverageAge] = useState(null);
+  const [userLocationData, setUserLocationData] = useState(null);
   const [update, setUpdate] = useState(false);
   let greeting = "";
 
@@ -73,10 +75,22 @@ const Report = () => {
       });
   };
 
+  const getUserLocationData = () => {
+    axios
+      .get("http://localhost:3001/reports/user/locationData")
+      .then((response) => {
+        setUserLocationData(response.data.userLocationData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
     getModelsCount();
     getModelsNames();
     getAverageAges();
+    getUserLocationData();
   }, [update]);
 
   console.log("Average Ages", averageAge);
@@ -84,6 +98,7 @@ const Report = () => {
   let nullCheckerModelsCount = modelsCount === null;
   let nullCheckerModelsNames = modelsNames === null;
   let nullCheckerAverageAge = averageAge === null;
+  let nullCheckerUserLocationData = userLocationData === null;
 
   return (
     <>
@@ -189,15 +204,18 @@ const Report = () => {
             </Flex>
 
             <Flex direction="row">
-              {nullCheckerAverageAge ? (
+              {nullCheckerAverageAge || nullCheckerUserLocationData ? (
                 <Center>
                   <Spinner />
                 </Center>
               ) : (
-                <AverageAge
-                  users={averageAge.avgAgeUsers}
-                  patients={averageAge.avgAgePatients}
-                />
+                <>
+                  <AverageAge
+                    users={averageAge.avgAgeUsers}
+                    patients={averageAge.avgAgePatients}
+                  />
+                  <UserLocation location={userLocationData} />
+                </>
               )}
             </Flex>
           </Flex>
