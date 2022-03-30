@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import Navbar from "../Home/Navbar/Admin/Navbar";
 import SideMenu from "../Shared/Admin/SideMenu";
-import { Container, Text, Flex, Box, Center } from "@chakra-ui/react";
+import { Container, Text, Flex, Box, Center, Button } from "@chakra-ui/react";
 import { AppContext } from "../../context/appcontext";
 import moment from "moment";
 import axios from "axios";
@@ -218,6 +218,14 @@ const Report = () => {
                 </>
               )}
             </Flex>
+
+            <Button
+              onClick={() => {
+                setUpdate(!update);
+              }}
+            >
+              Reload{" "}
+            </Button>
           </Flex>
         </Flex>
       </Container>
