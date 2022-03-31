@@ -3,7 +3,6 @@ import React from "react";
 import Chart from "react-apexcharts";
 
 const AverageAge = ({ users, patients }) => {
-  console.log(users, patients);
   let total = users + patients;
   let data = {
     series: [users, patients],
@@ -26,7 +25,7 @@ const AverageAge = ({ users, patients }) => {
   return (
     <Flex
       width={400}
-      height={350}
+      height={400}
       mt={10}
       border="1px solid purple.100"
       borderRadius={8}

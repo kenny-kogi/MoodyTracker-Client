@@ -16,6 +16,7 @@ const Report = () => {
   const [modelsNames, setModelsNames] = useState(null);
   const [averageAge, setAverageAge] = useState(null);
   const [userLocationData, setUserLocationData] = useState(null);
+  const [patientLocationData, setPatientLocationData] = useState(null);
   const [update, setUpdate] = useState(false);
   let greeting = "";
 
@@ -86,11 +87,23 @@ const Report = () => {
       });
   };
 
+  const getPatientLocationData = () => {
+    axios
+      .get("http://localhost:3001/reports/patient/locationData")
+      .then((response) => {
+        setPatientLocationData(response.data.patientLocationData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
     getModelsCount();
     getModelsNames();
     getAverageAges();
     getUserLocationData();
+    getPatientLocationData();
   }, [update]);
 
   console.log("Average Ages", averageAge);
@@ -99,6 +112,7 @@ const Report = () => {
   let nullCheckerModelsNames = modelsNames === null;
   let nullCheckerAverageAge = averageAge === null;
   let nullCheckerUserLocationData = userLocationData === null;
+  let nullCheckerPatientLocationData = patientLocationData === null;
 
   return (
     <>
@@ -204,7 +218,9 @@ const Report = () => {
             </Flex>
 
             <Flex direction="row">
-              {nullCheckerAverageAge || nullCheckerUserLocationData ? (
+              {nullCheckerAverageAge ||
+              nullCheckerUserLocationData ||
+              nullCheckerPatientLocationData ? (
                 <Center>
                   <Spinner />
                 </Center>
@@ -214,7 +230,11 @@ const Report = () => {
                     users={averageAge.avgAgeUsers}
                     patients={averageAge.avgAgePatients}
                   />
-                  <UserLocation location={userLocationData} />
+                  <UserLocation location={userLocationData} user={"Users"} />
+                  <UserLocation
+                    location={patientLocationData}
+                    user={"Patients"}
+                  />
                 </>
               )}
             </Flex>
