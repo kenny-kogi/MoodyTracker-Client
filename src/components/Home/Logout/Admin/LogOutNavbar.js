@@ -18,6 +18,7 @@ const LogOutNavbar = ({ currentlogged }) => {
         borderColor="purple.100"
         bgColor="white"
         height="80px"
+        zIndex="overlay"
       >
         <Box>
           <Button

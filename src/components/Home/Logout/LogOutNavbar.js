@@ -19,6 +19,7 @@ const LogOutNavbar = ({ currentlogged }) => {
         borderBottom="3px solid"
         borderColor="purple.100"
         bgColor="white"
+        zIndex="overlay"
       >
         <Link to="/">
           {" "}
@@ -34,7 +35,6 @@ const LogOutNavbar = ({ currentlogged }) => {
             variant="ghost"
             fontWeight="bold"
             onClick={() => {
-              console.log("handleling logout click");
               navigate(`/logout/${currentlogged}`);
             }}
           >
