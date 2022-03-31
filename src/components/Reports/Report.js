@@ -1,17 +1,22 @@
 import React, { useContext, useState, useEffect } from "react";
 import Navbar from "../Home/Navbar/Admin/Navbar";
 import SideMenu from "../Shared/Admin/SideMenu";
-import { Container, Text, Flex, Box, Center } from "@chakra-ui/react";
+import { Container, Text, Flex, Box, Center, Button } from "@chakra-ui/react";
 import { AppContext } from "../../context/appcontext";
 import moment from "moment";
 import axios from "axios";
 import Spinner from "../Shared/Spinner";
 import ModelNames from "./ModelNames";
+import AverageAge from "./AverageAge";
+import UserLocation from "./UserLocation";
 
 const Report = () => {
   const { admin } = useContext(AppContext);
   const [modelsCount, setModelsCount] = useState(null);
   const [modelsNames, setModelsNames] = useState(null);
+  const [averageAge, setAverageAge] = useState(null);
+  const [userLocationData, setUserLocationData] = useState(null);
+  const [patientLocationData, setPatientLocationData] = useState(null);
   const [update, setUpdate] = useState(false);
   let greeting = "";
 
@@ -60,15 +65,54 @@ const Report = () => {
       });
   };
 
+  const getAverageAges = () => {
+    axios
+      .get("http://localhost:3001/reports/users_patients/averageAge")
+      .then((response) => {
+        setAverageAge(response.data.averageAges);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const getUserLocationData = () => {
+    axios
+      .get("http://localhost:3001/reports/user/locationData")
+      .then((response) => {
+        setUserLocationData(response.data.userLocationData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const getPatientLocationData = () => {
+    axios
+      .get("http://localhost:3001/reports/patient/locationData")
+      .then((response) => {
+        setPatientLocationData(response.data.patientLocationData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
     getModelsCount();
     getModelsNames();
+    getAverageAges();
+    getUserLocationData();
+    getPatientLocationData();
   }, [update]);
 
-  console.log("Models Names", modelsNames);
+  console.log("Average Ages", averageAge);
 
   let nullCheckerModelsCount = modelsCount === null;
   let nullCheckerModelsNames = modelsNames === null;
+  let nullCheckerAverageAge = averageAge === null;
+  let nullCheckerUserLocationData = userLocationData === null;
+  let nullCheckerPatientLocationData = patientLocationData === null;
 
   return (
     <>
@@ -172,6 +216,36 @@ const Report = () => {
                 </>
               )}
             </Flex>
+
+            <Flex direction="row">
+              {nullCheckerAverageAge ||
+              nullCheckerUserLocationData ||
+              nullCheckerPatientLocationData ? (
+                <Center>
+                  <Spinner />
+                </Center>
+              ) : (
+                <>
+                  <AverageAge
+                    users={averageAge.avgAgeUsers}
+                    patients={averageAge.avgAgePatients}
+                  />
+                  <UserLocation location={userLocationData} user={"Users"} />
+                  <UserLocation
+                    location={patientLocationData}
+                    user={"Patients"}
+                  />
+                </>
+              )}
+            </Flex>
+
+            <Button
+              onClick={() => {
+                setUpdate(!update);
+              }}
+            >
+              Reload{" "}
+            </Button>
           </Flex>
         </Flex>
       </Container>

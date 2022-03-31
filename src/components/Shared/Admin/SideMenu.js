@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router";
-import { Container, Box, Button } from "@chakra-ui/react";
+import { Container, Box, Heading, Text, Flex } from "@chakra-ui/react";
 
 const SideMenu = () => {
   let navigate = useNavigate();
@@ -9,25 +9,81 @@ const SideMenu = () => {
     <Container
       maxWidth="17rem"
       position="fixed"
-      bgColor="blue.700"
+      bgColor="rgb(30 41 59)"
+      // opacity="10px"
       height="100%"
-      ml={0}
+      p={0}
     >
-      <Box flexDirection="column" p={5}>
-        <Button
-          width="200px"
-          height="60px"
-          bgColor="purple.100"
-          color="blackAlpha.700"
-          _hover={{ bg: "purple", color: "white" }}
-          fontWeight="bold"
-          mb={5}
+      <Box flexDirection="column">
+        <Heading
+          fontSize="30px"
+          color="whiteAlpha.700"
+          cursor="pointer"
+          p={5}
           onClick={() => {
-            navigate("/reports");
+            // navigate("/");
           }}
         >
-          Dashboard
-        </Button>
+          Moody Tracker
+        </Heading>
+
+        <Flex direction="column" mt={10} justifyContent="flex-start">
+          <Text
+            color="whiteAlpha.700"
+            height="35px"
+            pl="20px"
+            _hover={{ color: "white" }}
+            fontWeight="bold"
+            onClick={() => {
+              navigate("/reports");
+            }}
+            cursor="pointer"
+          >
+            Dashboard
+          </Text>
+
+          <Text
+            color="whiteAlpha.700"
+            height="35px"
+            pl="20px"
+            _hover={{ color: "white" }}
+            fontWeight="bold"
+            onClick={() => {
+              // navigate("/reports");
+            }}
+            cursor="pointer"
+          >
+            Profile
+          </Text>
+
+          <Text
+            color="whiteAlpha.700"
+            height="35px"
+            pl="20px"
+            _hover={{ color: "white" }}
+            fontWeight="bold"
+            onClick={() => {
+              // navigate("/reports");
+            }}
+            cursor="pointer"
+          >
+            Settings
+          </Text>
+
+          <Text
+            color="whiteAlpha.700"
+            height="35px"
+            pl="20px"
+            _hover={{ color: "white" }}
+            fontWeight="bold"
+            onClick={() => {
+              // navigate("/reports");
+            }}
+            cursor="pointer"
+          >
+            Logout
+          </Text>
+        </Flex>
       </Box>
     </Container>
   );
