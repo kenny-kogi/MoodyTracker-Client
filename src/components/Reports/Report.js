@@ -9,6 +9,7 @@ import Spinner from "../Shared/Spinner";
 import ModelNames from "./ModelNames";
 import AverageAge from "./AverageAge";
 import UserLocation from "./UserLocation";
+import UserGender from "./UserGender";
 
 const Report = () => {
   const { admin } = useContext(AppContext);
@@ -17,6 +18,8 @@ const Report = () => {
   const [averageAge, setAverageAge] = useState(null);
   const [userLocationData, setUserLocationData] = useState(null);
   const [patientLocationData, setPatientLocationData] = useState(null);
+  const [userGenderData, setUserGenderData] = useState(null);
+  const [patientGenderData, setPatientGenderData] = useState(null);
   const [update, setUpdate] = useState(false);
   let greeting = "";
 
@@ -98,12 +101,35 @@ const Report = () => {
       });
   };
 
+  const getUserGenderData = () => {
+    axios
+      .get("http://localhost:3001/reports/users/genderData")
+      .then((response) => {
+        setUserGenderData(response.data.userGenderData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const getPatientGenderData = () => {
+    axios
+      .get("http://localhost:3001/reports/patients/genderData")
+      .then((response) => {
+        setPatientGenderData(response.data.patientGenderData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   useEffect(() => {
     getModelsCount();
     getModelsNames();
     getAverageAges();
     getUserLocationData();
     getPatientLocationData();
+    getUserGenderData();
+    getPatientGenderData();
   }, [update]);
 
   console.log("Average Ages", averageAge);
@@ -113,6 +139,8 @@ const Report = () => {
   let nullCheckerAverageAge = averageAge === null;
   let nullCheckerUserLocationData = userLocationData === null;
   let nullCheckerPatientLocationData = patientLocationData === null;
+  let nullCheckerUserGenderData = userGenderData === null;
+  let nullCheckerPatientGenderData = patientGenderData === null;
 
   return (
     <>
@@ -233,6 +261,23 @@ const Report = () => {
                   <UserLocation location={userLocationData} user={"Users"} />
                   <UserLocation
                     location={patientLocationData}
+                    user={"Patients"}
+                  />
+                </>
+              )}
+            </Flex>
+
+            <Flex direction="row" justifyContent="space-evenly">
+              {nullCheckerUserGenderData || nullCheckerPatientGenderData ? (
+                <Center>
+                  <Spinner />
+                </Center>
+              ) : (
+                <>
+                  {" "}
+                  <UserGender gender_data={userGenderData} user={"Users"} />
+                  <UserGender
+                    gender_data={patientGenderData}
                     user={"Patients"}
                   />
                 </>
