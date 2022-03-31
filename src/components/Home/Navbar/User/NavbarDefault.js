@@ -15,6 +15,7 @@ const NavbarDefault = () => {
         ml={6}
         mr={6}
         position="sticky"
+        zIndex="overlay"
       >
         <Box>
           <Image

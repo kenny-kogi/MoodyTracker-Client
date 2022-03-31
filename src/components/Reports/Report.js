@@ -10,6 +10,7 @@ import ModelNames from "./ModelNames";
 import AverageAge from "./AverageAge";
 import UserLocation from "./UserLocation";
 import UserGender from "./UserGender";
+import MentalFacility from "./MentalFacility";
 
 const Report = () => {
   const { admin } = useContext(AppContext);
@@ -20,6 +21,7 @@ const Report = () => {
   const [patientLocationData, setPatientLocationData] = useState(null);
   const [userGenderData, setUserGenderData] = useState(null);
   const [patientGenderData, setPatientGenderData] = useState(null);
+  const [mentalFacilityData, setMentalFacilityData] = useState(null);
   const [update, setUpdate] = useState(false);
   let greeting = "";
 
@@ -122,6 +124,18 @@ const Report = () => {
         console.log(error);
       });
   };
+
+  const getMentalFacilityData = () => {
+    axios
+      .get("http://localhost:3001/reports/mental_facility_data")
+      .then((response) => {
+        setMentalFacilityData(response.data.mentalFacilityData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
     getModelsCount();
     getModelsNames();
@@ -130,6 +144,7 @@ const Report = () => {
     getPatientLocationData();
     getUserGenderData();
     getPatientGenderData();
+    getMentalFacilityData();
   }, [update]);
 
   console.log("Average Ages", averageAge);
@@ -141,6 +156,7 @@ const Report = () => {
   let nullCheckerPatientLocationData = patientLocationData === null;
   let nullCheckerUserGenderData = userGenderData === null;
   let nullCheckerPatientGenderData = patientGenderData === null;
+  let nullCheckerMentalFacilityData = mentalFacilityData === null;
 
   return (
     <>
@@ -281,6 +297,17 @@ const Report = () => {
                     user={"Patients"}
                   />
                 </>
+              )}
+            </Flex>
+
+            <Flex direction="row">
+              {nullCheckerMentalFacilityData ? (
+                <Center>
+                  {" "}
+                  <Spinner />
+                </Center>
+              ) : (
+                <MentalFacility mental_facility_data={mentalFacilityData} />
               )}
             </Flex>
 
