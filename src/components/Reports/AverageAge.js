@@ -12,7 +12,7 @@ const AverageAge = ({ users, patients }) => {
       dataLabels: {
         enabled: true,
         formatter: function (val) {
-          return (val / 100) * total + "yrs";
+          return Math.round((val / 100) * total) + "yrs";
         },
       },
       plotOptions: {

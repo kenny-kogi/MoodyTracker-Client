@@ -3,7 +3,7 @@ import Chart from "react-apexcharts";
 import { Flex, Text } from "@chakra-ui/react";
 
 const UserLocation = ({ location, user }) => {
-  let series = [];
+  let series = [];  
   let labels = [];
 
   // eslint-disable-next-line array-callback-return
