@@ -1,24 +1,45 @@
 import React, { useState, useEffect, useContext } from "react";
 import Navbar from "../../Home/Navbar/Patient/Navbar";
 import SideMenu from "../../Shared/Patient/PatientDash/SideMenu";
-import { Flex, Container, Center } from "@chakra-ui/react";
+import { Flex, Container, Center, useToast } from "@chakra-ui/react";
 import axios from "axios";
 import { AppContext } from "../../../context/appcontext";
 import Spinner from "../../Shared/Spinner";
 import Messages from "./FeedbackMessages";
 import { Heading, Text } from "@chakra-ui/react";
+import { useNavigate } from "react-router";
 
 const TherapistFeedback = () => {
   const [feedbacks, setFeedbacks] = useState(null);
   const [therapist, setTherapist] = useState(null);
-  const { patient } = useContext(AppContext);
+  const { patient, isLoggedInPatient } = useContext(AppContext);
   const [errors, setErrors] = useState({});
 
+  let navigate = useNavigate();
+  let toast = useToast();
+
   useEffect(() => {
+    checkAuthorized();
     getFeedbacks();
     getTherapistDetails();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const checkAuthorized = () => {
+    if (!isLoggedInPatient) {
+      navigate("/");
+      toast({
+        title: "Not Authorized",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+        containerStyle: {
+          backgroundColor: "purple",
+        },
+      });
+    }
+  };
 
   const getFeedbacks = () => {
     axios
@@ -48,8 +69,6 @@ const TherapistFeedback = () => {
 
   let nullCheckerFeedback = feedbacks === null;
   let nullCheckerTherapist = therapist === null;
-  console.log("Feedback", feedbacks);
-  console.log(therapist);
 
   return (
     <>

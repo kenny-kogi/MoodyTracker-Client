@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../../Home/Navbar/User/Navbar";
 import { AppContext } from "../../../context/appcontext";
 import { useToast, Flex, Container, Heading, Text } from "@chakra-ui/react";
@@ -6,9 +6,10 @@ import axios from "axios";
 import SideMenu from "../../Shared/SideMenu";
 import Errors from "../../Shared/Errors";
 import Form from "../Form/User/Form";
+import { useNavigate } from "react-router";
 
 const UserProfile = () => {
-  const { user, handleLogin } = useContext(AppContext);
+  const { user, isLoggedIn, handleLogin } = useContext(AppContext);
   const [editUser, setEditUser] = useState({
     id: user.id,
     firstName: user.firstName,
@@ -24,6 +25,30 @@ const UserProfile = () => {
 
   const [errors, setErrors] = useState({});
 
+  let navigate = useNavigate();
+  let toast = useToast();
+
+  const checkAuthorized = () => {
+    if (!isLoggedIn) {
+      navigate("/");
+      toast({
+        title: "Not Authorized",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+        containerStyle: {
+          backgroundColor: "purple",
+        },
+      });
+    }
+  };
+
+  useEffect(() => {
+    checkAuthorized();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setEditUser({
@@ -38,8 +63,6 @@ const UserProfile = () => {
       age: v,
     });
   };
-
-  const toast = useToast();
 
   const handleSubmit = (event) => {
     event.preventDefault();

@@ -174,7 +174,9 @@ const MoodsAnalysis = ({ currentLogged, urlString }) => {
           >
             <Center>
               {nullCheckerAverageSleptHours ? (
-                <Spinner />
+                <Center>
+                  <Spinner />
+                </Center>
               ) : (
                 <AverageHours averagehours={averagehours} />
               )}

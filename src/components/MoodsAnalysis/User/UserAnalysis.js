@@ -1,12 +1,38 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { AppContext } from "../../../context/appcontext";
 import MoodsAnalysis from "../MoodDashboard/MoodsAnalysis";
 import Navbar from "../../Home/Navbar/User/Navbar";
-import { Flex, Container, Text, Heading } from "@chakra-ui/react";
+import { Flex, Container, Text, Heading, useToast } from "@chakra-ui/react";
 import SideMenu from "../../Shared/SideMenu";
+import { useNavigate } from "react-router";
+
 const UserAnalysis = () => {
-  const { user } = useContext(AppContext);
+  const { user, isLoggedIn } = useContext(AppContext);
   const urlString = "http://localhost:3001/users";
+
+  let toast = useToast();
+  let navigate = useNavigate();
+
+  const checkAuthorized = () => {
+    if (!isLoggedIn) {
+      navigate("/");
+      toast({
+        title: "Not Authorized",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+        containerStyle: {
+          backgroundColor: "purple",
+        },
+      });
+    }
+  };
+
+  useEffect(() => {
+    checkAuthorized();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>

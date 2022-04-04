@@ -24,9 +24,10 @@ import { AppContext } from "../../../context/appcontext";
 import axios from "axios";
 import { useToast } from "@chakra-ui/react";
 import Errors from "../../Shared/Errors";
+import { useNavigate } from "react-router";
 
 const MedicationLog = () => {
-  const { patient } = useContext(AppContext);
+  const { patient, isLoggedInPatient } = useContext(AppContext);
   const [medication, setMedication] = useState({
     drug_name: "",
     prescription: "",
@@ -36,6 +37,23 @@ const MedicationLog = () => {
   const [update, setUpdate] = useState(false);
   const [errors, setErrors] = useState({});
   const toast = useToast();
+  let navigate = useNavigate();
+
+  const checkAuthorized = () => {
+    if (!isLoggedInPatient) {
+      navigate("/");
+      toast({
+        title: "Not Authorized",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+        containerStyle: {
+          backgroundColor: "purple",
+        },
+      });
+    }
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -90,7 +108,9 @@ const MedicationLog = () => {
   };
 
   useEffect(() => {
+    checkAuthorized();
     setErrors({});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [update]);
   const isEmpty = Object.keys(errors).length === 0;
   console.log("Medication Errors", errors);

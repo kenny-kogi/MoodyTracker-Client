@@ -24,7 +24,7 @@ import { AppContext } from "../../../context/appcontext";
 // import Activity from "./moods/Activity";
 
 const LogMood = () => {
-  const { user } = useContext(AppContext);
+  const { user, isLoggedIn } = useContext(AppContext);
   const [errors, setErrors] = useState({
     errors: {},
   });
@@ -45,6 +45,23 @@ const LogMood = () => {
 
   let navigate = useNavigate();
   let toast = useToast();
+
+  const checkAuthorized = () => {
+    if (!isLoggedIn) {
+      navigate("/");
+      toast({
+        title: "Not Authorized",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+        containerStyle: {
+          backgroundColor: "purple",
+        },
+      });
+    }
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -83,6 +100,7 @@ const LogMood = () => {
   };
 
   useEffect(() => {
+    checkAuthorized();
     if (checked) {
       setMood({
         ...mood,
@@ -96,6 +114,7 @@ const LogMood = () => {
       });
       console.log(mood);
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checked]);
 

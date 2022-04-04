@@ -24,7 +24,7 @@ import { AppContext } from "../../../context/appcontext";
 // import Activity from "./moods/Activity";
 
 const LogMood = () => {
-  const { patient } = useContext(AppContext);
+  const { patient, isLoggedInPatient } = useContext(AppContext);
   const [errors, setErrors] = useState({
     errors: {},
   });
@@ -47,10 +47,25 @@ const LogMood = () => {
 
   let navigate = useNavigate();
   let toast = useToast();
+  const checkAuthorized = () => {
+    if (!isLoggedInPatient) {
+      navigate("/");
+      toast({
+        title: "Not Authorized",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+        containerStyle: {
+          backgroundColor: "purple",
+        },
+      });
+    }
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log(mood);
     axios
       .post("http://localhost:3001/moods", mood, { withCredentials: true })
       .then((response) => {
@@ -84,6 +99,7 @@ const LogMood = () => {
   };
 
   useEffect(() => {
+    checkAuthorized();
     if (checked) {
       setMood({
         ...mood,

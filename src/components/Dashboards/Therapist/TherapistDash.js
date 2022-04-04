@@ -12,6 +12,7 @@ import {
   Heading,
   Badge,
   IconButton,
+  useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { AppContext } from "../../../context/appcontext";
@@ -22,7 +23,7 @@ import { MdDelete } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 
 const TherapistDash = () => {
-  const { therapist } = useContext(AppContext);
+  const { therapist, isLoggedInTherapist } = useContext(AppContext);
   const [patients, setPatients] = useState(null);
   const [update, setUpdate] = useState(false);
   const getAllPatients = () => {
@@ -37,6 +38,23 @@ const TherapistDash = () => {
   };
 
   let navigate = useNavigate();
+  let toast = useToast();
+
+  const checkAuthorized = () => {
+    if (!isLoggedInTherapist) {
+      navigate("/");
+      toast({
+        title: "Not Authorized",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+        containerStyle: {
+          backgroundColor: "purple",
+        },
+      });
+    }
+  };
 
   const removePatientFromList = (patient_id) => {
     axios
@@ -52,6 +70,7 @@ const TherapistDash = () => {
   };
 
   useEffect(() => {
+    checkAuthorized();
     getAllPatients();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [update]);
