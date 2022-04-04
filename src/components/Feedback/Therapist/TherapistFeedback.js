@@ -8,12 +8,13 @@ import { AppContext } from "../../../context/appcontext";
 import FeedbackForm from "./Form/FeedbackForm";
 import { useToast } from "@chakra-ui/react";
 import Errors from "../../Shared/Errors";
+import { useNavigate } from "react-router";
 
 const Feedback = () => {
   const [patient, setPatient] = useState(null);
   // const [update, setUpdate] = useState(false);
   const { id } = useParams();
-  const { therapist } = useContext(AppContext);
+  const { therapist, isLoggedInTherapist } = useContext(AppContext);
   const [feedback, setFeedback] = useState({
     title: "",
     body: "",
@@ -21,6 +22,24 @@ const Feedback = () => {
     therapist_id: therapist.id,
   });
   const [errors, setErrors] = useState({});
+  let toast = useToast();
+  let navigate = useNavigate();
+
+  const checkAuthorized = () => {
+    if (!isLoggedInTherapist) {
+      navigate("/");
+      toast({
+        title: "Not Authorized",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+        containerStyle: {
+          backgroundColor: "purple",
+        },
+      });
+    }
+  };
 
   const getPatientDetails = () => {
     axios
@@ -34,6 +53,7 @@ const Feedback = () => {
   };
 
   useEffect(() => {
+    checkAuthorized();
     getPatientDetails();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -45,7 +65,7 @@ const Feedback = () => {
       [name]: value,
     });
   };
-  const toast = useToast();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     axios

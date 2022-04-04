@@ -5,9 +5,8 @@ const Messages = ({ title, body, therapistName, created_at }) => {
   return (
     <>
       <Flex
-        margin="auto"
-        width={800}
-        height={250}
+        width={1200}
+        height={130}
         mb={10}
         border="1px solid purple.100"
         borderRadius={8}
@@ -16,28 +15,28 @@ const Messages = ({ title, body, therapistName, created_at }) => {
         direction="column"
       >
         <Flex direction="row" justifyContent="center" gap={5} m="10px">
-          <Badge backgroundColor="pink.200" size="200px">
+          <Badge backgroundColor="purple.200" size="200px">
             From: {therapistName}
           </Badge>
           <Badge>Time: {created_at}</Badge>
         </Flex>
 
-        <Flex direction="column" m="10px">
+        <Flex direction="column" ml={5}>
           <Flex direction="row">
-            <Tag height="30px" width="60px" mr="20px">
+            <Tag bgColor="purple.100" height="30px" width="100px" mr="20px">
               Title:
             </Tag>
             <Text> {title}</Text>
           </Flex>
 
-          <Flex mt="20px" direction="row">
-            <Tag height="30px" width="60px" mr="20px">
+          <Flex mt="5px" direction="row">
+            <Tag bgColor="purple.100" height="30px" width="100px" mr="20px">
               Body:
             </Tag>
             <Box>{body}</Box>
           </Flex>
           {/* <Tag height="{}40px">
-     
+
             <Text fontSize="15px" fontWeight="bold" mr="20px" as="span">
               Title:{" "}
             </Text>

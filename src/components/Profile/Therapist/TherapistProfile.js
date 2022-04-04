@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { AppContext } from "../../../context/appcontext";
 import axios from "axios";
 import Navbar from "../../Home/Navbar/Therapist/Navbar";
@@ -7,9 +7,11 @@ import { Flex, Container, Heading, Text } from "@chakra-ui/react";
 import Errors from "../../Shared/Errors";
 import Form from "../Form/Therapist/Form";
 import { useToast } from "@chakra-ui/react";
+import { useNavigate } from "react-router";
 
 const TherapistProfile = () => {
-  const { therapist, handleLoginTherapist } = useContext(AppContext);
+  const { therapist, isLoggedInTherapist, handleLoginTherapist } =
+    useContext(AppContext);
   const [editTherapist, setEditTherapist] = useState({
     id: therapist.id,
     firstName: therapist.firstName,
@@ -20,8 +22,26 @@ const TherapistProfile = () => {
     gender: therapist.gender,
     specialization: therapist.specialization,
   });
-
   const [errors, setErrors] = useState({});
+
+  let navigate = useNavigate();
+  let toast = useToast();
+
+  const checkAuthorized = () => {
+    if (!isLoggedInTherapist) {
+      navigate("/");
+      toast({
+        title: "Not Authorized",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+        containerStyle: {
+          backgroundColor: "purple",
+        },
+      });
+    }
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -30,7 +50,6 @@ const TherapistProfile = () => {
       [name]: value,
     });
   };
-  const toast = useToast();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -77,6 +96,11 @@ const TherapistProfile = () => {
         console.log(errors);
       });
   };
+
+  useEffect(() => {
+    checkAuthorized();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const isEmpty = Object.keys(errors).length === 0;
 

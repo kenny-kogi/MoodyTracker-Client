@@ -1,7 +1,15 @@
 import React, { useContext, useState, useEffect } from "react";
 import Navbar from "../Home/Navbar/Admin/Navbar";
 import SideMenu from "../Shared/Admin/SideMenu";
-import { Container, Text, Flex, Box, Center, Button } from "@chakra-ui/react";
+import {
+  Container,
+  Text,
+  Flex,
+  Box,
+  Center,
+  Button,
+  useToast,
+} from "@chakra-ui/react";
 import { AppContext } from "../../context/appcontext";
 import moment from "moment";
 import axios from "axios";
@@ -11,9 +19,10 @@ import AverageAge from "./AverageAge";
 import UserLocation from "./UserLocation";
 import UserGender from "./UserGender";
 import MentalFacility from "./MentalFacility";
+import { useNavigate } from "react-router";
 
 const Report = () => {
-  const { admin } = useContext(AppContext);
+  const { admin, isLoggedInAdmin } = useContext(AppContext);
   const [modelsCount, setModelsCount] = useState(null);
   const [modelsNames, setModelsNames] = useState(null);
   const [averageAge, setAverageAge] = useState(null);
@@ -23,6 +32,8 @@ const Report = () => {
   const [patientGenderData, setPatientGenderData] = useState(null);
   const [mentalFacilityData, setMentalFacilityData] = useState(null);
   const [update, setUpdate] = useState(false);
+  let navigate = useNavigate();
+  let toast = useToast();
   let greeting = "";
 
   if (moment().isBetween(3, 12, "HH")) {
@@ -136,7 +147,24 @@ const Report = () => {
       });
   };
 
+  const checkAuthorized = () => {
+    if (!isLoggedInAdmin) {
+      navigate("/");
+      toast({
+        title: "Not Authorized",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+        containerStyle: {
+          backgroundColor: "purple",
+        },
+      });
+    }
+  };
+
   useEffect(() => {
+    checkAuthorized();
     getModelsCount();
     getModelsNames();
     getAverageAges();
@@ -145,6 +173,7 @@ const Report = () => {
     getUserGenderData();
     getPatientGenderData();
     getMentalFacilityData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [update]);
 
   console.log("Average Ages", averageAge);

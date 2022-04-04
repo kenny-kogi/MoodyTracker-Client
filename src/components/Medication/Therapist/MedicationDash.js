@@ -1,18 +1,47 @@
 import React, { useEffect, useState, useContext } from "react";
 import Navbar from "../../Home/Navbar/Therapist/Navbar";
 import SideMenu from "../../Shared/Therapist/PatientAnalysis/SideMenu";
-import { Flex, Container, Center, Heading, Text, Tag } from "@chakra-ui/react";
+import {
+  Flex,
+  Container,
+  Center,
+  Heading,
+  Text,
+  Tag,
+  useToast,
+} from "@chakra-ui/react";
 import { useParams } from "react-router";
 import axios from "axios";
 import Spinner from "../../Shared/Spinner";
 import Medication from "./Medication";
 import { AppContext } from "../../../context/appcontext";
+import { useNavigate } from "react-router";
 
 const MedicationDash = () => {
-  const { therapist } = useContext(AppContext);
+  const { therapist, isLoggedInTherapist } = useContext(AppContext);
   const { id } = useParams();
   const [errors, setErrors] = useState({});
   const [medications, setMedications] = useState(null);
+
+  let navigate = useNavigate();
+  let toast = useToast();
+
+  const checkAuthorized = () => {
+    if (!isLoggedInTherapist) {
+      navigate("/");
+      toast({
+        title: "Not Authorized",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+        containerStyle: {
+          backgroundColor: "purple",
+        },
+      });
+    }
+  };
+
   const getPatientMedications = () => {
     axios
       .get(`http://localhost:3001/patient/medication/${id}`)
@@ -27,6 +56,7 @@ const MedicationDash = () => {
   };
 
   useEffect(() => {
+    checkAuthorized();
     getPatientMedications();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

@@ -261,6 +261,8 @@ const App = () => {
               path="/therapist/patient/moods/:id"
               element={<TherapistLog />}
             />
+
+            <Route path="*" element={<Home />} />
           </Routes>
         </BrowserRouter>
       </AppContext.Provider>

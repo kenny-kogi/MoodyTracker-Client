@@ -7,10 +7,13 @@ import axios from "axios";
 import Form from "../Form/Patient/Form";
 import Errors from "../../Shared/Errors";
 import { useToast } from "@chakra-ui/react";
+import { useNavigate } from "react-router";
 
 const PatientProfile = () => {
   let toast = useToast();
-  const { patient, handleLoginPatient } = useContext(AppContext);
+  let navigate = useNavigate();
+  const { patient, isLoggedInPatient, handleLoginPatient } =
+    useContext(AppContext);
   const [therapist, setTherapist] = useState(null);
   const [editpatient, setEditPatient] = useState({
     id: patient.id,
@@ -31,6 +34,22 @@ const PatientProfile = () => {
   });
 
   const [errors, setErrors] = useState({});
+
+  const checkAuthorized = () => {
+    if (!isLoggedInPatient) {
+      navigate("/");
+      toast({
+        title: "Not Authorized",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+        containerStyle: {
+          backgroundColor: "purple",
+        },
+      });
+    }
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -112,7 +131,9 @@ const PatientProfile = () => {
   };
 
   useEffect(() => {
+    checkAuthorized();
     getTherapistData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const isEmpty = Object.keys(errors).length === 0;
