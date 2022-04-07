@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Box, Center, Button, Text, Heading } from "@chakra-ui/react";
+import { Flex, Box, Center, Button, Heading } from "@chakra-ui/react";
 import HoursChart from "../Charts/HoursChart";
 import Weather from "../Charts/Weather";
 import ColumnChart from "../Charts/ColumnChart";
