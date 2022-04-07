@@ -1,11 +1,11 @@
 import React from "react";
-import { Box } from "@chakra-ui/react";
+import { Box, Text, Textarea } from "@chakra-ui/react";
 
-const Activity = () => {
+const Activity = ({ value, handleActivityChange }) => {
   return (
     <Box
-      width="500px"
-      height="150px"
+      width="300px"
+      height="275px"
       alignItems="center"
       justifyContent="center"
       p={15}
@@ -14,7 +14,16 @@ const Activity = () => {
       boxShadow="xl"
       mb={20}
       borderWidth={2}
-    ></Box>
+    >
+      <Text mb="8px">Current Activity:</Text>
+      <Textarea
+        value={value}
+        onChange={handleActivityChange}
+        placeholder="Add an activity"
+        size="sm"
+        height="150px"
+      />
+    </Box>
   );
 };
 

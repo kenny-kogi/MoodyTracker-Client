@@ -1,9 +1,6 @@
 import React from "react";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Pie } from "react-chartjs-2";
-import { Flex } from "@chakra-ui/react";
-
-ChartJS.register(ArcElement, Tooltip, Legend);
+import { Flex, Tag } from "@chakra-ui/react";
+import Chart from "react-apexcharts";
 
 const ColumnChart = ({
   anxiety_level,
@@ -11,41 +8,73 @@ const ColumnChart = ({
   irritability_level,
   elevated_level,
 }) => {
-  const data = {
-    labels: ["Anxiety", "Depressed", "Irritability", "Elevated"],
-    datasets: [
-      {
-        label: "# of Votes",
-        data: [
-          anxiety_level,
-          depressed_level,
-          irritability_level,
-          elevated_level,
-        ],
-        backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(255, 206, 86, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-          "rgba(153, 102, 255, 0.2)",
-          "rgba(255, 159, 64, 0.2)",
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
-        ],
-        borderWidth: 1,
-      },
+  const moodRange = (v) => {
+    let mood;
+
+    if (v === 1) {
+      mood = "Mild";
+    } else if (v === 2) {
+      mood = "Moderate";
+    } else if (v === 3) {
+      mood = "Severe";
+    }
+
+    return mood;
+  };
+
+  let data = {
+    series: [
+      (anxiety_level / 3) * 100,
+      (depressed_level / 3) * 100,
+      (irritability_level / 3) * 100,
+      (elevated_level / 3) * 100,
     ],
+
+    options: {
+      dataLabels: {
+        enabled: true,
+        formatter: function (val) {
+          return val;
+        },
+      },
+      plotOptions: {
+        radialBar: {
+          dataLabels: {
+            name: {
+              show: true,
+            },
+            value: {
+              show: true,
+              fontSize: "14px",
+              formatter: function (val) {
+                return moodRange(Math.ceil((val / 100) * 3));
+              },
+            },
+            total: {
+              show: true,
+              label: "Moods",
+              formatter: function (val) {
+                return;
+              },
+            },
+          },
+        },
+      },
+      labels: ["Anxiety", "Depression", "Irritability", "Elevated"],
+    },
   };
 
   return (
-    <Flex width={350} height={300}>
-      <Pie data={data} />
+    <Flex width={200} height={200} mt={10} direction="column">
+      <Tag textAlign="center" alignContent="center" bgColor="pink.100">
+        Mood Records
+      </Tag>
+      <Chart
+        options={data.options}
+        series={data.series}
+        type="radialBar"
+        height={250}
+      />
     </Flex>
   );
 };

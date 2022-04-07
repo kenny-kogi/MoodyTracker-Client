@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState, useContext } from "react";
 import Navbar from "../../../components/Home/Navbar/Patient/Navbar";
 import axios from "axios";
@@ -25,9 +26,7 @@ import { AppContext } from "../../../context/appcontext";
 
 const LogMood = () => {
   const { patient, isLoggedInPatient } = useContext(AppContext);
-  const [errors, setErrors] = useState({
-    errors: {},
-  });
+  const [errors, setErrors] = useState({});
   const [mood, setMood] = useState({
     hours_slept: null,
     depressed: null,
@@ -42,8 +41,6 @@ const LogMood = () => {
   });
   const [checked, setChecked] = useState(false);
   const [circularValue, setCircularValue] = useState(0);
-
-  console.log(patient);
 
   let navigate = useNavigate();
   let toast = useToast();
@@ -83,7 +80,7 @@ const LogMood = () => {
           });
         } else {
           toast({
-            title: "Error !!",
+            title: "You have Not Logged Any Mood",
             status: "error",
             duration: 3000,
             isClosable: true,
@@ -92,7 +89,7 @@ const LogMood = () => {
               backgroundColor: "purple",
             },
           });
-          setErrors({ ...errors, errors: response.data.errors });
+          setErrors({ errors: response.data.errors });
         }
       })
       .catch((error) => console.log(error));

@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Text, Flex } from "@chakra-ui/react";
+import { Box, Tag, Flex } from "@chakra-ui/react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
@@ -18,19 +18,16 @@ const HoursChart = ({ hours_slept }) => {
 
   return (
     <Flex
-      width={350}
-      height={300}
-      m={10}
-      // border="1px solid purple.100"
-      // borderRadius={8}
-      // boxShadow="xl"
-      // borderWidth={2}
+      width={150}
+      height={200}
+      mt={10}
       justifyContent="center"
+      alignContent="center"
     >
       <Box width={200} height={200}>
-        <Text mb={10} fontSize="20px" textAlign="center">
+        <Tag bgColor="pink.100" mb={9}>
           Hours Slept
-        </Text>
+        </Tag>
         <CircularProgressbar
           value={hours_slept}
           text={`${hours_slept} Hrs Slept`}
