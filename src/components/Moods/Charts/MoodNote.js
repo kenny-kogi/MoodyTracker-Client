@@ -8,16 +8,6 @@ const MoodNote = ({ moodnote }) => {
       <Tag textAlign="center" alignContent="center" bgColor="pink.100">
         Mood Notes
       </Tag>
-      {/* <Badge
-        textAlign="center"
-        size="sm"
-        height="20px"
-        mt={5}
-        bgColor="purple.100"
-      >
-        {moodnote}
-      </Badge> */}
-
       {moodnote === null ? "" : moodnote}
     </Flex>
   );
