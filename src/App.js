@@ -66,11 +66,9 @@ const App = () => {
   const [patient, setPatient] = useState({});
 
   const handleLoginPatient = (data) => {
-    console.log("logging data", data);
     setIsLoggedInPatient(true);
     setPatient(data.patient);
   };
-  console.log("patient in loggin page", patient);
 
   const handleLogoutPatient = () => {
     setIsLoggedInPatient(false);
@@ -98,7 +96,6 @@ const App = () => {
   const [therapist, setTherapist] = useState({});
 
   const handleLoginTherapist = (data) => {
-    console.log(data);
     setIsLoggedInTherapist(true);
     setTherapist(data.therapist);
   };
@@ -129,7 +126,6 @@ const App = () => {
   const [admin, setAdmin] = useState({});
 
   const handleLoginAdmin = (data) => {
-    console.log(data);
     setIsLoggedInAdmin(true);
     setAdmin(data.admin);
   };

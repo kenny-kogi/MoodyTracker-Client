@@ -25,9 +25,8 @@ import { AppContext } from "../../../context/appcontext";
 
 const LogMood = () => {
   const { user, isLoggedIn } = useContext(AppContext);
-  const [errors, setErrors] = useState({
-    errors: {},
-  });
+  // eslint-disable-next-line no-unused-vars
+  const [errors, setErrors] = useState({});
   const [mood, setMood] = useState({
     hours_slept: null,
     depressed: null,
@@ -84,7 +83,7 @@ const LogMood = () => {
           });
         } else {
           toast({
-            title: "Error !!",
+            title: "You have Not Logged Any Mood",
             status: "error",
             duration: 3000,
             isClosable: true,
@@ -93,7 +92,7 @@ const LogMood = () => {
               backgroundColor: "purple",
             },
           });
-          setErrors({ ...errors, errors: response.data.errors });
+          setErrors({ errors: response.data.errors });
         }
       })
       .catch((error) => console.log(error));
