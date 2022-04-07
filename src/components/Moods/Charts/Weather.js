@@ -1,10 +1,10 @@
 import React from "react";
-import { Text, Image } from "@chakra-ui/react";
+import { Image } from "@chakra-ui/react";
 import Rainy from "../../../assets/weather/rainy.png";
 import Sunny from "../../../assets/weather/rainy.png";
 import Windy from "../../../assets/weather/windy.png";
 import Cloudy from "../../../assets/weather/cloudy.jpeg";
-import { Flex } from "@chakra-ui/react";
+import { Flex, Tag } from "@chakra-ui/react";
 
 const Weather = ({ weather }) => {
   let Weather;
@@ -20,10 +20,10 @@ const Weather = ({ weather }) => {
   }
   //test
   return (
-    <Flex width={350} height={300} m={10} flexDirection="column">
-      <Text fontSize="20px" textAlign="center">
+    <Flex width={300} height={300} mt={10} flexDirection="column">
+      <Tag textAlign="center" alignContent="center" bgColor="pink.100">
         Weather
-      </Text>
+      </Tag>
       <Image
         src={Weather}
         alt="weather svg"

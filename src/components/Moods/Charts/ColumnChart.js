@@ -44,7 +44,7 @@ const ColumnChart = ({
   };
 
   return (
-    <Flex width={350} height={300}>
+    <Flex width={220} height={300} mt={10}>
       <Pie data={data} />
     </Flex>
   );

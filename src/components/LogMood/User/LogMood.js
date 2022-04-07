@@ -16,8 +16,9 @@ import Elevated from "../moods/Elevated";
 import HoursSlept from "../moods/HoursSlept";
 import Anxiety from "../moods/Anxiety";
 import Depressed from "../moods/Depressed";
-import Psychotic from "../moods/Psychotic";
+// import Psychotic from "../moods/Psychotic";
 import Weather from "../moods/Weather";
+import Activity from "../moods/Activity";
 import MoodNote from "../moods/MoodNote";
 import SideMenu from "../../Shared/SideMenu";
 import { AppContext } from "../../../context/appcontext";
@@ -39,7 +40,7 @@ const LogMood = () => {
     mood_note: null,
     activity: null,
   });
-  const [checked, setChecked] = useState(false);
+  // const [checked, setChecked] = useState(false);
   const [circularValue, setCircularValue] = useState(0);
 
   let navigate = useNavigate();
@@ -100,22 +101,22 @@ const LogMood = () => {
 
   useEffect(() => {
     checkAuthorized();
-    if (checked) {
-      setMood({
-        ...mood,
-        psychotic_symptoms: true,
-      });
-      console.log(mood);
-    } else {
-      setMood({
-        ...mood,
-        psychotic_symptoms: false,
-      });
-      console.log(mood);
-    }
+    // if (checked) {
+    //   setMood({
+    //     ...mood,
+    //     psychotic_symptoms: true,
+    //   });
+    //   console.log(mood);
+    // } else {
+    //   setMood({
+    //     ...mood,
+    //     psychotic_symptoms: false,
+    //   });
+    //   console.log(mood);
+    // }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [checked]);
+  }, []);
 
   const handleChange = (v) => {
     setMood({
@@ -168,6 +169,12 @@ const LogMood = () => {
     });
   };
 
+  const handleActivityChange = (e) => {
+    setMood({
+      ...mood,
+      activity: e.target.value,
+    });
+  };
   return (
     <>
       <Navbar />
@@ -211,12 +218,16 @@ const LogMood = () => {
                 <Elevated handleEleveted={handleEleveted} />
                 <Anxiety handleAnxiety={handleAnxiety} />
                 <Depressed handleDepressed={handleDepressed} />
-                <Psychotic checked={checked} setChecked={setChecked} />
+                {/* <Psychotic checked={checked} setChecked={setChecked} /> */}
                 <Weather weather={mood.weather} handleWeather={handleWeather} />
-                {/* <Activity /> */}
+                <Activity
+                  value={mood.activity}
+                  handleActivityChange={handleActivityChange}
+                />
               </Box>
               <Button
                 type="submit"
+                mb={5}
                 mt="35"
                 bg="pink.400"
                 color="white"
