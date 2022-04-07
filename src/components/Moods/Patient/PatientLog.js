@@ -1,14 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../../Home/Navbar/Patient/Navbar";
-import { Flex, Container } from "@chakra-ui/react";
+import { Flex, Container, Heading, Text } from "@chakra-ui/react";
 import SideMenu from "../../Shared/Patient/SideMenu";
 import { AppContext } from "../../../context/appcontext";
 import axios from "axios";
 import Moods from "../DailyLog/Moods";
+import { useToast } from "@chakra-ui/react";
 
-const UserLog = () => {
+const PatientLog = () => {
   const [moods, setMoods] = useState({});
   const { patient } = useContext(AppContext);
+  const [update, setUpdate] = useState(false);
   useEffect(() => {
     axios
       .get(`http://localhost:3001/moods/patient/${patient.id}`)
@@ -19,7 +21,30 @@ const UserLog = () => {
         console.log(error);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [update]);
+
+  let toast = useToast();
+
+  const delMood = (id) => {
+    axios
+      .delete(`http://localhost:3001/moods/${id}`)
+      .then((response) => {
+        setUpdate(!update);
+        toast({
+          title: "Mood Deleted",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+          position: "top",
+          containerStyle: {
+            backgroundColor: "purple",
+          },
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <>
@@ -27,10 +52,24 @@ const UserLog = () => {
       <Flex flexDirection="row" pt="100px">
         <SideMenu />
         <Container maxWidth="7xl" pt={5} ml={300}>
-          <Moods moods={moods} />
+          <Heading
+            as="h1"
+            size="sm"
+            letterSpacing="wide"
+            fontWeight="bold"
+            color="purple"
+            fontSize="30px"
+            mb="30"
+          >
+            <Text as="span" color="pink.400" fontSize="40px">
+              Welcome {patient.username},{" "}
+            </Text>
+            Here is your Daily Mood Logs
+          </Heading>
+          <Moods moods={moods} delMood={delMood} />
         </Container>
       </Flex>
     </>
   );
 };
-export default UserLog;
+export default PatientLog;

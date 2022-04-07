@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../../Home/Navbar/User/Navbar";
-import { Flex, Container, useToast } from "@chakra-ui/react";
+import { Flex, Container, useToast, Heading, Text } from "@chakra-ui/react";
 import SideMenu from "../../Shared/SideMenu";
 import { AppContext } from "../../../context/appcontext";
 import axios from "axios";
@@ -71,6 +71,20 @@ const UserLog = () => {
       <Flex flexDirection="row" pt="100px">
         <SideMenu />
         <Container maxWidth="7xl" pt={5} ml={300}>
+          <Heading
+            as="h1"
+            size="sm"
+            letterSpacing="wide"
+            fontWeight="bold"
+            color="purple"
+            fontSize="30px"
+            mb="30"
+          >
+            <Text as="span" color="pink.400" fontSize="40px">
+              Welcome {user.username},{" "}
+            </Text>
+            Here is your Daily Mood Logs
+          </Heading>
           <Moods moods={moods} delMood={delMood} />
         </Container>
       </Flex>

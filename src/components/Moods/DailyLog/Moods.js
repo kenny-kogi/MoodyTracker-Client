@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Box, Center, Button, Text } from "@chakra-ui/react";
+import { Flex, Box, Center, Button, Text, Heading } from "@chakra-ui/react";
 import HoursChart from "../Charts/HoursChart";
 import Weather from "../Charts/Weather";
 import ColumnChart from "../Charts/ColumnChart";
@@ -23,18 +23,19 @@ const Moods = ({ moods, delMood }) => {
             <>
               <Box
                 textAlign="center"
-                bgColor="purple.100"
                 height={10}
                 mb={5}
                 display="flex"
                 direction="row"
                 justifyContent="center"
               >
-                <Text>Logged on: {mood.created_at}</Text>
+                <Heading color="purple" fontSize="20px">
+                  Logged on: {mood.created_at}
+                </Heading>
                 <Button
                   bgColor="red.400"
                   color="white"
-                  right={-500}
+                  right={-450}
                   _hover={{ bg: "red.600" }}
                   onClick={() => {
                     delMood(mood.id);
