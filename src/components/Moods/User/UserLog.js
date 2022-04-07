@@ -10,6 +10,7 @@ import { useNavigate } from "react-router";
 const UserLog = () => {
   const [moods, setMoods] = useState({});
   const { user, isLoggedIn } = useContext(AppContext);
+  const [update, setUpdate] = useState(false);
 
   let navigate = useNavigate();
   let toast = useToast();
@@ -41,7 +42,28 @@ const UserLog = () => {
         console.log(error);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [update]);
+
+  const delMood = (id) => {
+    axios
+      .delete(`http://localhost:3001/moods/${id}`)
+      .then((response) => {
+        setUpdate(!update);
+        toast({
+          title: "Mood Deleted",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+          position: "top",
+          containerStyle: {
+            backgroundColor: "purple",
+          },
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <>
@@ -49,7 +71,7 @@ const UserLog = () => {
       <Flex flexDirection="row" pt="100px">
         <SideMenu />
         <Container maxWidth="7xl" pt={5} ml={300}>
-          <Moods moods={moods} />
+          <Moods moods={moods} delMood={delMood} />
         </Container>
       </Flex>
     </>
