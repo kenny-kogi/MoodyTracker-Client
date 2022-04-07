@@ -28,7 +28,20 @@ const AverageChart = ({ hours_data }) => {
       },
       title: {
         display: true,
-        text: "Hours Slept Chart",
+        text: "Hours Slept Analysis",
+        color: "purple",
+      },
+    },
+    scales: {
+      x: {
+        grid: {
+          display: false,
+        },
+      },
+      y: {
+        grid: {
+          display: true,
+        },
       },
     },
   };

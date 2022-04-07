@@ -1,41 +1,86 @@
 import React from "react";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Doughnut } from "react-chartjs-2";
 import { Flex } from "@chakra-ui/react";
-
-ChartJS.register(ArcElement, Tooltip, Legend);
+import Chart from "react-apexcharts";
 
 const DoughnutChart = ({ averageMoodsData }) => {
-  const data = {
-    labels: Object.keys(averageMoodsData),
-    datasets: [
-      {
-        label: "Doughnut Chart of Average Moods Level",
-        data: Object.values(averageMoodsData),
-        backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(255, 206, 86, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-          "rgba(153, 102, 255, 0.2)",
-          "rgba(255, 159, 64, 0.2)",
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
-        ],
-        borderWidth: 1,
+  const moodAverageString = (v) => {
+    let mood;
+
+    if (v === 1) {
+      mood = "Mild";
+    } else if (v === 2) {
+      mood = "Moderate";
+    } else if (v === 3) {
+      mood = "Severe";
+    }
+
+    return mood;
+  };
+
+  let data = {
+    series: Object.values(averageMoodsData),
+    options: {
+      labels: Object.keys(averageMoodsData),
+      chart: {
+        width: 580,
+        type: "donut",
       },
-    ],
+      plotOptions: {
+        pie: {
+          startAngle: -90,
+          endAngle: 270,
+        },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      fill: {
+        type: "gradient",
+      },
+      legend: {
+        formatter: function (val, opts) {
+          return (
+            val +
+            " - " +
+            moodAverageString(opts.w.globals.series[opts.seriesIndex])
+          );
+        },
+        position: "bottom",
+      },
+      title: {
+        text: "Average Mood Levels",
+        align: "center",
+        style: {
+          fontSize: "14px",
+          fontWeight: "bold",
+          fontFamily: undefined,
+          color: "purple",
+        },
+      },
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200,
+            },
+            legend: {
+              position: "bottom",
+            },
+          },
+        },
+      ],
+    },
   };
 
   return (
-    <Flex width={400} height={500}>
-      <Doughnut data={data} />
+    <Flex width={300} height={500}>
+      <Chart
+        options={data.options}
+        series={data.series}
+        type="donut"
+        height={450}
+      />
     </Flex>
   );
 };
