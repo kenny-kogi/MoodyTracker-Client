@@ -1,12 +1,8 @@
 import React from "react";
-
 import { Flex, Box, Center } from "@chakra-ui/react";
-
 import HoursChart from "../Charts/HoursChart";
 import Weather from "../Charts/Weather";
 import ColumnChart from "../Charts/ColumnChart";
-import moment from "moment";
-
 import Spinner from "../../Shared/Spinner";
 
 const Moods = ({ moods }) => {
@@ -23,7 +19,7 @@ const Moods = ({ moods }) => {
           return (
             <>
               <Box textAlign="center" bgColor="purple.100" height={10} mb={5}>
-                Created on: {moment(mood.created_at).utc().format("LLL", "en")}
+                Logged on: {mood.created_at}
               </Box>
               <Flex>
                 <HoursChart hours_slept={mood.hours_slept} />
