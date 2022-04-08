@@ -59,10 +59,35 @@ const StackedBar = ({ moodData }) => {
       },
     ],
   };
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Average Moods Chart Analysis",
+        color: "purple",
+      },
+    },
+    scales: {
+      x: {
+        grid: {
+          display: false,
+        },
+      },
+      y: {
+        grid: {
+          display: true,
+        },
+      },
+    },
+  };
 
   return (
     <Flex width={700} height={500}>
-      <Chart type="bar" data={data} />
+      <Chart type="bar" data={data} options={options} />
     </Flex>
   );
 };

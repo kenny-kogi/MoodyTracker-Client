@@ -15,7 +15,6 @@ const HoursChart = ({ hours_slept }) => {
   } else {
     pathColor = "green";
   }
-
   return (
     <Flex
       width={150}

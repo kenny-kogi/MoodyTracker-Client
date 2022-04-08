@@ -3,7 +3,6 @@ import { Flex, Box, Center, Button, Heading } from "@chakra-ui/react";
 import HoursChart from "../Charts/HoursChart";
 import Weather from "../Charts/Weather";
 import ColumnChart from "../Charts/ColumnChart";
-import Spinner from "../../Shared/Spinner";
 import Activity from "../Charts/Activity";
 import MoodNote from "../Charts/MoodNote";
 
@@ -15,7 +14,11 @@ const Moods = ({ moods, delMood }) => {
     <>
       {isEmpty ? (
         <Center>
-          <Spinner />
+          <Flex direction="column">
+            <Heading fontSize="20px" color="purple">
+              Currently, No Logged Moods
+            </Heading>
+          </Flex>
         </Center>
       ) : (
         moods.map((mood) => {

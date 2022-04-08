@@ -1,43 +1,90 @@
 import React from "react";
-import {
-  Chart as ChartJS,
-  RadialLinearScale,
-  PointElement,
-  LineElement,
-  Filler,
-  Tooltip,
-  Legend,
-} from "chart.js";
-import { Radar } from "react-chartjs-2";
 import { Flex } from "@chakra-ui/react";
-
-ChartJS.register(
-  RadialLinearScale,
-  PointElement,
-  LineElement,
-  Filler,
-  Tooltip,
-  Legend
-);
+import Chart from "react-apexcharts";
 
 const AverageMoodsChart = ({ averageMoodsData }) => {
-  console.log("Radar", averageMoodsData);
-  const data = {
-    labels: Object.keys(averageMoodsData),
-    datasets: [
+  // console.log("Radar", averageMoodsData);
+  // const data = {
+  //   labels: Object.keys(averageMoodsData),
+  //   datasets: [
+  //     {
+  //       label: "Average Mood Levels",
+  //       data: Object.values(averageMoodsData),
+  //       backgroundColor: "rgba(255, 99, 132, 0.2)",
+  //       borderColor: "rgba(255, 99, 132, 1)",
+  //       borderWidth: 1,
+  //     },
+  //   ],
+  // };
+
+  let data = {
+    series: [
       {
-        label: "Average Mood Levels",
+        name: "Series 1",
         data: Object.values(averageMoodsData),
-        backgroundColor: "rgba(255, 99, 132, 0.2)",
-        borderColor: "rgba(255, 99, 132, 1)",
-        borderWidth: 1,
       },
     ],
+    options: {
+      chart: {
+        height: 350,
+        type: "radar",
+      },
+      dataLabels: {
+        enabled: true,
+      },
+      plotOptions: {
+        radar: {
+          size: 140,
+          polygons: {
+            strokeColors: "#e9e9e9",
+            fill: {
+              colors: ["#f8f8f8", "#fff"],
+            },
+          },
+        },
+      },
+      title: {
+        text: "Average Mood Levels Radar Chart",
+        align: "center",
+        style: {
+          fontSize: "14px",
+          fontWeight: "bold",
+          fontFamily: undefined,
+          color: "purple",
+        },
+      },
+      colors: ["#FF4560"],
+      markers: {
+        enabled: false,
+        size: 4,
+        colors: ["#fff"],
+        strokeColor: "#FF4560",
+        strokeWidth: 2,
+      },
+
+      xaxis: {
+        categories: Object.keys(averageMoodsData),
+      },
+      yaxis: {
+        tickAmount: 7,
+        labels: {
+          show: false,
+          formatter: function (val, i) {
+            return;
+          },
+        },
+      },
+    },
   };
 
   return (
     <Flex width={500} height={500}>
-      <Radar data={data} />
+      <Chart
+        options={data.options}
+        series={data.series}
+        type="radar"
+        height={450}
+      />
     </Flex>
   );
 };
