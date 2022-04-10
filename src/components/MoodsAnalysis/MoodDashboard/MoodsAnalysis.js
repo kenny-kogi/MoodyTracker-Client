@@ -15,6 +15,8 @@ import MoodAnxiety from "../AnalysisComponentss/MoodAnxietyChart";
 import MoodElevated from "../AnalysisComponentss/MoodElevatedChart";
 import MoodIrritability from "../AnalysisComponentss/MoodIrritabilityChart";
 import AnxietyChart from "../AnalysisComponentss/CircularMoodCharts/AnxietyChart";
+import StackedMoods from "../AnalysisComponentss/StackedAreaChart";
+import MultipleMoods from "../AnalysisComponentss/MultipleRadarChart";
 
 const MoodsAnalysis = ({ currentLogged, urlString }) => {
   const [averagehours, setAverageHours] = useState(null);
@@ -165,7 +167,7 @@ const MoodsAnalysis = ({ currentLogged, urlString }) => {
         <Flex direction="row" flexWrap="wrap">
           <Box
             width={350}
-            height={400}
+            height={450}
             border="1px solid purple.100"
             borderRadius={8}
             boxShadow="xl"
@@ -184,7 +186,7 @@ const MoodsAnalysis = ({ currentLogged, urlString }) => {
           </Box>
           <Box
             width={790}
-            height={400}
+            height={450}
             border="1px solid purple.100"
             borderRadius={8}
             boxShadow="xl"
@@ -377,6 +379,32 @@ const MoodsAnalysis = ({ currentLogged, urlString }) => {
                 <Spinner />
               ) : (
                 <AnxietyChart anxietyAvg={irritabilityData.irritabilityAvg} />
+              )}
+            </Center>
+          </Box>
+
+          <Box
+            width={450}
+            height={450}
+            border="1px solid purple.100"
+            borderRadius={8}
+            boxShadow="xl"
+            borderWidth={2}
+            mt={10}
+          >
+            <Center>
+              {nullCheckerAnxietyData ||
+              nullCheckerDepressedData ||
+              nullCheckerElevatedData ||
+              nullCheckerIrritabilityData ? (
+                <Spinner />
+              ) : (
+                <MultipleMoods
+                  anxiety={anxietyData}
+                  depressed={depressedData}
+                  irritability={irritabilityData}
+                  elevated={elevatedData}
+                />
               )}
             </Center>
           </Box>

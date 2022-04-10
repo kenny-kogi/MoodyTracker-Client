@@ -1,73 +1,86 @@
 import React from "react";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-import { Bar } from "react-chartjs-2";
 import { Flex } from "@chakra-ui/react";
+import Chart from "react-apexcharts";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
 const AverageChart = ({ hours_data }) => {
-  const options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: "top",
-      },
-      title: {
-        display: true,
-        text: "Hours Slept Analysis",
-        color: "purple",
-      },
-    },
-    scales: {
-      x: {
-        grid: {
-          display: false,
-        },
-      },
-      y: {
-        grid: {
-          display: true,
-        },
-      },
-    },
-  };
-
   const labels = hours_data.map((data) => {
     return data.label;
   });
 
-  console.log(labels);
-  const data = {
-    labels,
-    datasets: [
+  let data = {
+    series: [
       {
-        label: "Slept Hours",
+        name: "Hrs Slept",
         data: hours_data.map((data) => {
           return data.y;
         }),
-
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
     ],
+    options: {
+      chart: {
+        height: 300,
+        type: "bar",
+        toolbar: {
+          tools: {
+            download: false,
+          },
+        },
+      },
+
+      // eslint-disable-next-line array-callback-return
+      colors: hours_data.map((data) => {
+        if (data.y <= 4) {
+          return "#E91E63";
+        } else if (data.y <= 5) {
+          return "#FF9800";
+        } else if (data.y <= 7) {
+          return "#2E93fA";
+        } else if (data.y > 7) {
+          return "#66DA26";
+        }
+      }),
+      plotOptions: {
+        bar: {
+          columnWidth: "45%",
+          distributed: true,
+        },
+      },
+      title: {
+        text: "Slept Hours Chart",
+        align: "center",
+        style: {
+          fontSize: "14px",
+          fontWeight: "bold",
+          fontFamily: undefined,
+          color: "purple",
+        },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      legend: {
+        show: false,
+      },
+      xaxis: {
+        categories: labels,
+        labels: {
+          style: {
+            // colors: colors,
+            fontSize: "12px",
+          },
+        },
+      },
+      yaxis: {
+        tickAmount: 5,
+        max: 10,
+        min: 0,
+      },
+    },
   };
 
   return (
-    <Flex width={700} height={500} mt={15}>
-      <Bar data={data} options={options} />
+    <Flex width={700} height={300} mt={15}>
+      <Chart options={data.options} series={data.series} type="bar" />
     </Flex>
   );
 };
