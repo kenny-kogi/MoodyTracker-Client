@@ -1,67 +1,104 @@
 import React from "react";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-import { Line } from "react-chartjs-2";
 import { Flex } from "@chakra-ui/react";
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
+import Chart from "react-apexcharts";
 
 const MoodIrritability = ({ irritabilityData }) => {
-  const options = {
-    responsive: true,
-    elements: {
-      line: {
-        tension: 0.5, // disables bezier curves
-      },
-    },
-    plugins: {
-      legend: {
-        position: "top",
-      },
-      title: {
-        display: true,
-        text: "Irritability Mood Flunctuations",
-      },
-    },
-  };
-
   let labels = irritabilityData.createdDates.map((dates) => {
     return dates;
   });
 
-  const data = {
-    labels,
-    datasets: [
+  const getMoodString = (v) => {
+    let mood;
+
+    if (v === 0) {
+      mood = "None";
+    } else if (v === 1) {
+      mood = "Mild";
+    } else if (v === 2) {
+      mood = "Moderate";
+    } else if (v === 3) {
+      mood = "Severe";
+    } else {
+      mood = "";
+    }
+    return mood;
+  };
+
+  let data = {
+    series: [
       {
-        label: "Dataset 1",
-        data: irritabilityData.irritabilityData.map((dep) => {
-          return dep;
+        name: "Irritability",
+        data: irritabilityData.irritabilityData.map((irr) => {
+          return irr;
         }),
-        borderColor: "rgb(255, 99, 132)",
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
-        fill: true,
       },
     ],
+    options: {
+      chart: {
+        type: "area",
+        height: 350,
+        zoom: {
+          enabled: false,
+        },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      stroke: {
+        curve: "smooth",
+      },
+      title: {
+        text: "Irritability Mood Fluctuations",
+        align: "center",
+        style: {
+          fontSize: "14px",
+          fontWeight: "bold",
+          fontFamily: undefined,
+          color: "purple",
+        },
+      },
+      labels: labels,
+      xaxis: {
+        type: "date",
+      },
+      yaxis: {
+        show: true,
+        showAlways: true,
+        tickAmount: 6,
+        min: 0,
+        max: 3,
+        forceNiceScale: false,
+        floating: false,
+        decimalsInFloat: undefined,
+        opposite: false,
+        labels: {
+          show: true,
+          align: "right",
+          minWidth: 0,
+          maxWidth: 160,
+          style: {
+            colors: [],
+            fontSize: "12px",
+            fontFamily: "Helvetica, Arial, sans-serif",
+            fontWeight: 400,
+            cssClass: "apexcharts-yaxis-label",
+          },
+          offsetX: 0,
+          offsetY: 0,
+          rotate: 0,
+          formatter: (value) => {
+            return getMoodString(value);
+          },
+        },
+      },
+      legend: {
+        horizontalAlign: "left",
+      },
+    },
   };
   return (
     <Flex width={700} height={400}>
-      <Line options={options} data={data} />
+      <Chart options={data.options} series={data.series} type="area" />
     </Flex>
   );
 };
