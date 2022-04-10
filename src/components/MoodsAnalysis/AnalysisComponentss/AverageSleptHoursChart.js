@@ -10,6 +10,7 @@ const AverageChart = ({ hours_data }) => {
   let data = {
     series: [
       {
+        name: "Hrs Slept",
         data: hours_data.map((data) => {
           return data.y;
         }),
@@ -19,6 +20,11 @@ const AverageChart = ({ hours_data }) => {
       chart: {
         height: 300,
         type: "bar",
+        toolbar: {
+          tools: {
+            download: false,
+          },
+        },
       },
 
       // eslint-disable-next-line array-callback-return

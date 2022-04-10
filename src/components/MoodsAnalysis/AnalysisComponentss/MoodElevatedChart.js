@@ -40,6 +40,11 @@ const MoodElevated = ({ elevatedData }) => {
         zoom: {
           enabled: false,
         },
+        toolbar: {
+          tools: {
+            download: false,
+          },
+        },
       },
       dataLabels: {
         enabled: false,

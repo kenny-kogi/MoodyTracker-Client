@@ -3,43 +3,9 @@ import { Flex } from "@chakra-ui/react";
 import Chart from "react-apexcharts";
 
 const MoodDepressed = ({ depressedData }) => {
-  // const options = {
-  //   responsive: true,
-  //   maintainAspectRatio: false,
-  //   elements: {
-  //     line: {
-  //       tension: 0.5, // disables bezier curves
-  //     },
-  //   },
-  //   plugins: {
-  //     legend: {
-  //       position: "top",
-  //     },
-  //     title: {
-  //       display: true,
-  //       text: "Depressed Mood Fluctuations",
-  //     },
-  //   },
-  // };
-
   let labels = depressedData.createdDates.map((dates) => {
     return dates;
   });
-
-  // const data = {
-  //   labels,
-  //   datasets: [
-  //     {
-  //       label: "Depressed",
-  //       data: depressedData.depressedData.map((dep) => {
-  //         return dep;
-  //       }),
-  //       borderColor: "rgb(255, 99, 132)",
-  //       backgroundColor: "rgba(255, 99, 132, 0.5)",
-  //       fill: true,
-  //     },
-  //   ],
-  // };
 
   const getMoodString = (v) => {
     let mood;
@@ -55,7 +21,6 @@ const MoodDepressed = ({ depressedData }) => {
     } else {
       mood = "";
     }
-
     return mood;
   };
 
@@ -75,6 +40,11 @@ const MoodDepressed = ({ depressedData }) => {
         zoom: {
           enabled: false,
         },
+        toolbar: {
+          tools: {
+            download: false,
+          },
+        },
       },
       dataLabels: {
         enabled: false,
@@ -82,7 +52,6 @@ const MoodDepressed = ({ depressedData }) => {
       stroke: {
         curve: "smooth",
       },
-
       title: {
         text: "Depression Mood Fluctuations",
         align: "center",
@@ -93,9 +62,7 @@ const MoodDepressed = ({ depressedData }) => {
           color: "purple",
         },
       },
-
       labels: labels,
-
       xaxis: {
         type: "date",
       },

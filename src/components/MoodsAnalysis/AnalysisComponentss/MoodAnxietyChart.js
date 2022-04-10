@@ -40,6 +40,11 @@ const MoodAnxiety = ({ anxietyData }) => {
         zoom: {
           enabled: false,
         },
+        toolbar: {
+          tools: {
+            download: false,
+          },
+        },
       },
       dataLabels: {
         enabled: false,

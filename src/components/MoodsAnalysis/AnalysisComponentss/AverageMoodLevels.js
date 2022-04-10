@@ -20,7 +20,7 @@ const AverageMoodsChart = ({ averageMoodsData }) => {
   let data = {
     series: [
       {
-        name: "Series 1",
+        name: "Moods",
         data: Object.values(averageMoodsData),
       },
     ],
@@ -28,6 +28,11 @@ const AverageMoodsChart = ({ averageMoodsData }) => {
       chart: {
         height: 350,
         type: "radar",
+        toolbar: {
+          tools: {
+            download: false,
+          },
+        },
       },
       dataLabels: {
         enabled: true,
