@@ -15,8 +15,8 @@ import MoodAnxiety from "../AnalysisComponentss/MoodAnxietyChart";
 import MoodElevated from "../AnalysisComponentss/MoodElevatedChart";
 import MoodIrritability from "../AnalysisComponentss/MoodIrritabilityChart";
 import AnxietyChart from "../AnalysisComponentss/CircularMoodCharts/AnxietyChart";
-import StackedMoods from "../AnalysisComponentss/StackedAreaChart";
-import MultipleMoods from "../AnalysisComponentss/MultipleRadarChart";
+// import StackedMoods from "../AnalysisComponentss/StackedAreaChart";
+// import MultipleMoods from "../AnalysisComponentss/MultipleRadarChart";
 
 const MoodsAnalysis = ({ currentLogged, urlString }) => {
   const [averagehours, setAverageHours] = useState(null);
@@ -383,7 +383,7 @@ const MoodsAnalysis = ({ currentLogged, urlString }) => {
             </Center>
           </Box>
 
-          <Box
+          {/* <Box
             width={450}
             height={450}
             border="1px solid purple.100"
@@ -407,7 +407,7 @@ const MoodsAnalysis = ({ currentLogged, urlString }) => {
                 />
               )}
             </Center>
-          </Box>
+          </Box> */}
         </Flex>
       </Box>
     </>
