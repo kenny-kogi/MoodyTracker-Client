@@ -16,6 +16,13 @@ const UserGender = ({ gender_data, user }) => {
     series: series,
 
     options: {
+      chart: {
+        toolbar: {
+          tools: {
+            download: true,
+          },
+        },
+      },
       labels: labels,
       dataLabels: {
         enabled: true,

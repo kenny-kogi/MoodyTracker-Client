@@ -6,7 +6,7 @@ import ColumnChart from "../Charts/ColumnChart";
 import Activity from "../Charts/Activity";
 import MoodNote from "../Charts/MoodNote";
 
-const Moods = ({ moods, delMood }) => {
+const Moods = ({ moods, delMood, therapist }) => {
   const isEmpty = Object.keys(moods).length === 0;
   console.log(moods);
 
@@ -35,17 +35,21 @@ const Moods = ({ moods, delMood }) => {
                 <Heading color="purple" fontSize="20px">
                   Logged on: {mood.created_at}
                 </Heading>
-                <Button
-                  bgColor="red.400"
-                  color="white"
-                  right={-450}
-                  _hover={{ bg: "red.600" }}
-                  onClick={() => {
-                    delMood(mood.id);
-                  }}
-                >
-                  Delete
-                </Button>
+                {therapist ? (
+                  ""
+                ) : (
+                  <Button
+                    bgColor="red.400"
+                    color="white"
+                    right={-450}
+                    _hover={{ bg: "red.600" }}
+                    onClick={() => {
+                      delMood(mood.id);
+                    }}
+                  >
+                    Delete
+                  </Button>
+                )}
               </Box>
 
               <Box

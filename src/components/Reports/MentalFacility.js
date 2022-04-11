@@ -15,6 +15,7 @@ const MentalFacility = ({ mental_facility_data }) => {
   let data = {
     series: [
       {
+        name: "Mental Facility",
         data: series,
       },
     ],
@@ -23,6 +24,11 @@ const MentalFacility = ({ mental_facility_data }) => {
       chart: {
         type: "bar",
         height: 200,
+        toolbar: {
+          tools: {
+            download: true,
+          },
+        },
       },
       plotOptions: {
         bar: {

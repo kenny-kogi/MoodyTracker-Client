@@ -11,7 +11,9 @@ const ColumnChart = ({
   const moodRange = (v) => {
     let mood;
 
-    if (v === 1) {
+    if (v === 0) {
+      mood = "None";
+    } else if (v === 1) {
       mood = "Mild";
     } else if (v === 2) {
       mood = "Moderate";

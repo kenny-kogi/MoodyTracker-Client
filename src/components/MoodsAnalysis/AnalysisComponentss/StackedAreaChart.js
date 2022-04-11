@@ -3,9 +3,9 @@ import { Flex } from "@chakra-ui/react";
 import Chart from "react-apexcharts";
 
 const StackedMoods = ({ anxiety, depressed }) => {
-  let labels = depressed.createdDates.map((dates) => {
-    return dates;
-  });
+  //   let labels = depressed.createdDates.map((dates) => {
+  //     return dates;
+  //   });
 
   function generateDayWiseTimeSeries(baseval, count, yrange) {
     var i = 0;

@@ -56,7 +56,7 @@ const TherapistLog = () => {
       <Flex flexDirection="row" pt="100px">
         <SideMenu />
         <Container maxWidth="7xl" pt={5} ml={300}>
-          <Moods moods={moods} />
+          <Moods moods={moods} therapist={true} />
         </Container>
       </Flex>
     </>
