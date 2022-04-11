@@ -8,6 +8,13 @@ const AverageAge = ({ users, patients }) => {
     series: [users, patients],
 
     options: {
+      chart: {
+        toolbar: {
+          tools: {
+            download: true,
+          },
+        },
+      },
       labels: ["Users", "Patients"],
       dataLabels: {
         enabled: true,
@@ -16,6 +23,13 @@ const AverageAge = ({ users, patients }) => {
         },
       },
       plotOptions: {
+        chart: {
+          toolbar: {
+            tools: {
+              download: true,
+            },
+          },
+        },
         pie: {
           expandOnClick: true,
         },
