@@ -18,7 +18,7 @@ const Hero = () => {
   let navigate = useNavigate();
 
   return (
-    <Box pt="20">
+    <Box pt="20" id="about">
       <Container maxWidth="container.xl">
         <Box as="flex" alignItems="center" py="10" flexDirection="row">
           <Stack direction="row">

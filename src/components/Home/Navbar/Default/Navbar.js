@@ -1,7 +1,8 @@
 import React from "react";
-import { Button, Box, Image } from "@chakra-ui/react";
+import { Box, Image } from "@chakra-ui/react";
 import Logo from "../../../../assets/logo.png";
 import { useNavigate } from "react-router";
+import { Link } from "@chakra-ui/react";
 
 const NavbarDefault = () => {
   let navigate = useNavigate();
@@ -29,7 +30,7 @@ const NavbarDefault = () => {
         </Box>
 
         <Box display="flex" flexDirection="row" justifyContent="space-between">
-          <Button
+          <Link
             color="purple"
             size="lg"
             fontSize="lg"
@@ -39,14 +40,12 @@ const NavbarDefault = () => {
               color: "purple.600",
             }}
             mr={5}
-            onClick={() => {
-              //   navigate("/therapist/signup");
-            }}
+            href="#about"
           >
             About
-          </Button>
+          </Link>
 
-          <Button
+          <Link
             color="purple"
             size="lg"
             fontSize="lg"
@@ -56,13 +55,11 @@ const NavbarDefault = () => {
               color: "purple.600",
             }}
             mr={5}
-            onClick={() => {
-              //   navigate("/therapist/signup");
-            }}
+            href="#features"
           >
             Features
-          </Button>
-          <Button
+          </Link>
+          <Link
             color="purple"
             size="lg"
             fontSize="lg"
@@ -72,12 +69,10 @@ const NavbarDefault = () => {
               color: "purple.600",
             }}
             mr={5}
-            onClick={() => {
-              //   navigate("/therapist/login");
-            }}
+            href="#contact"
           >
             Contact
-          </Button>
+          </Link>
         </Box>
       </Box>
     </header>
