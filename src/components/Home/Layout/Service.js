@@ -7,7 +7,7 @@ import Therapy from "../../../assets/hero4.jpg";
 const Service = () => {
   return (
     <>
-      <Box mt={20}>
+      <Box mt={20} id="features">
         <Container maxWidth="container.xl">
           <Heading
             textAlign="center"
