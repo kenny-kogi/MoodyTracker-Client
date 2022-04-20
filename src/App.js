@@ -31,6 +31,7 @@ import MedicationDash from "./components/Medication/Therapist/MedicationDash";
 import TherapistProfile from "./components/Profile/Therapist/TherapistProfile";
 import UserProfile from "./components/Profile/User/UserProfile";
 import TherapistLog from "./components/Moods/Therapist/TherapistLog";
+import ModelDetails from "./components/Reports/ReportComponents/ModelDetails";
 
 const App = () => {
   //user
@@ -256,6 +257,12 @@ const App = () => {
               exact
               path="/therapist/patient/moods/:id"
               element={<TherapistLog />}
+            />
+
+            <Route
+              exact
+              path="/reports/details/:person/:id"
+              element={<ModelDetails />}
             />
 
             <Route path="*" element={<Home />} />

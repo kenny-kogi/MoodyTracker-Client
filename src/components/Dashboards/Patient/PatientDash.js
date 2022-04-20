@@ -22,6 +22,8 @@ const PatientDash = () => {
   const { id } = useParams();
   const urlString = "http://localhost:3001/patients";
 
+  console.log(patient, id);
+
   let toast = useToast();
   let navigate = useNavigate();
 
@@ -45,7 +47,7 @@ const PatientDash = () => {
     axios
       .get(`http://localhost:3001/patients/${id}`)
       .then((response) => {
-        setPatient(response.data.patient);
+        setPatient(response.data);
       })
       .catch((error) => {
         console.log(error);

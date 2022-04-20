@@ -1,8 +1,10 @@
 import React from "react";
 import { Box, Tag, Flex, Divider, IconButton, Button } from "@chakra-ui/react";
 import { MdDelete } from "react-icons/md";
+import { useNavigate } from "react-router";
 
 const ModelNames = ({ modelName, modelTitle, deleteModel }) => {
+  let navigate = useNavigate();
   return (
     <Box
       height={400}
@@ -23,12 +25,13 @@ const ModelNames = ({ modelName, modelTitle, deleteModel }) => {
           <>
             <Flex justifyContent="space-between">
               <Flex direction="row" m={3} justifyContent="space-around">
-                {modelTitle === "users" || modelTitle === "patients" ? (
-                  <Button>{user.firstName + " " + user.lastName}</Button>
-                ) : (
-                  <Button>{user.firstName + " " + user.lastName}</Button>
-                )}
-                {/* <Text>{user.firstName + " " + user.lastName}</Text> */}
+                <Button
+                  onClick={() => {
+                    navigate(`/reports/details/${modelTitle}/${user.id}`);
+                  }}
+                >
+                  {user.firstName + " " + user.lastName}
+                </Button>
               </Flex>
 
               <IconButton

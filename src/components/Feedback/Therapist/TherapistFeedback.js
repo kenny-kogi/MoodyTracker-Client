@@ -45,7 +45,7 @@ const Feedback = () => {
     axios
       .get(`http://localhost:3001/patients/${id}`)
       .then((response) => {
-        setPatient(response.data.patient);
+        setPatient(response.data);
       })
       .catch((error) => {
         console.log(error);
