@@ -340,13 +340,13 @@ const Report = () => {
               )}
             </Flex>
 
-            <Button
+            {/* <Button
               onClick={() => {
                 setUpdate(!update);
               }}
             >
               Reload{" "}
-            </Button>
+            </Button> */}
           </Flex>
         </Flex>
       </Container>

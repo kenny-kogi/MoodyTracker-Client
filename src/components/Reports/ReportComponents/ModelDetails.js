@@ -13,7 +13,11 @@ const ModelDetails = () => {
     axios
       .get(`http://localhost:3001/${person}/${id}`)
       .then((response) => {
-        setCurrentLogged(response.data);
+        if (person === "therapists") {
+          setCurrentLogged(response.data.therapist);
+        } else {
+          setCurrentLogged(response.data);
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -75,20 +79,33 @@ const ModelDetails = () => {
                   <Tag fontSize="20px">Location: </Tag>
                   <Text> {currentLogged?.location}</Text>
                 </Flex>
-                <Flex gap={5} fontSize="20px">
-                  <Tag fontSize="20px">Age: </Tag>
-                  <Text> {currentLogged?.age}</Text>
-                </Flex>
+
+                {person !== "therapists" ? (
+                  <Flex gap={5} fontSize="20px">
+                    <Tag fontSize="20px">Age: </Tag>
+                    <Text> {currentLogged?.age}</Text>
+                  </Flex>
+                ) : (
+                  <Flex gap={5} fontSize="20px">
+                    <Tag fontSize="20px">Specialization: </Tag>
+                    <Text> {currentLogged?.specialization}</Text>
+                  </Flex>
+                )}
               </Flex>
               <Flex width={1200} mt={10}>
                 <Flex gap={5} fontSize="20px" mr="300px">
                   <Tag fontSize="20px">Email: </Tag>
                   <Text> {currentLogged?.email}</Text>
                 </Flex>
-                <Flex gap={5} fontSize="20px">
-                  <Tag fontSize="20px">Occupation: </Tag>
-                  <Text> {currentLogged?.occupation}</Text>
-                </Flex>
+
+                {person !== "therapists" ? (
+                  <Flex gap={5} fontSize="20px">
+                    <Tag fontSize="20px">Occupation: </Tag>
+                    <Text> {currentLogged?.occupation}</Text>
+                  </Flex>
+                ) : (
+                  ""
+                )}
               </Flex>
             </Flex>
           </Flex>

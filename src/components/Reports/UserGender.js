@@ -27,7 +27,7 @@ const UserGender = ({ gender_data, user }) => {
       dataLabels: {
         enabled: true,
         formatter: function (val) {
-          return val + "%";
+          return Math.round(val) + "%";
         },
       },
       plotOptions: {

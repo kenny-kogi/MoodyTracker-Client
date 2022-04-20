@@ -28,7 +28,7 @@ const UserLocation = ({ location, user }) => {
       dataLabels: {
         enabled: true,
         formatter: function (val) {
-          return val + "%";
+          return Math.round(val) + "%";
         },
       },
       stroke: {
