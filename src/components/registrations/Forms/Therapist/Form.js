@@ -118,7 +118,7 @@ const Form = ({
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={1} mr="6">
+                {/* <GridItem colSpan={1} mr="6">
                   <FormControl>
                     <FormLabel htmlFor="image">Profile Image:</FormLabel>
                     <Input
@@ -129,9 +129,9 @@ const Form = ({
                       accept="image/jpeg"
                     />
                   </FormControl>
-                </GridItem>
+                </GridItem> */}
 
-                <GridItem colSpan={2} mr="6">
+                <GridItem colSpan={1} mr="6">
                   <FormControl>
                     <FormLabel htmlFor="specialization">
                       specialization:

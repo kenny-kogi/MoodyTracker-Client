@@ -42,7 +42,7 @@ const SideMenu = () => {
             Dashboard
           </Text>
 
-          <Text
+          {/* <Text
             color="whiteAlpha.700"
             height="35px"
             pl="20px"
@@ -68,7 +68,7 @@ const SideMenu = () => {
             cursor="pointer"
           >
             Settings
-          </Text>
+          </Text> */}
 
           <Text
             color="whiteAlpha.700"
@@ -78,6 +78,7 @@ const SideMenu = () => {
             fontWeight="bold"
             onClick={() => {
               // navigate("/reports");
+              navigate("/logout/admin");
             }}
             cursor="pointer"
           >

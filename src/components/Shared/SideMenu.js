@@ -40,7 +40,7 @@ const SideMenu = () => {
               Log Mood
             </Button>
 
-            <Button
+            {/* <Button
               mb={5}
               width="200px"
               height="60px"
@@ -50,7 +50,7 @@ const SideMenu = () => {
               fontWeight="bold"
             >
               Reminders
-            </Button>
+            </Button> */}
 
             <Button
               mb={5}

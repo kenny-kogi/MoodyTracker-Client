@@ -38,6 +38,7 @@ const LogMood = () => {
     patient_id: patient.id,
     mood_note: null,
     activity: null,
+    user_id: null,
   });
   const [checked, setChecked] = useState(false);
   const [circularValue, setCircularValue] = useState(0);

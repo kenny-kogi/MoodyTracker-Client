@@ -30,6 +30,7 @@ const Form = ({
   handleChangeAgeInput,
 }) => {
   let nullCheckerTherapist = therapists === null;
+
   return (
     <Box py="30" ml="20">
       <Stack direction="row" justifyContent="space-evenly">
@@ -170,7 +171,7 @@ const Form = ({
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={2} mr="6">
+                {/* <GridItem colSpan={2} mr="6">
                   <FormControl>
                     <FormLabel htmlFor="image">Profile Image:</FormLabel>
                     <Input
@@ -181,7 +182,7 @@ const Form = ({
                       accept="image/jpeg"
                     />
                   </FormControl>
-                </GridItem>
+                </GridItem> */}
 
                 <GridItem colSpan={1} mb="2" mr="6">
                   <FormControl>
@@ -223,7 +224,7 @@ const Form = ({
                     </Select>
                   </FormControl>
                 </GridItem>
-                <GridItem colSpan={1} mb="2" mr="6">
+                <GridItem colSpan={3} mb="2" mr="6">
                   <FormControl>
                     <FormLabel htmlFor="mental_health_status">
                       Therapist:
@@ -240,7 +241,8 @@ const Form = ({
                       ) : (
                         therapists.map((therapist) => {
                           return (
-                            <option value={therapist.id}>
+                            <option value={parseInt(therapist.id)}>
+                              {console.log(parseInt(therapist.id))}
                               {therapist.username}
                             </option>
                           );

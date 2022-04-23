@@ -11,7 +11,7 @@ import {
   Image,
   Heading,
   Badge,
-  IconButton,
+  // IconButton,
   useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
@@ -19,13 +19,13 @@ import { AppContext } from "../../../context/appcontext";
 import Spinner from "../../Shared/Spinner";
 import { useNavigate } from "react-router";
 import PatientSvg from "../../../assets/pt.png";
-import { MdDelete } from "react-icons/md";
-import { CgProfile } from "react-icons/cg";
+// import { MdDelete } from "react-icons/md";
+// import { CgProfile } from "react-icons/cg";
 
 const TherapistDash = () => {
   const { therapist, isLoggedInTherapist } = useContext(AppContext);
   const [patients, setPatients] = useState(null);
-  const [update, setUpdate] = useState(false);
+  // const [update, setUpdate] = useState(false);
   const getAllPatients = () => {
     axios
       .get(`http://localhost:3001/therapists/patients/${therapist.id}`)
@@ -56,24 +56,26 @@ const TherapistDash = () => {
     }
   };
 
-  const removePatientFromList = (patient_id) => {
-    axios
-      .get(
-        `http://localhost:3001/therapists/remove_patient/${therapist.id}/${patient_id}`
-      )
-      .then((response) => {
-        setUpdate(true);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  // const removePatientFromList = (patient_id) => {
+  //   console.log(patient_id);
+  //   axios
+  //     .get(
+  //       `http://localhost:3001/therapists/remove_patient/${therapist.id}/${patient_id}`
+  //     )
+  //     .then((response) => {
+  //       console.log(response.data);
+  //       setUpdate(true);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
   useEffect(() => {
     checkAuthorized();
     getAllPatients();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [update]);
+  }, []);
 
   let nullCheckerPatient = patients === null;
   return (
@@ -109,7 +111,7 @@ const TherapistDash = () => {
                 return (
                   <Box
                     width={300}
-                    height={300}
+                    height={250}
                     border="1px solid purple.100"
                     borderRadius={8}
                     boxShadow="xl"
@@ -143,7 +145,7 @@ const TherapistDash = () => {
                         View Analysis
                       </Button>
 
-                      <Flex direction="row" justifyContent="space-evenly">
+                      {/* <Flex direction="row" justifyContent="space-evenly">
                         <IconButton
                           variant="outline"
                           colorScheme="blue"
@@ -167,7 +169,7 @@ const TherapistDash = () => {
                             removePatientFromList(patient.id);
                           }}
                         />
-                      </Flex>
+                      </Flex> */}
                     </Flex>
                   </Box>
                 );

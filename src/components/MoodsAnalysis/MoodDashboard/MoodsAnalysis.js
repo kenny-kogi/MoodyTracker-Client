@@ -109,6 +109,7 @@ const MoodsAnalysis = ({ currentLogged, urlString }) => {
     axios
       .get(`${urlString}/mood_elevated_data/${currentLogged.id}`)
       .then((response) => {
+        console.log(response.data.moodElevatedData);
         setElevatedData(response.data.moodElevatedData);
       })
       .catch((error) => {

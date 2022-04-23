@@ -17,7 +17,7 @@ const Signup = () => {
     password: "",
     password_confirmation: "",
     location: "",
-    image: null,
+    image_url: null,
     age: null,
     occupation: "",
     gender: "",

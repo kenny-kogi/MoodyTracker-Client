@@ -62,7 +62,7 @@ const Form = ({ handleChange, user, handleSubmit, handleChangeAgeInput }) => {
             </FormControl>
           </GridItem>
 
-          <GridItem colSpan={3} mb="2" mr="6">
+          <GridItem colSpan={2} mb="2" mr="6">
             <FormControl>
               <FormLabel htmlFor="email">Email:</FormLabel>
               <Input
@@ -150,13 +150,13 @@ const Form = ({ handleChange, user, handleSubmit, handleChangeAgeInput }) => {
             </FormControl>
           </GridItem> */}
 
-          {/* <GridItem colSpan={1} mb="2" mr="6">
+          <GridItem colSpan={1} mb="2" mr="6">
             <FormControl>
               <FormLabel htmlFor="password">Password:</FormLabel>
               <Input
                 id="password"
                 type="password"
-                value={patient.password}
+                value={user.password}
                 onChange={handleChange}
                 name="password"
               />
@@ -171,12 +171,12 @@ const Form = ({ handleChange, user, handleSubmit, handleChangeAgeInput }) => {
               <Input
                 id="password_confirmation"
                 type="password"
-                value={patient.password_confirmation}
+                value={user.password_confirmation}
                 onChange={handleChange}
                 name="password_confirmation"
               />
             </FormControl>
-          </GridItem> */}
+          </GridItem>
         </Grid>
 
         <Button

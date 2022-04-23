@@ -146,7 +146,7 @@ const Form = ({
             </FormControl>
           </GridItem>
 
-          <GridItem colSpan={2} mr="6">
+          {/* <GridItem colSpan={2} mr="6">
             <FormControl>
               <FormLabel htmlFor="image">Profile Image:</FormLabel>
               <Input
@@ -157,7 +157,7 @@ const Form = ({
                 accept="image/jpeg"
               />
             </FormControl>
-          </GridItem>
+          </GridItem> */}
 
           <GridItem colSpan={1} mb="2" mr="6">
             <FormControl>
@@ -192,7 +192,7 @@ const Form = ({
               />
             </FormControl>
           </GridItem>
-          <GridItem colSpan={1} mb="2" mr="6">
+          <GridItem colSpan={3} mb="2" mr="6">
             <FormControl>
               <FormLabel htmlFor="mental_health_status">Therapist:</FormLabel>
               <Select
@@ -215,7 +215,7 @@ const Form = ({
             </FormControl>
           </GridItem>
 
-          {/* <GridItem colSpan={1} mb="2" mr="6">
+          <GridItem colSpan={1} mb="2" mr="6">
             <FormControl>
               <FormLabel htmlFor="password">Password:</FormLabel>
               <Input
@@ -241,7 +241,7 @@ const Form = ({
                 name="password_confirmation"
               />
             </FormControl>
-          </GridItem> */}
+          </GridItem>
         </Grid>
 
         <Button

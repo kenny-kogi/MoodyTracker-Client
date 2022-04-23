@@ -3,20 +3,6 @@ import { Flex } from "@chakra-ui/react";
 import Chart from "react-apexcharts";
 
 const AverageMoodsChart = ({ averageMoodsData }) => {
-  // console.log("Radar", averageMoodsData);
-  // const data = {
-  //   labels: Object.keys(averageMoodsData),
-  //   datasets: [
-  //     {
-  //       label: "Average Mood Levels",
-  //       data: Object.values(averageMoodsData),
-  //       backgroundColor: "rgba(255, 99, 132, 0.2)",
-  //       borderColor: "rgba(255, 99, 132, 1)",
-  //       borderWidth: 1,
-  //     },
-  //   ],
-  // };
-
   let data = {
     series: [
       {

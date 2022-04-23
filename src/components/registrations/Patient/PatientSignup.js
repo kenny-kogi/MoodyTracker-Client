@@ -18,7 +18,7 @@ const PatientSignup = () => {
     password: "",
     password_confirmation: "",
     location: "",
-    image: null,
+    image_url: null,
     age: null,
     occupation: "",
     gender: "",
@@ -57,6 +57,7 @@ const PatientSignup = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log(patient);
     axios
       .post(
         "http://localhost:3001/patients",

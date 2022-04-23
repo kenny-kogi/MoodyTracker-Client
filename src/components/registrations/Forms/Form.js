@@ -94,7 +94,7 @@ const Form = ({
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={1} mr="6">
+                <GridItem colSpan={1.5} mr="6">
                   <FormControl>
                     <FormLabel htmlFor="location">Location:</FormLabel>
                     <Select
@@ -120,12 +120,12 @@ const Form = ({
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={1} mb="2" mr="6">
+                <GridItem colSpan={2} mb="2" mr="6">
                   <FormControl>
                     <FormLabel htmlFor="age">Age:</FormLabel>
                     <NumberInput
                       min={12}
-                      max={120}
+                      max={100}
                       name="age"
                       onChange={(v) => handleChangeAgeInput(v)}
                     >
@@ -168,7 +168,7 @@ const Form = ({
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={2} mr="6">
+                {/* <GridItem colSpan={2} mr="6">
                   <FormControl>
                     <FormLabel htmlFor="image">Profile Image:</FormLabel>
                     <Input
@@ -179,7 +179,7 @@ const Form = ({
                       accept="image/jpeg"
                     />
                   </FormControl>
-                </GridItem>
+                </GridItem> */}
 
                 <GridItem colSpan={2} mb="2" mr="6">
                   <FormControl>
