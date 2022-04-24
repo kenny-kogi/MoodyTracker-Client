@@ -17,12 +17,12 @@ import Elevated from "../moods/Elevated";
 import HoursSlept from "../moods/HoursSlept";
 import Anxiety from "../moods/Anxiety";
 import Depressed from "../moods/Depressed";
-import Psychotic from "../moods/Psychotic";
+// import Psychotic from "../moods/Psychotic";
 import Weather from "../moods/Weather";
 import MoodNote from "../moods/MoodNote";
 import SideMenu from "../../Shared/Patient/PatientDash/SideMenu";
 import { AppContext } from "../../../context/appcontext";
-// import Activity from "./moods/Activity";
+import Activity from "../moods/Activity";
 
 const LogMood = () => {
   const { patient, isLoggedInPatient } = useContext(AppContext);
@@ -98,19 +98,19 @@ const LogMood = () => {
 
   useEffect(() => {
     checkAuthorized();
-    if (checked) {
-      setMood({
-        ...mood,
-        psychotic_symptoms: true,
-      });
-      console.log(mood);
-    } else {
-      setMood({
-        ...mood,
-        psychotic_symptoms: false,
-      });
-      console.log(mood);
-    }
+    // if (checked) {
+    //   setMood({
+    //     ...mood,
+    //     psychotic_symptoms: true,
+    //   });
+    //   console.log(mood);
+    // } else {
+    //   setMood({
+    //     ...mood,
+    //     psychotic_symptoms: false,
+    //   });
+    //   console.log(mood);
+    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checked]);
 
@@ -165,6 +165,13 @@ const LogMood = () => {
     });
   };
 
+  const handleActivityChange = (e) => {
+    setMood({
+      ...mood,
+      activity: e.target.value,
+    });
+  };
+
   return (
     <>
       <Navbar />
@@ -210,9 +217,13 @@ const LogMood = () => {
                 <Elevated handleEleveted={handleEleveted} />
                 <Anxiety handleAnxiety={handleAnxiety} />
                 <Depressed handleDepressed={handleDepressed} />
-                <Psychotic checked={checked} setChecked={setChecked} />
+                {/* <Psychotic checked={checked} setChecked={setChecked} /> */}
                 <Weather weather={mood.weather} handleWeather={handleWeather} />
                 {/* <Activity /> */}
+                <Activity
+                  value={mood.activity}
+                  handleActivityChange={handleActivityChange}
+                />
               </Box>
               <Button
                 type="submit"
