@@ -60,8 +60,8 @@ Open localhoost:3000 to view the application
 ## Login && SignUp
 
 <div style="display:flex;flex-direction:row;">
-<img src="./src/assets/login.png" width="300" height="300"/>
-<img src="./src/assets/signupc.png" width="300" height="300"/>
+<img src="./src/assets/login.png" width="500" height="300"/>
+<img src="./src/assets/signupc.png" width="500" height="300"/>
 </div>
 
 ## Log Mood
