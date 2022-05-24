@@ -1,70 +1,77 @@
-# Getting Started with Create React App
+<p align="center">
+<img src="./src/assets/logo.png" width="200" height="100"/>
+</p>
+<p align="center" style="font-size:40px;font-weight:bold;"> 
+Moody Tracker Frontend
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Project Description
 
-## Available Scripts
+Moody Tracker is a mental health tracking system that facilitates awareness and reflection of moods, so users can better
+understand the influencing factors, and thus be able to change these to improve their mental health. For those who are already battling various mental health disorders, the system aids in their treatment process as it provides their respective therapist previous mental health data of the patient.
 
-In the project directory, you can run:
+## Technologies
 
-### `npm start`
+- JavaScript
+- React
+- Chakra UI
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# Getting Started
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Prerequisites
 
-### `npm test`
+- node
+- Moody Tracker Backend is set up and running on localhoost:3001
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## How to Install and Run the Project
 
-### `npm run build`
+Clone the repository
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+git clone https://github.com/kenny-kogi/MoodyTracker-Client.git
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Change Directory
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+cd MoodyTracker/
+```
 
-### `npm run eject`
+Install Packages
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+npm install
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Usage
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+npm run start
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Open localhoost:3000 to view the application
 
-## Learn More
+# ScreenShots
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Home
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<img src="./src/assets/home.png" />
 
-### Code Splitting
+## Login && SignUp
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+<img src="./src/assets/login.png" width="550" height="300"/>
+<img src="./src/assets/signupc.png" width="550" height="300"/>
 
-### Analyzing the Bundle Size
+## Log Mood
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<img src="./src/assets/logmood.png" width="550" height="300"/>
+<img src="./src/assets/loggedmood.png" width="550" height="300"/>
 
-### Making a Progressive Web App
+## Mood Analysis
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+<img src="./src/assets/moodanalysis.png" width="550" height="300"/>
+<img src="./src/assets/analysismood.png" width="550" height="300"/>
 
-### Advanced Configuration
+## Therapist DashBoard
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<img src="./src/assets/therapistdash.png"/>
