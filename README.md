@@ -66,13 +66,17 @@ Open localhoost:3000 to view the application
 
 ## Log Mood
 
-<img src="./src/assets/logmood.png" width="550" height="300"/>
-<img src="./src/assets/loggedmood.png" width="550" height="300"/>
+<div style="display:flex;flex-direction:row;">
+<img src="./src/assets/logmood.png" width="400" height="300"/>
+<img src="./src/assets/loggedmood.png" width="400" height="300"/>
+</div>
 
 ## Mood Analysis
 
-<img src="./src/assets/moodanalysis.png" width="550" height="300"/>
-<img src="./src/assets/analysismood.png" width="550" height="300"/>
+<div style="display:flex;flex-direction:row;">
+<img src="./src/assets/moodanalysis.png" width="400" height="300"/>
+<img src="./src/assets/analysismood.png" width="400" height="300"/>
+</div>
 
 ## Therapist DashBoard
 
