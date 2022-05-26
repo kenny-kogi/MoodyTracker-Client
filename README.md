@@ -1,9 +1,16 @@
 <p align="center">
 <img src="./src/assets/logo.png" width="200" height="100"/>
 </p>
-<p align="center" style="font-size:40px;font-weight:bold;"> 
+<p align="center" style="font-size:4em;font-weight:bold;"> 
 Moody Tracker Frontend
 </p>
+
+# Table of contents
+* [Project Description](#project-description)
+* [Technologies](#technologies)
+* [Prerequisites](#prerequisites)
+* [Setup](#how-to-install-and-run-the-project)
+* [Screenshots](#screenshots)
 
 # Project Description
 
