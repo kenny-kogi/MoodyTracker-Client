@@ -1,9 +1,8 @@
 <p align="center">
 <img src="./src/assets/logo.png" width="200" height="100"/>
 </p>
-<p align="center"> 
-<span style="font-size:4em;font-weight:bold;"># Moody Tracker Frontend </span>
-</p>
+<h1 style="font-size:4em;font-weight:bold;text-align:center;">Moody Tracker Frontend </h1>
+
 
 # Table of contents
 * [Project Description](#project-description)
