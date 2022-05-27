@@ -19,6 +19,7 @@ understand the influencing factors, and thus be able to change these to improve 
 - JavaScript
 - React
 - Chakra UI
+- ApexCharts
 
 # Getting Started
 
